@@ -31,5 +31,4 @@ RSpec.feature 'Gameplay' do
   # - pawn + bishop gives another
   # - armor + armor gives stronger armor?
   # - crafting element !?!?!
-
 end
