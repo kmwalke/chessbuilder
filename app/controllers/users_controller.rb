@@ -3,23 +3,18 @@ class UsersController < ApplicationController
   before_action :logged_in, except: [:new, :create, :index, :show]
   before_action :logged_in_as_admin_or_self, only: [:edit, :update, :destroy]
 
-  # GET /users
   def index
     @users = User.all
   end
 
-  # GET /users/1
   def show; end
 
-  # GET /users/new
   def new
     @user = User.new
   end
 
-  # GET /users/1/edit
   def edit; end
 
-  # POST /users
   def create
     @user = User.new(user_params)
 
@@ -32,7 +27,6 @@ class UsersController < ApplicationController
     end
   end
 
-  # PATCH/PUT /users/1
   def update
     respond_to do |format|
       if @user.update(user_params)
@@ -43,7 +37,6 @@ class UsersController < ApplicationController
     end
   end
 
-  # DELETE /users/1
   def destroy
     @user.destroy!
 

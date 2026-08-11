@@ -1,11 +1,14 @@
 require 'rails_helper'
 
 RSpec.feature 'Games' do
-  let!(:user) { create(:user) }
+  let!(:user1) { create(:user) }
+  let!(:user2) { create(:user) }
+  let!(:game) { create(:game, host: user1, guest: user2) }
 
   before do
     3.times do
-      user.deck.piece_cards << create(:piece_card)
+      user1.deck.piece_cards << create(:piece_card)
+      user2.deck.piece_cards << create(:piece_card)
     end
   end
 
@@ -15,11 +18,12 @@ RSpec.feature 'Games' do
     end
 
     it 'shows the games' do
-      skip('not implemented')
+      expect(page).to have_text(game.name)
     end
 
     it 'views a game' do
-      skip('not implemented')
+      click_link(game.name)
+      expect(page).to have_current_path(game_path(game))
     end
 
     it 'cant start a game' do
@@ -29,6 +33,7 @@ RSpec.feature 'Games' do
 
   describe 'logged in' do
     let!(:current_user) { login }
+    let!(:game) { create(:game, host: current_user, guest: user2) }
 
     before do
       visit games_path

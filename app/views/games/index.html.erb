@@ -5,12 +5,13 @@
 <h1>Games</h1>
 
 <div id="games">
+  <ul>
   <% @games.each do |game| %>
-    <%= render game %>
-    <p>
-      <%= link_to "Show this game", game %>
-    </p>
+    <li>
+      <%= link_to game.name, game_path(game) %>
+    </li>
   <% end %>
+  </ul>
 </div>
 
 <%= link_to "New game", new_game_path %>

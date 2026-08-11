@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :game do
-    host_id { 1 }
-    guest_id { 1 }
+    host factory: :user
+    guest factory: :user
   end
 end

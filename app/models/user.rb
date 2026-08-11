@@ -12,6 +12,9 @@ class User < ApplicationRecord
 
   has_one :deck, dependent: :destroy
 
+  has_many :host_games, inverse_of: :host, class_name: 'Game'
+  has_many :guest_games, inverse_of: :guest, class_name: 'Game'
+
   private
 
   def create_deck
