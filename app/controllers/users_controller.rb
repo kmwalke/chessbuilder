@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :logged_in, except: [:new, :create, :index, :show]
+  before_action :logged_in_as_admin_or_self, only: [:edit, :update, :destroy]
 
   # GET /users
   def index
@@ -61,5 +62,13 @@ class UsersController < ApplicationController
   # Only allow a list of trusted parameters through.
   def user_params
     params.expect(user: [:name, :email, :password, :password_confirmation, :motto])
+  end
+
+  public
+
+  def logged_in_as_admin_or_self
+    return if current_user&.id == params[:id].to_i
+
+    logged_in_as_admin
   end
 end
