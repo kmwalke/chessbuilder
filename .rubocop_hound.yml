@@ -15,7 +15,7 @@ AllCops:
   NewCops: enable
   UseCache: true
 
-Capybara/NegationMatcherAfterVisit:
+Capybara/RSpec/NegationMatcherAfterVisit:
   Enabled: false
 
 Layout/EmptyLinesAroundAttributeAccessor:
