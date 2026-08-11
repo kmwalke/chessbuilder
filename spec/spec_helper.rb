@@ -90,3 +90,21 @@ RSpec.configure do |config|
   #   # as the one that triggered the failure.
   #   Kernel.srand config.seed
 end
+
+def login
+  login_as(FactoryBot.create(:user))
+end
+
+def login_as(user)
+  visit login_path
+  fill_in 'Email', with: user.email
+  fill_in 'Password', with: user.password
+  click_button 'Log In'
+
+  user
+end
+
+def logout
+  visit root_path
+  click_link 'Log Out'
+end
