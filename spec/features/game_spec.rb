@@ -47,6 +47,8 @@ RSpec.feature 'Games' do
       before do
         skip('not implemented')
         click_link 'New Game'
+        select user1.name, from: 'user-dropdown'
+        click_link 'Start Game'
       end
 
       it 'redirects to the game page' do
@@ -56,8 +58,14 @@ RSpec.feature 'Games' do
       end
     end
 
-    it 'rejoins a game' do
-      skip('not implemented')
+    describe 'rejoins a game' do
+      before do
+        click_link game.name
+      end
+
+      it 'redirects to the game page' do
+        expect(page).to have_current_path(game_path(game))
+      end
     end
   end
 end

@@ -12,13 +12,12 @@
   <% end %>
 
   <div>
-    <%= form.label :host_id, style: "display: block" %>
-    <%= form.number_field :host_id %>
+    <%= form.hidden_field :host_id, value: current_user.id %>
   </div>
 
   <div>
-    <%= form.label :guest_id, style: "display: block" %>
-    <%= form.number_field :guest_id %>
+    <%= form.label :guest %>
+    <%= form.collection_select :guest_id, User.all, :id, :name %>
   </div>
 
   <div>

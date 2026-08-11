@@ -6,12 +6,14 @@
 
 <div id="games">
   <ul>
-  <% @games.each do |game| %>
-    <li>
-      <%= link_to game.name, game_path(game) %>
-    </li>
-  <% end %>
+    <% @games.each do |game| %>
+      <li>
+        <%= link_to game.name, game_path(game) %>
+      </li>
+    <% end %>
   </ul>
 </div>
 
-<%= link_to "New game", new_game_path %>
+<% if current_user %>
+  <%= link_to "New game", new_game_path %>
+<% end %>
