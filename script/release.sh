@@ -8,12 +8,11 @@
 psql $DATABASE_URL -c 'SELECT id FROM users LIMIT 1'
 
 if [ $? == 0 ]; then
-  bundle exec rails db:rollback STEP=10000
+#  bundle exec rails db:rollback STEP=10000
   echo "Running Rails DB migrations..."
   bundle exec rails db:migrate
   echo "Seeding data..."
   bundle exec rails db:seed
-  ./script/project_manager.sh
 else
   echo 'Skipping Rails DB migrations!!'
   echo 'If this is happening outside review app provisioning something went wrong!'
