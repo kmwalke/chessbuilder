@@ -17,7 +17,7 @@
 
   <div>
     <%= form.label :guest %>
-    <%= form.collection_select :guest_id, User.all, :id, :name %>
+    <%= form.collection_select :guest_id, User.where.not(email: current_user.email), :id, :name %>
   </div>
 
   <div>

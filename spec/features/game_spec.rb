@@ -21,9 +21,18 @@ RSpec.feature 'Games' do
       expect(page).to have_text(game.name)
     end
 
-    it 'views a game' do
-      click_link(game.name)
-      expect(page).to have_current_path(game_path(game))
+    describe 'views a game' do
+      before do
+        click_link(game.name)
+      end
+
+      it 'redirects' do
+        expect(page).to have_current_path(game_path(game))
+      end
+
+      it 'shows the name' do
+        expect(page).to have_text(game.name)
+      end
     end
 
     it 'cant start a game' do
@@ -45,16 +54,17 @@ RSpec.feature 'Games' do
 
     describe 'starts a game' do
       before do
-        skip('not implemented')
-        click_link 'New Game'
-        select user1.name, from: 'user-dropdown'
-        click_link 'Start Game'
+        click_link 'New game'
+        select user1.name, from: 'game_guest_id'
+        click_button 'Create Game'
       end
 
       it 'redirects to the game page' do
+        expect(page).to have_current_path(game_path(Game.last))
       end
 
       it 'sets up the board' do
+        expect(true).to be(false)
       end
     end
 
