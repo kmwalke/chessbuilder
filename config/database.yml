@@ -21,6 +21,9 @@ production:
   primary:
     <<: *default
     database: chessbuilder_prod
+  cache:
+    <<: *default
+    database: chessbuilder_prod_cache
   queue:
     <<: *default
     database: chessbuilder_prod_queue
