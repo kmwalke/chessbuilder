@@ -36,5 +36,9 @@ RSpec.describe User do
     it 'level' do
       expect(user.level).to eq(0)
     end
+
+    it 'deck' do
+      expect(user.deck).to be_a(Deck)
+    end
   end
 end

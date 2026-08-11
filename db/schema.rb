@@ -10,9 +10,39 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_08_11_032215) do
+ActiveRecord::Schema[8.1].define(version: 2026_08_11_084157) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
+
+  create_table "decks", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "name", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.index ["user_id"], name: "index_decks_on_user_id"
+  end
+
+  create_table "decks_piece_cards", id: false, force: :cascade do |t|
+    t.bigint "deck_id"
+    t.bigint "piece_card_id"
+    t.index ["deck_id"], name: "index_decks_piece_cards_on_deck_id"
+    t.index ["piece_card_id"], name: "index_decks_piece_cards_on_piece_card_id"
+  end
+
+  create_table "games", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.integer "guest_id", null: false
+    t.integer "host_id", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "piece_cards", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.integer "level", default: 0, null: false
+    t.string "name", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_piece_cards_on_name", unique: true
+  end
 
   create_table "users", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -25,4 +55,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_11_032215) do
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
   end
+
+  add_foreign_key "decks", "users"
 end

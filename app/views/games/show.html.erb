@@ -1,0 +1,19 @@
+<p style="color: green"><%= notice %></p>
+
+<h1><%= @game.name %></h1>
+
+<table>
+<% (1..8).sort.reverse.each do |i| %>
+  <tr>
+    <% (1..8).each do |j| %>
+      <td><%= "#{j}#{i}" %></td>
+    <% end %>
+  </tr>
+<% end %>
+</table>
+
+<div>
+  <%= link_to "Back to games", games_path %>
+
+  <%= button_to "Destroy this game", @game, method: :delete %>
+</div>

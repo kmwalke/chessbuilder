@@ -97,6 +97,9 @@ Rails/Exit:
   Exclude:
     - 'spec/rails_helper.rb'
 
+Rails/HasAndBelongsToMany:
+  Enabled: false
+
 Rails/HasManyOrHasOneDependent:
   Enabled: false
 
