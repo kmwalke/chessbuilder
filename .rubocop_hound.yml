@@ -7,6 +7,7 @@ plugins:
 
 AllCops:
   Exclude:
+    - 'db/queue_schema.rb'
     - 'db/schema.rb'
     - 'config/environments/*'
     - 'bin/*'

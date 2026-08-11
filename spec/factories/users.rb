@@ -1,9 +1,8 @@
 FactoryBot.define do
   factory :user do
-    name { "MyString" }
-    email { "MyString" }
-    password { "" }
-    motto { "MyString" }
-    level { 1 }
+    sequence(:name) { |n| "User_#{n}" }
+    email { "#{name}@email.com" }
+    password { '123' }
+    motto { "Now that's Streets Ahead!" }
   end
 end
