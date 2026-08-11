@@ -27,3 +27,6 @@ production:
   queue:
     <<: *default
     database: chessbuilder_prod_queue
+  cable:
+    <<: *default
+    database: chessbuilder_prod_cable
