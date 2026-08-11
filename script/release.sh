@@ -8,7 +8,7 @@
 psql $DATABASE_URL -c 'SELECT id FROM users LIMIT 1'
 
 if [ $? == 0 ]; then
-  bundle exec rails db:rollback STEP=10000
+#  bundle exec rails db:rollback STEP=10000
   echo "Running Rails DB migrations..."
   bundle exec rails db:migrate
   echo "Seeding data..."
