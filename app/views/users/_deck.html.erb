@@ -3,7 +3,10 @@
   <ul>
     <% @user.deck.piece_cards.each do |piece_card| %>
       <li>
-        <%= piece_card.name %>
+        <fieldset>
+          <legend><%= piece_card.name %></legend>
+          <span>Level <%= piece_card.level %></span>
+        </fieldset>
       </li>
     <% end %>
   </ul>
