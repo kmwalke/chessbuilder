@@ -18,5 +18,9 @@ test:
   database: <%= ENV["DB_TEST"] %>
 
 production:
-  <<: *default
-  database: chessbuilder_prod
+  primary:
+    <<: *default
+    database: chessbuilder_prod
+  queue:
+    <<: *default
+    database: chessbuilder_prod_queue
