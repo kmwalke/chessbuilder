@@ -8,6 +8,8 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
+PieceCard.populate
+
 User.create(
   name: 'Kent',
   email: 'kmwalke@gmail.com',

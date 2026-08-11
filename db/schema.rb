@@ -31,6 +31,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_11_074259) do
 
   create_table "piece_cards", force: :cascade do |t|
     t.datetime "created_at", null: false
+    t.integer "level", default: 0, null: false
     t.string "name", null: false
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_piece_cards_on_name", unique: true

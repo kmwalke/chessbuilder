@@ -1,0 +1,10 @@
+<fieldset>
+  <legend>Deck</legend>
+  <ul>
+    <% @user.deck.piece_cards.each do |piece_card| %>
+      <li>
+        <%= piece_card.name %>
+      </li>
+    <% end %>
+  </ul>
+</fieldset>

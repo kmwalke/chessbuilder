@@ -3,6 +3,12 @@ require 'rails_helper'
 RSpec.feature 'Decks' do
   let!(:user) { create(:user) }
 
+  before do
+    3.times do
+      user.deck.piece_cards << create(:piece_card)
+    end
+  end
+
   describe 'Logged out' do
     before do
       visit users_path
