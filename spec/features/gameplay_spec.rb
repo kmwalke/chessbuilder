@@ -4,6 +4,10 @@ RSpec.feature 'Gameplay' do
   it 'does all the stuff below' do
     skip('See Notes in gameplay_spec')
   end
+
+  # https://en.wikipedia.org/wiki/Chess_symbols_in_Unicode
+  # https://en.wikipedia.org/wiki/Algebraic_notation_(chess)
+
   # Piece card
   # - Just the pieces
   # - name, move
