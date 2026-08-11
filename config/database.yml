@@ -20,6 +20,8 @@ production:
   primary: &primary_production
     <<: *default
     database: chessbuilder_prod
+    url: <%= ENV["DATABASE_URL"] %>
+    pool: <%= ENV["DB_POOL"] || ENV['RAILS_MAX_THREADS'] || 5 %>
   cache:
     <<: *primary_production
     database: chessbuilder_prod_cache
