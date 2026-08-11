@@ -1,0 +1,41 @@
+x-chessbuilder-common:
+  &chessbuilder-common
+  build:
+    context: .
+    args:
+      USERNAME: $USER
+      UID: ${USER_ID:-0}
+      GID: ${GROUP_ID:-0}
+  volumes:
+    - .:/app
+    - chessbuilder-gems:/gems
+    - /app/node_modules
+  stdin_open: true # docker run -i
+  tty: true        # docker run -t
+  environment:
+    DB_DEV: chessbuilder-development
+    DB_HOST: db
+    DB_TEST: chessbuilder-test
+    DB_USERNAME: postgres
+    HEROKU_RELEASE_VERSION: "buildnumber"
+
+
+services:
+  web:
+    << : *chessbuilder-common
+    command: "./script/start-dev.sh"
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+
+  db:
+    image: postgres:11.5
+    volumes:
+      - chessbuilder-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+volumes:
+  chessbuilder-data:
+  chessbuilder-gems:
