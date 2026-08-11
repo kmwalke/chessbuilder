@@ -1,5 +1,6 @@
 <fieldset>
   <legend>Deck</legend>
+  <span><%= @user.deck.piece_cards.count %> piece cards</span>
   <ul>
     <% @user.deck.piece_cards.each do |piece_card| %>
       <li>
