@@ -63,9 +63,14 @@ RSpec.feature 'Games' do
         expect(page).to have_current_path(game_path(Game.last))
       end
 
+      it 'assigns the pieces' do
+        expect(game.pieces.count).to eq(user1.deck.piece_cards.count + current_user.deck.piece_cards.count)
+      end
+
       it 'sets up the board' do
-        expect(game.pieces.count).to eq(16)
-        expect(game.pieces.first.position).to eq(game.pieces.first.starting_position)
+        game.pieces.each do |piece|
+          expect(piece.position).to eq(piece.starting_position)
+        end
       end
     end
 

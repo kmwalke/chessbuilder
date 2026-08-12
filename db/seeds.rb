@@ -9,6 +9,7 @@
 #   end
 
 PieceCardUtil.populate
+
 [
   { email: 'kmwalke@gmail.com', name: 'Kent', motto: 'That\s streets ahead!"' },
   { email: 'kfretz2@gmail.com', name: 'Keith', motto: 'But Prestidigitation _is_ a combat skill!' },
