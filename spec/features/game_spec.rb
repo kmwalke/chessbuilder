@@ -64,8 +64,8 @@ RSpec.feature 'Games' do
       end
 
       it 'sets up the board' do
-        skip('not implemented')
         expect(game.pieces.count).to eq(16)
+        expect(game.pieces.first.position).to eq(game.pieces.first.starting_position)
       end
     end
 

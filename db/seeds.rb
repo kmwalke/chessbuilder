@@ -9,19 +9,19 @@
 #   end
 
 PieceCardUtil.populate
+[
+  { email: 'kmwalke@gmail.com', name: 'Kent', motto: 'That\s streets ahead!"' },
+  { email: 'kfretz2@gmail.com', name: 'Keith', motto: 'But Prestidigitation _is_ a combat skill!' },
+  { email: 'cristin.slaymaker@gmail.com', name: 'Cris' },
+  { email: 'kerryslaymaker@gmail.com', name: 'Kerry' },
+  { email: 'buttforker@gmail.com', name: 'Zack' },
+  { email: 'Aaron.m.lee.al@gmail.com', name: 'Aaron' },
+  { email: 'polymangler@gmail.com', name: 'Bruce' },
+  { email: 'a@b.com', name: 'Lumber Jack' },
+  { email: 'b@b.com', name: 'Shifty Rogue' }
+].each do |user_params|
+  @user                       = User.find_or_create_by(user_params)
+  @user.password              = '123'
+  @user.save
+end
 
-User.create(
-  name: 'Cris',
-  email: 'cristin.slaymaker@gmail.com',
-  password: '123',
-  password_confirmation: '123',
-  motto: 'What a cutie :)'
-)
-
-User.create(
-  name: 'Kent',
-  email: 'kmwalke@gmail.com',
-  password: '123',
-  password_confirmation: '123',
-  motto: 'That\'s Streets Ahead!'
-)
