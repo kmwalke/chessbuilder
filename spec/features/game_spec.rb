@@ -64,12 +64,12 @@ RSpec.feature 'Games' do
       end
 
       it 'assigns the pieces' do
-        expect(game.pieces.count).to eq(user1.deck.piece_cards.count + current_user.deck.piece_cards.count)
+        expect(game.squares.count).to eq(user1.deck.piece_cards.count + current_user.deck.piece_cards.count)
       end
 
       it 'sets up the board' do
-        game.pieces.each do |piece|
-          expect(piece.position).to eq(piece.starting_position)
+        game.squares.each_pair do |square, piece_id|
+          expect(Piece.find(piece_id).rules['start'].include?(square)).to be true
         end
       end
     end

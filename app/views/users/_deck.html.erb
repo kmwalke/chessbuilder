@@ -8,6 +8,8 @@
       <td>Name</td>
       <td>Host</td>
       <td>Guest</td>
+      <td>Start</td>
+      <td>Moves</td>
     </tr>
     </thead>
     <% @user.deck.piece_cards.each do |piece_card| %>
@@ -16,6 +18,8 @@
         <td><%= piece_card.name %></td>
         <td><%= piece_card.host_symbol %></td>
         <td><%= piece_card.guest_symbol %></td>
+        <td><%= piece_card.rules['start'] %></td>
+        <td></td>
       </tr>
     <% end %>
   </table>
