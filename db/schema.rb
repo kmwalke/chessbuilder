@@ -43,9 +43,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_13_025323) do
     t.string "host_symbol", null: false
     t.integer "level"
     t.string "name"
-    t.integer "piece_card_id"
     t.jsonb "rules", null: false
-    t.string "type"
     t.datetime "updated_at", null: false
   end
 
