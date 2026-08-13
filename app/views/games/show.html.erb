@@ -6,7 +6,7 @@
 <% (1..@game.board_height).sort.reverse.each do |i| %>
   <tr>
     <% (1..@game.board_width).each do |j| %>
-      <td><%= "#{j}#{i}" %></td>
+      <td id="<%= "#{i}#{j}" %>"><%= "#{j}#{i}" %></td>
     <% end %>
   </tr>
 <% end %>
