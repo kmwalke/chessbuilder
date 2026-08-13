@@ -103,6 +103,9 @@ Rails/HasAndBelongsToMany:
 Rails/HasManyOrHasOneDependent:
   Enabled: false
 
+Rails/HelperInstanceVariable:
+  Enabled: false
+
 Rails/NotNullColumn:
   Enabled: false
 

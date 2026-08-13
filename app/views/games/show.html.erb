@@ -3,10 +3,13 @@
 <h1><%= @game.name %></h1>
 
 <table>
-<% (1..@game.board_height).sort.reverse.each do |i| %>
+<% (1..@game.board_height).sort.reverse.each do |y| %>
   <tr>
-    <% (1..@game.board_width).each do |j| %>
-      <td id="<%= "#{i}#{j}" %>"><%= "#{j}#{i}" %></td>
+    <% (1..@game.board_width).each do |x| %>
+      <td id="<%= "#{algebraic_notation(x,y)}" %>">
+        <%= piece_symbol(algebraic_notation(x,y))  %>
+        <%#= algebraic_notation(x,y)  %>
+      </td>
     <% end %>
   </tr>
 <% end %>
