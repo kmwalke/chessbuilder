@@ -25,4 +25,3 @@ PieceCardUtil.populate
   @user.password              = '123'
   @user.save
 end
-
