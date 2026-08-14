@@ -1,8 +1,13 @@
 class GamesController < ApplicationController
-  before_action :set_game, only: [:show, :edit, :update, :destroy]
+  before_action :set_game, only: [:show, :edit, :update, :destroy, :move]
 
   def index
     @games = Game.all
+  end
+
+  def move
+    # puts move_params
+    redirect_to @game
   end
 
   def show; end
@@ -56,5 +61,9 @@ class GamesController < ApplicationController
   # Only allow a list of trusted parameters through.
   def game_params
     params.expect(game: [:host_id, :guest_id])
+  end
+
+  def move_params
+    params.expect(move: [:piece_id, :from, :to])
   end
 end

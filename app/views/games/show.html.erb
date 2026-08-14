@@ -2,17 +2,32 @@
 
 <h1><%= @game.name %></h1>
 
-<table class="board">
-<% (1..@game.board_height).sort.reverse.each do |y| %>
-  <tr>
-    <% (1..@game.board_width).each do |x| %>
-      <td title="<%= algebraic_notation(x,y) %>" id="<%= algebraic_notation(x,y) %>">
-        <%= piece_symbol(algebraic_notation(x,y))  %>
-      </td>
+<%= form_with url: move_game_path do |form| %>
+<!--  TODO: big radio button in the background to deselect any pieces-->
+  <%= form.radio_button(nil, nil, id: "nil_piece_select", name: "piece_id") %>
+  <%= form.label 'nil_piece_select', 'no piece', class: 'nil'  %>
+  <table class="board">
+    <% (1..@game.board_height).sort.reverse.each do |y| %>
+      <tr>
+        <% (1..@game.board_width).each do |x| %>
+          <% position = algebraic_notation(x, y) %>
+          <% piece = piece(position) %>
+          <td title="<%= position %>" id="<%= position %>">
+            <% if piece %>
+              <%= form.label "#{position}_piece_select", piece.symbol %>
+              <%= form.radio_button(nil, piece.id, id: "#{position}_piece_select", name: "move[piece_id]") %>
+              <div class="possible-moves"><%= piece.name %></div>
+<!--              TODO: WHen selected, open overlay with possible moves-->
+<!--              Overlay is whole board, put radio buttons on each good move-->
+<!--              Form is submitted showing the piece and where to move it to-->
+            <% end %>
+          </td>
+        <% end %>
+      </tr>
     <% end %>
-  </tr>
+  </table>
+  <%= form.submit "Move piece" %>
 <% end %>
-</table>
 
 <div>
   <%= link_to "Back to games", games_path %>
