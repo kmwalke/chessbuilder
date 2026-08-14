@@ -7,4 +7,33 @@
  * depending on specificity.
  *
  * Consider organizing styles into separate files for maintainability.
+ *= require_tree .
+ *= require_self
  */
+
+table.board {
+    border-spacing: 0;
+    border: 4px outset goldenrod;
+
+    tr:nth-child(2n+1) {
+        td:nth-child(2n) {
+            background: tan;
+        }
+    }
+
+    tr:nth-child(2n) {
+        td:nth-child(2n+1) {
+            background: tan;
+        }
+    }
+
+    tr {
+        td {
+            padding: 0;
+            height: 1.5em;
+            width: 1.5em;
+            text-align: center;
+            font-size: 3em;
+        }
+    }
+}
