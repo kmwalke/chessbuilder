@@ -5,6 +5,10 @@ RSpec.feature 'Gameplay' do
     skip('See Notes in gameplay_spec')
   end
 
+  it 'setup simplecov and catch testing up' do
+    skip('once some basic mvp is achieved')
+  end
+
   # https://en.wikipedia.org/wiki/Chess_symbols_in_Unicode
   # https://en.wikipedia.org/wiki/Algebraic_notation_(chess)
 

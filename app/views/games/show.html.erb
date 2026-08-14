@@ -6,9 +6,8 @@
 <% (1..@game.board_height).sort.reverse.each do |y| %>
   <tr>
     <% (1..@game.board_width).each do |x| %>
-      <td id="<%= "#{algebraic_notation(x,y)}" %>">
+      <td title="<%= algebraic_notation(x,y) %>" id="<%= algebraic_notation(x,y) %>">
         <%= piece_symbol(algebraic_notation(x,y))  %>
-        <%#= algebraic_notation(x,y)  %>
       </td>
     <% end %>
   </tr>

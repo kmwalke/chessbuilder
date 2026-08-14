@@ -19,24 +19,42 @@ class Game < ApplicationRecord
 
   def setup_board
     build_board
-    place_pieces
+    place_host_pieces
+    place_guest_pieces
   end
 
   def build_board
     update(squares: {})
   end
 
-  def place_pieces
+  def place_host_pieces
     host.deck.piece_cards.each do |card|
-      card.rules['start']&.each do |start_position|
+      card.rules['start'].each do |start_position|
         next if squares[start_position]
 
-        piece                   = Piece.create(piece_card: card)
+        piece                   = Piece.create(piece_card: card, player: Piece::HOST)
+        squares[start_position] = piece.id
+        break
+      end
+    end
+  end
+
+  def place_guest_pieces
+    guest.deck.piece_cards.each do |card|
+      card.rules['start'].each do |start_position|
+        start_position = convert_to_guest(start_position)
+        next if squares[start_position]
+
+        piece                   = Piece.create(piece_card: card, player: Piece::GUEST)
         squares[start_position] = piece.id
         break
       end
     end
 
     save
+  end
+
+  def convert_to_guest(position)
+    "#{position[0]}#{(board_height + 1) - position[1].to_i}"
   end
 end
