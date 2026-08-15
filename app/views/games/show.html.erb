@@ -6,6 +6,7 @@
 <!--  TODO: big radio button in the background to deselect any pieces-->
   <%= form.radio_button(nil, nil, id: "nil_piece_select", name: "move[piece_id]") %>
   <%= form.label 'nil_piece_select', 'no piece', class: 'nil'  %>
+  <%= form.text_field 'move[to]', value: 'c4' %>
   <table class="board">
     <% (1..@game.board_height).sort.reverse.each do |y| %>
       <tr>
@@ -17,7 +18,7 @@
               <%= form.label "#{position}_piece_select", piece.symbol %>
               <%= form.radio_button(
                     nil,
-                    "{ \"piece_id\": #{piece.id}, \"from\": \"#{position}\", \"to\": \"c4\" }",
+                    "{ \"piece_id\": #{piece.id}, \"from\": \"#{position}\" }",
                     id: "#{position}_piece_select",
                     name: "move[data]")
               %>

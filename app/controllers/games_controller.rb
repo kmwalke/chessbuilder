@@ -66,6 +66,7 @@ class GamesController < ApplicationController
   end
 
   def move_params
-    JSON.parse(params.expect(move: [:data])[:data]).symbolize_keys
+    temp_params = params.expect(move: [:data, :to])
+    temp_params.merge JSON.parse(temp_params[:data]).symbolize_keys
   end
 end
