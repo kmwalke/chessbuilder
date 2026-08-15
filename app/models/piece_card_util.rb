@@ -23,7 +23,12 @@ class PieceCardUtil < ApplicationRecord
       { name: PieceCard::ROOK, level: 0, host_symbol: '♖', guest_symbol: '♜',
         rules: {
           start: %w[a1 h1],
-          moves: []
+          moves: [
+            {x: 0, y:1, distance: 1000},
+            {x: 1, y:0, distance: 1000},
+            {x: 0, y:-1, distance: 1000},
+            {x: -1, y:0, distance: 1000},
+          ]
         } },
       { name: PieceCard::KNIGHT, level: 0, host_symbol: '♘', guest_symbol: '♞',
         rules: {
