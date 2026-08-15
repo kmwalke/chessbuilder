@@ -6,7 +6,9 @@ class GamesController < ApplicationController
   end
 
   def move
-    # puts move_params
+    @game.squares[move_params[:from]] = nil
+    @game.squares[move_params[:to]]   = move_params[:piece_id]
+    @game.save
     redirect_to @game
   end
 
@@ -64,6 +66,6 @@ class GamesController < ApplicationController
   end
 
   def move_params
-    params.expect(move: [:piece_id, :from, :to])
+    JSON.parse(params.expect(move: [:data])[:data]).symbolize_keys
   end
 end

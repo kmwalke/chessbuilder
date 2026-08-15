@@ -15,8 +15,15 @@
           <td title="<%= position %>" id="<%= position %>">
             <% if piece %>
               <%= form.label "#{position}_piece_select", piece.symbol %>
-              <%= form.radio_button(nil, piece.id, id: "#{position}_piece_select", name: "move[piece_id]") %>
-              <div class="possible-moves"><%= piece.name %></div>
+              <%= form.radio_button(
+                    nil,
+                    "{ \"piece_id\": #{piece.id}, \"from\": \"#{position}\", \"to\": \"c4\" }",
+                    id: "#{position}_piece_select",
+                    name: "move[data]")
+              %>
+              <div class="possible-moves">
+                <%= piece.name %>
+              </div>
 <!--              TODO: WHen selected, open overlay with possible moves-->
 <!--              Overlay is whole board, put radio buttons on each good move-->
 <!--              Form is submitted showing the piece and where to move it to-->
