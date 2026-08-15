@@ -1,4 +1,5 @@
 class Piece < ApplicationRecord
+  # TODO: these should be in user or game, not here
   HOST  = 'Host'.freeze
   GUEST = 'Guest'.freeze
 
@@ -20,9 +21,5 @@ class Piece < ApplicationRecord
 
   def to_s
     "#{name} - #{symbol}"
-  end
-
-  def valid_moves
-    %w[c4 c5 d4 d5]
   end
 end

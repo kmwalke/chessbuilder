@@ -22,24 +22,28 @@ class PieceCardUtil < ApplicationRecord
       },
       { name: PieceCard::ROOK, level: 0, host_symbol: '♖', guest_symbol: '♜',
         rules: {
-          start: %w[a1 h1]
+          start: %w[a1 h1],
+          moves: []
         } },
       { name: PieceCard::KNIGHT, level: 0, host_symbol: '♘', guest_symbol: '♞',
         rules: {
           start: %w[b1 g1],
-          moves: [[]]
+          moves: []
         } },
       { name: PieceCard::BISHOP, level: 0, host_symbol: '♗', guest_symbol: '♝',
         rules: {
-          start: %w[c1 f1]
+          start: %w[c1 f1],
+          moves: []
         } },
       { name: PieceCard::QUEEN, level: 0, host_symbol: '♕', guest_symbol: '♛',
         rules: {
-          start: ['d1']
+          start: ['d1'],
+          moves: []
         } },
       { name: PieceCard::KING, level: 0, host_symbol: '♔', guest_symbol: '♚',
         rules: {
-          start: ['e1']
+          start: ['e1'],
+          moves: []
         } }
     ]
   end

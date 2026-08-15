@@ -6,6 +6,7 @@ class GamesController < ApplicationController
   end
 
   def move
+    # TODO: protect from dissapearing pieces.  Return unless :to param is set. in fact, require all params
     @game.squares[move_params[:from]] = nil
     @game.squares[move_params[:to]]   = move_params[:piece_id]
     @game.save

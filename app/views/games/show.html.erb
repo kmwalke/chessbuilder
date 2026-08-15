@@ -22,12 +22,12 @@
                     name: "move[data]")
               %>
               <table class="board move">
-                <% (1..@game.board_height).sort.reverse.each do |y| %>
+                <% (1..@game.board_height).sort.reverse.each do |y_move| %>
                   <tr>
-                    <% (1..@game.board_width).each do |x| %>
-                      <% move_position = algebraic_notation(x, y) %>
+                    <% (1..@game.board_width).each do |x_move| %>
+                      <% move_position = algebraic_notation(x_move, y_move) %>
                       <td title="<%= move_position %>" id="<%= move_position %>_move_to">
-                        <% if piece.valid_moves.include?(move_position) %>
+                        <% if @game.valid_moves(piece, x, y).include?(move_position) %>
                           <%= form.radio_button nil, move_position, id: "#{move_position}_move_select", name: 'move[to]' %>
                           <%= form.label "#{move_position}_move_select", piece.symbol, class: 'move_to' %>
                         <% end %>

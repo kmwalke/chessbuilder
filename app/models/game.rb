@@ -15,6 +15,18 @@ class Game < ApplicationRecord
     "#{host.name} VS #{guest.name} - #{created_at.to_fs(:long_ordinal)}"
   end
 
+  def valid_moves(piece, pos_x, pos_y)
+    moves = []
+
+    piece.rules['moves'].each do |move|
+      operator      = '+'
+      operator      = '-' if piece.player == Piece::GUEST
+      move_position = algebraic_notation(pos_x + move['x'], pos_y.send(operator, move['y']))
+      moves << move_position
+    end
+    moves
+  end
+
   private
 
   def setup_board
