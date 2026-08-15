@@ -16,7 +16,8 @@ class PieceCardUtil < ApplicationRecord
       {
         name: PieceCard::PAWN, level: 0, host_symbol: '♙', guest_symbol: '♟',
         rules: {
-          start: %w[a2 b2 c2 d2 e2 f2 g2 h2]
+          start: %w[a2 b2 c2 d2 e2 f2 g2 h2],
+          moves: [{ x: 0, y: 1, distance: 1 }]
         }
       },
       { name: PieceCard::ROOK, level: 0, host_symbol: '♖', guest_symbol: '♜',

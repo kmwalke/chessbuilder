@@ -51,10 +51,10 @@ table.board {
     tr {
         td {
             padding: 0;
+            font-size: 50px;
             height: 1.5em;
             width: 1.5em;
             text-align: center;
-            font-size: 3em;
 
             input[type="radio"] {
                 position: absolute;
@@ -73,7 +73,6 @@ table.board {
 
             input[type="radio"]:checked + div {
                 display: block;
-                background: red;
             }
 
             label {
@@ -83,5 +82,14 @@ table.board {
                 cursor: pointer;
             }
         }
+    }
+}
+
+table.move {
+    opacity: 25%;
+
+    label.move_to {
+        /*border: 1px solid cornflowerblue;*/
+        box-shadow: 0 0 20px cornflowerblue inset;
     }
 }
