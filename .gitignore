@@ -54,3 +54,6 @@ yarn-debug.log*
 .yarn-integrity
 .cache
 .gem
+
+/app/assets/builds/*
+!/app/assets/builds/.keep

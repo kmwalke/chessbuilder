@@ -1,8 +1,16 @@
 class GamesController < ApplicationController
-  before_action :set_game, only: [:show, :edit, :update, :destroy]
+  before_action :set_game, only: [:show, :edit, :update, :destroy, :move]
 
   def index
     @games = Game.all
+  end
+
+  def move
+    # TODO: protect from dissapearing pieces.  Return unless :to param is set. in fact, require all params
+    @game.squares[move_params[:from]] = nil
+    @game.squares[move_params[:to]]   = move_params[:piece_id]
+    @game.save
+    redirect_to @game
   end
 
   def show; end
@@ -56,5 +64,10 @@ class GamesController < ApplicationController
   # Only allow a list of trusted parameters through.
   def game_params
     params.expect(game: [:host_id, :guest_id])
+  end
+
+  def move_params
+    temp_params = params.expect(move: [:data, :to])
+    temp_params.merge JSON.parse(temp_params[:data]).symbolize_keys
   end
 end

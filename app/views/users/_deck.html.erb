@@ -1,14 +1,26 @@
 <fieldset>
   <legend>Deck</legend>
   <span><%= @user.deck.piece_cards.count %> piece cards</span>
-  <ul>
+  <table>
+    <thead>
+    <tr>
+      <td>Level</td>
+      <td>Name</td>
+      <td>Host</td>
+      <td>Guest</td>
+      <td>Start</td>
+      <td>Moves</td>
+    </tr>
+    </thead>
     <% @user.deck.piece_cards.each do |piece_card| %>
-      <li>
-        <fieldset>
-          <legend><%= piece_card.name %></legend>
-          <span>Level <%= piece_card.level %></span>
-        </fieldset>
-      </li>
+      <tr>
+        <td><%= piece_card.level %></td>
+        <td><%= piece_card.name %></td>
+        <td><%= piece_card.host_symbol %></td>
+        <td><%= piece_card.guest_symbol %></td>
+        <td><%= piece_card.rules['start'] %></td>
+        <td></td>
+      </tr>
     <% end %>
-  </ul>
+  </table>
 </fieldset>

@@ -1,7 +1,13 @@
 Rails.application.routes.draw do
-  resources :games
   get 'home/index'
   root to: 'home#index'
+
+  resources :games do
+    member do
+      post 'move'
+    end
+  end
+
   resources :users
 
   resources :sessions, only: [:new, :create, :destroy]

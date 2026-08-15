@@ -5,13 +5,6 @@ RSpec.feature 'Games' do
   let!(:user2) { create(:user) }
   let!(:game) { create(:game, host: user1, guest: user2) }
 
-  before do
-    3.times do
-      user1.deck.piece_cards << create(:piece_card)
-      user2.deck.piece_cards << create(:piece_card)
-    end
-  end
-
   describe 'Logged out' do
     before do
       visit games_path
@@ -63,9 +56,26 @@ RSpec.feature 'Games' do
         expect(page).to have_current_path(game_path(Game.last))
       end
 
-      it 'sets up the board' do
-        skip('not implemented')
-        expect(game.pieces.count).to eq(16)
+      it 'assigns the pieces' do
+        expect(game.squares.count).to eq(user1.deck.piece_cards.count + current_user.deck.piece_cards.count)
+      end
+
+      it 'sets up the host pieces on the board' do
+        game.squares.each_pair do |square, piece_id|
+          piece = Piece.where(id: piece_id, player: Piece::HOST).first
+          next unless piece
+
+          expect(piece.rules['start'].include?(square)).to be true
+        end
+      end
+
+      it 'sets up the guest pieces on the board' do
+        game.squares.each_pair do |square, piece_id|
+          piece = Piece.where(id: piece_id, player: Piece::GUEST).first
+          next unless piece
+
+          expect(piece.rules['start'].include?(convert_to_guest(square))).to be true
+        end
       end
     end
 
@@ -78,5 +88,11 @@ RSpec.feature 'Games' do
         expect(page).to have_current_path(game_path(game))
       end
     end
+  end
+
+  private
+
+  def convert_to_guest(position)
+    "#{position[0]}#{9 - position[1].to_i}"
   end
 end

@@ -2,15 +2,48 @@
 
 <h1><%= @game.name %></h1>
 
-<table>
-<% (1..8).sort.reverse.each do |i| %>
-  <tr>
-    <% (1..8).each do |j| %>
-      <td><%= "#{j}#{i}" %></td>
+<%= form_with url: move_game_path do |form| %>
+  <!--  TODO: big radio button in the background to deselect any pieces-->
+  <%= form.radio_button(nil, nil, id: "nil_piece_select", name: "move[data]") %>
+  <%= form.label 'nil_piece_select', 'no piece', class: 'nil' %>
+  <table class="board">
+    <% (1..@game.board_height).sort.reverse.each do |y| %>
+      <tr>
+        <% (1..@game.board_width).each do |x| %>
+          <% position = algebraic_notation(x, y) %>
+          <% piece = piece(position) %>
+          <td title="<%= position %>" id="<%= position %>">
+            <% if piece %>
+              <%= form.label "#{position}_piece_select", piece.symbol %>
+              <%= form.radio_button(
+                    nil,
+                    "{ \"piece_id\": #{piece.id}, \"from\": \"#{position}\" }",
+                    id: "#{position}_piece_select",
+                    name: "move[data]")
+              %>
+              <table class="board move">
+                <% (1..@game.board_height).sort.reverse.each do |y_move| %>
+                  <tr>
+                    <% (1..@game.board_width).each do |x_move| %>
+                      <% move_position = algebraic_notation(x_move, y_move) %>
+                      <td title="<%= move_position %>" id="<%= move_position %>_move_to">
+                        <% if @game.valid_moves(piece, x, y).include?(move_position) %>
+                          <%= form.radio_button nil, move_position, id: "#{move_position}_move_select", name: 'move[to]' %>
+                          <%= form.label "#{move_position}_move_select", piece.symbol, class: 'move_to' %>
+                        <% end %>
+                      </td>
+                    <% end %>
+                  </tr>
+                <% end %>
+              </table>
+            <% end %>
+          </td>
+        <% end %>
+      </tr>
     <% end %>
-  </tr>
+  </table>
+  <%= form.submit "Move piece" %>
 <% end %>
-</table>
 
 <div>
   <%= link_to "Back to games", games_path %>
