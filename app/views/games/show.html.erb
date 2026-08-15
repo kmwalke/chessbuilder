@@ -21,26 +21,21 @@
                     id: "#{position}_piece_select",
                     name: "move[data]")
               %>
-              <div class="possible-moves">
-                <table class="board move">
-                  <% (1..@game.board_height).sort.reverse.each do |y| %>
-                    <tr>
-                      <% (1..@game.board_width).each do |x| %>
-                        <% move_position = algebraic_notation(x, y) %>
-                        <td title="<%= move_position %>" id="<%= move_position %>_move_to">
-                          <% if piece.valid_moves.include?(move_position) %>
-                            <%= form.label "#{move_position}_move_select", piece.symbol, class: 'move_to' %>
-                            <%= form.radio_button nil, move_position, id: "#{move_position}_move_select", name: 'move[to]' %>
-                          <% end %>
-                        </td>
-                      <% end %>
-                    </tr>
-                  <% end %>
-                </table>
-              </div>
-              <!--              TODO: WHen selected, open overlay with possible moves-->
-              <!--              Overlay is whole board, put radio buttons on each good move-->
-              <!--              Form is submitted showing the piece and where to move it to-->
+              <table class="board move">
+                <% (1..@game.board_height).sort.reverse.each do |y| %>
+                  <tr>
+                    <% (1..@game.board_width).each do |x| %>
+                      <% move_position = algebraic_notation(x, y) %>
+                      <td title="<%= move_position %>" id="<%= move_position %>_move_to">
+                        <% if piece.valid_moves.include?(move_position) %>
+                          <%= form.radio_button nil, move_position, id: "#{move_position}_move_select", name: 'move[to]' %>
+                          <%= form.label "#{move_position}_move_select", piece.symbol, class: 'move_to' %>
+                        <% end %>
+                      </td>
+                    <% end %>
+                  </tr>
+                <% end %>
+              </table>
             <% end %>
           </td>
         <% end %>

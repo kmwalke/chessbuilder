@@ -63,7 +63,7 @@ table.board {
                 cursor: pointer;
             }
 
-            div.possible-moves {
+            table.move {
                 display: none;
                 position: absolute;
                 top: 0;
@@ -71,7 +71,7 @@ table.board {
 
             }
 
-            input[type="radio"]:checked + div {
+            input[type="radio"]:checked + table {
                 display: block;
             }
 
@@ -88,8 +88,12 @@ table.board {
 table.move {
     opacity: 25%;
 
-    label.move_to {
-        /*border: 1px solid cornflowerblue;*/
+    label {
         box-shadow: 0 0 20px cornflowerblue inset;
+    }
+
+    /*TODO: highlight only seems to work on the thop-left piece.*/
+    input[type="radio"]:checked + label {
+        box-shadow: 0 0 50px darkred inset;
     }
 }
