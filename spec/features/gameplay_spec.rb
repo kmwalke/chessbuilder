@@ -9,6 +9,16 @@ RSpec.feature 'Gameplay' do
     skip('once some basic mvp is achieved')
   end
 
+  it 'performance pass' do
+    skip('later')
+    # perhaps save renders chessboard to db
+    # @game.current_board or something
+    # Server calculates once and serves it to each page view
+    # Currently, it is recalculated for each page view
+
+    # also need to make the rendering itself quicker
+  end
+
   # https://en.wikipedia.org/wiki/Chess_symbols_in_Unicode
   # https://en.wikipedia.org/wiki/Algebraic_notation_(chess)
 
