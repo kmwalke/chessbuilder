@@ -23,6 +23,7 @@ class Game < ApplicationRecord
       operator      = '-' if piece.player == Piece::GUEST
       move_position = algebraic_notation(pos_x + move['x'], pos_y.send(operator, move['y']))
       next if Piece.where(id: squares[move_position]).first&.player == piece.player
+
       moves << move_position
     end
     moves
