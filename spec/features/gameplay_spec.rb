@@ -20,6 +20,10 @@ RSpec.feature 'Gameplay' do
     # game.rb:25 is causing a million individual DB calls.  And other spots are bad, too
 
     # also need to make the rendering itself quicker
+    # Instead of pre-rendering each piece's possible moves, maybe turbo with server calls
+    # GET game/1/pieces/2/moves and render the results?
+    #  More server calls vs 1 call with big response.
+    #  This would make things more lightweight.  watchers would get smaller responses. Host wouldn't get guests' moves
   end
 
   it 'address TODOs' do
