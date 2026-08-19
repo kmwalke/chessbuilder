@@ -1,0 +1,87 @@
+
+html {
+  background: black;
+  color: white;
+
+  a, a:visited {
+    color: green;
+  }
+
+  a:hover {
+    color: white;
+  }
+}
+
+label.nil {
+  border: 1px solid green;
+  position: absolute;
+}
+
+table.board {
+  border-spacing: 0;
+  border: 4px outset goldenrod;
+  background: #f8faef;
+  color: black;
+  position: relative;
+
+  tr:nth-child(2n+1) {
+    td:nth-child(2n) {
+      background: tan;
+    }
+  }
+
+  tr:nth-child(2n) {
+    td:nth-child(2n+1) {
+      background: tan;
+    }
+  }
+
+  tr {
+    td {
+      padding: 0;
+      font-size: 50px;
+      height: 1.5em;
+      width: 1.5em;
+      text-align: center;
+
+      input[type="radio"] {
+        position: absolute;
+        /*opacity: 0;*/
+        display: none;
+        cursor: pointer;
+      }
+
+      table.move {
+        display: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+
+      }
+
+      input[type="radio"]:checked + table {
+        display: block;
+      }
+
+      label {
+        display: block;
+        width: 100%;
+        height: 100%;
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+table.move {
+  opacity: 25%;
+
+  label {
+    box-shadow: 0 0 20px cornflowerblue inset;
+  }
+
+  /*TODO: highlight only seems to work on the thop-left piece.*/
+  input[type="radio"]:checked + label {
+    box-shadow: 0 0 50px darkred inset;
+  }
+}
