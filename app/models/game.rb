@@ -25,7 +25,7 @@ class Game < ApplicationRecord
       operator      = '+'
       operator      = '-' if piece.player == Piece::GUEST
       move_position = algebraic_notation(pos_x + move['x'], pos_y.send(operator, move['y']))
-      next if pieces.select { |new_piece| new_piece.position == move_position && new_piece.player == piece.player}.any?
+      next if pieces.find { |new_piece| new_piece.position == move_position && new_piece.player == piece.player }
 
       moves << move_position
     end
