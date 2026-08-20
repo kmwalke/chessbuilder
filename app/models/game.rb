@@ -22,12 +22,11 @@ class Game < ApplicationRecord
   end
 
   def valid_moves(piece)
-    moves    = []
-    position = xy_notation(piece.position)
+    moves = []
 
     piece.rules['moves'].each do |move|
-      move_position = algebraic_notation(position[:x] + move['x'], position[:y].send(operator(piece.player), move['y']))
-      next if pieces.find { |new_piece| new_piece.position == move_position && new_piece.player == piece.player }
+      move_position = calc_move_position(piece, move)
+      next if space_occupied?(piece, move_position)
 
       moves << move_position
     end
@@ -35,6 +34,15 @@ class Game < ApplicationRecord
   end
 
   private
+
+  def space_occupied?(piece, move_position)
+    pieces.find { |new_piece| new_piece.position == move_position && new_piece.player == piece.player }
+  end
+
+  def calc_move_position(piece, move)
+    position = xy_notation(piece.position)
+    algebraic_notation(position[:x] + move['x'], position[:y].send(operator(piece.player), move['y']))
+  end
 
   def operator(player)
     return '-' if player == Game::GUEST
