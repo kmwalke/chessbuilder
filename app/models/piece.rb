@@ -3,6 +3,7 @@ class Piece < ApplicationRecord
   HOST  = 'Host'.freeze
   GUEST = 'Guest'.freeze
 
+  belongs_to :game
   belongs_to :piece_card
 
   delegate :name, to: :piece_card

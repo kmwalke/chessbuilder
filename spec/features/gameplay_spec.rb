@@ -12,7 +12,18 @@ RSpec.feature 'Gameplay' do
     # Server calculates once and serves it to each page view
     # Currently, it is recalculated for each page view
 
+    # I think using json to store ID's is bad.  It prevents rails's auto caching features.
+    # I could probably set up some auto caching, but rails would do it easily if I used rails relations
+    # @game.peices.first.position = g3 ?
+    # @game.pieces.where(position: 'a3') ?
+    # Then @game.pieces can be cached
+    # game.rb:25 is causing a million individual DB calls.  And other spots are bad, too
+
     # also need to make the rendering itself quicker
+    # Instead of pre-rendering each piece's possible moves, maybe turbo with server calls
+    # GET game/1/pieces/2/moves and render the results?
+    #  More server calls vs 1 call with big response.
+    #  This would make things more lightweight.  watchers would get smaller responses. Host wouldn't get guests' moves
   end
 
   it 'address TODOs' do
