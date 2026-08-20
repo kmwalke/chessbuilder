@@ -57,7 +57,7 @@ class GamesController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_game
-    @game = Game.find(params.expect(:id))
+    @game = Game.where(id: params.expect(:id)).eager_load( pieces: :piece_card).first
   end
 
   # Only allow a list of trusted parameters through.
