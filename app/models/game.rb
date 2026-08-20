@@ -1,4 +1,7 @@
 class Game < ApplicationRecord
+  HOST  = 'Host'.freeze
+  GUEST = 'Guest'.freeze
+
   belongs_to :host, class_name: 'User'
   belongs_to :guest, class_name: 'User'
 
@@ -24,7 +27,7 @@ class Game < ApplicationRecord
 
     piece.rules['moves'].each do |move|
       operator      = '+'
-      operator      = '-' if piece.player == Piece::GUEST
+      operator      = '-' if piece.player == Game::GUEST
       move_position = algebraic_notation(position[:x] + move['x'], position[:y].send(operator, move['y']))
       next if pieces.find { |new_piece| new_piece.position == move_position && new_piece.player == piece.player }
 
@@ -45,7 +48,7 @@ class Game < ApplicationRecord
       card.rules['start'].each do |start_position|
         next if pieces.where(position: start_position).any?
 
-        Piece.create(piece_card: card, player: Piece::HOST, game: self, position: start_position)
+        Piece.create(piece_card: card, player: Game::HOST, game: self, position: start_position)
         break
       end
     end
@@ -57,7 +60,7 @@ class Game < ApplicationRecord
         start_position = convert_to_guest(start_position)
         next if pieces.where(position: start_position).any?
 
-        Piece.create(piece_card: card, player: Piece::GUEST, game: self, position: start_position)
+        Piece.create(piece_card: card, player: Game::GUEST, game: self, position: start_position)
         break
       end
     end

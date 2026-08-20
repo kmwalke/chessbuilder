@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe Piece do
-  let(:guest_piece) { create(:piece, player: Piece::GUEST, position: 'a0') }
-  let(:host_piece) { create(:piece, player: Piece::HOST, position: 'a0') }
+  let(:guest_piece) { create(:piece, player: Game::GUEST, position: 'a0') }
+  let(:host_piece) { create(:piece, player: Game::HOST, position: 'a0') }
 
   it 'shows host symbol' do
     expect(host_piece.symbol).to eq(host_piece.piece_card.host_symbol)

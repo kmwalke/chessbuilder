@@ -1,8 +1,4 @@
 class Piece < ApplicationRecord
-  # TODO: these should be in user or game, not here
-  HOST  = 'Host'.freeze
-  GUEST = 'Guest'.freeze
-
   belongs_to :game
   belongs_to :piece_card
 
@@ -15,7 +11,7 @@ class Piece < ApplicationRecord
   delegate :rules, to: :piece_card
 
   def symbol
-    return host_symbol if player == HOST
+    return host_symbol if player == Game::HOST
 
     guest_symbol
   end

@@ -63,7 +63,7 @@ RSpec.feature 'Games' do
       it 'sets up the host pieces on the board' do
         skip('removed squares')
         game.squares.each_pair do |square, piece_id|
-          piece = Piece.where(id: piece_id, player: Piece::HOST).first
+          piece = Piece.where(id: piece_id, player: Game::HOST).first
           next unless piece
 
           expect(piece.rules['start'].include?(square)).to be true
@@ -73,7 +73,7 @@ RSpec.feature 'Games' do
       it 'sets up the guest pieces on the board' do
         skip('removed squares')
         game.squares.each_pair do |square, piece_id|
-          piece = Piece.where(id: piece_id, player: Piece::GUEST).first
+          piece = Piece.where(id: piece_id, player: Game::GUEST).first
           next unless piece
 
           expect(piece.rules['start'].include?(convert_to_guest(square))).to be true
