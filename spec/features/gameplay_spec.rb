@@ -1,67 +1,33 @@
 require 'rails_helper'
 
 RSpec.feature 'Gameplay' do
-  it 'setup simplecov and catch testing up' do
-    skip('once some basic mvp is achieved')
+  let!(:current_user) { login }
+  let!(:game) { create(:game, host: current_user) }
+
+  before do
+    visit game_path(game)
   end
 
-  it 'performance pass' do
-    skip('later')
-    # perhaps save renders chessboard to db
-    # @game.current_board or something
-    # Server calculates once and serves it to each page view
-    # Currently, it is recalculated for each page view
+  it 'moves a piece' do
+    piece = game.pieces.find_by(position: 'e7')
+    page.find_by_id('e7_piece_select').click
+    page.find_by_id('e6_move_select').click
+    click_button 'Move piece'
 
-    # I think using json to store ID's is bad.  It prevents rails's auto caching features.
-    # I could probably set up some auto caching, but rails would do it easily if I used rails relations
-    # @game.peices.first.position = g3 ?
-    # @game.pieces.where(position: 'a3') ?
-    # Then @game.pieces can be cached
-    # game.rb:25 is causing a million individual DB calls.  And other spots are bad, too
-
-    # also need to make the rendering itself quicker
-    # Instead of pre-rendering each piece's possible moves, maybe turbo with server calls
-    # GET game/1/pieces/2/moves and render the results?
-    #  More server calls vs 1 call with big response.
-    #  This would make things more lightweight.  watchers would get smaller responses. Host wouldn't get guests' moves
+    expect(piece.reload.position).to eq('e6')
   end
 
-  it 'address TODOs' do
-    skip('search for all TODOs')
+  it 'captures a piece' do
+    piece = game.pieces.find_by(position: 'e7')
+    piece.update(position: 'e3')
+    visit game_path(game)
+
+    captured_piece_id = game.pieces.find_by(position: 'e2').id
+
+    page.find_by_id('e3_piece_select').click
+    page.find_by_id('e2_move_select').click
+    click_button 'Move piece'
+
+    expect(Piece.find_by(id: captured_piece_id)).to be_nil
   end
-
-  it 'does all the stuff below' do
-    skip('See Notes in gameplay_spec')
-  end
-
-  # https://en.wikipedia.org/wiki/Chess_symbols_in_Unicode
-  # https://en.wikipedia.org/wiki/Algebraic_notation_(chess)
-
-  # Piece card
-  # - Just the pieces
-  # - name, move
-  # - could have cool new pieces:
-  #                         https://www.reddit.com/r/chess/comments/he6tmj/here_are_30_alternative_chess_pieces_as/
-  #
-  #   Equipment Card
-  # - Makes pieces stronger
-  # - Attaches to a piece?  Equipment!
-  # - Armor makes a piece take two hits to kill
-  # - Boots make it move faster
-  #
-  # Power/bonus card
-  # - affect the rules of the game
-  # - limited number of turns
-  # - armor is boosted
-  # - pacman torus movement mode
-  # - etc...
-  #
-  #
-  #   Start with a Deck that makes a normal deck
-  # Can earn new cards
-  # Can combine cards to upgrade?
-  # - pawn + knight gives one thing
-  # - pawn + bishop gives another
-  # - armor + armor gives stronger armor?
-  # - crafting element !?!?!
 end
