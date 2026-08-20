@@ -1,6 +1,9 @@
 class Game < ApplicationRecord
   belongs_to :host, class_name: 'User'
   belongs_to :guest, class_name: 'User'
+
+  has_many :pieces, dependent: :destroy
+
   after_create :setup_board
 
   def board_width
@@ -22,7 +25,7 @@ class Game < ApplicationRecord
       operator      = '+'
       operator      = '-' if piece.player == Piece::GUEST
       move_position = algebraic_notation(pos_x + move['x'], pos_y.send(operator, move['y']))
-      next if Piece.where(id: squares[move_position]).first&.player == piece.player
+      next if pieces.find_by(position: move_position)&.player == piece.player
 
       moves << move_position
     end
@@ -32,22 +35,16 @@ class Game < ApplicationRecord
   private
 
   def setup_board
-    build_board
     place_host_pieces
     place_guest_pieces
-  end
-
-  def build_board
-    update(squares: {})
   end
 
   def place_host_pieces
     host.deck.piece_cards.each do |card|
       card.rules['start'].each do |start_position|
-        next if squares[start_position]
+        next if pieces.where(position: start_position).any?
 
-        piece                   = Piece.create(piece_card: card, player: Piece::HOST)
-        squares[start_position] = piece.id
+        Piece.create(piece_card: card, player: Piece::HOST, game: self, position: start_position)
         break
       end
     end
@@ -57,10 +54,9 @@ class Game < ApplicationRecord
     guest.deck.piece_cards.each do |card|
       card.rules['start'].each do |start_position|
         start_position = convert_to_guest(start_position)
-        next if squares[start_position]
+        next if pieces.where(position: start_position).any?
 
-        piece                   = Piece.create(piece_card: card, player: Piece::GUEST)
-        squares[start_position] = piece.id
+        Piece.create(piece_card: card, player: Piece::GUEST, game: self, position: start_position)
         break
       end
     end

@@ -11,7 +11,7 @@
       <tr>
         <% (1..@game.board_width).each do |x| %>
           <% position = algebraic_notation(x, y) %>
-          <% piece = piece(position) %>
+          <% piece = @game.pieces.find_by(position: ) %>
           <td title="<%= position %>" id="<%= position %>">
             <% if piece %>
               <%= form.label "#{position}_piece_select", piece.symbol %>

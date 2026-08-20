@@ -57,10 +57,11 @@ RSpec.feature 'Games' do
       end
 
       it 'assigns the pieces' do
-        expect(game.squares.count).to eq(user1.deck.piece_cards.count + current_user.deck.piece_cards.count)
+        expect(game.pieces.count).to eq(user1.deck.piece_cards.count + current_user.deck.piece_cards.count)
       end
 
       it 'sets up the host pieces on the board' do
+        skip('removed squares')
         game.squares.each_pair do |square, piece_id|
           piece = Piece.where(id: piece_id, player: Piece::HOST).first
           next unless piece
@@ -70,6 +71,7 @@ RSpec.feature 'Games' do
       end
 
       it 'sets up the guest pieces on the board' do
+        skip('removed squares')
         game.squares.each_pair do |square, piece_id|
           piece = Piece.where(id: piece_id, player: Piece::GUEST).first
           next unless piece

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_08_14_152409) do
+ActiveRecord::Schema[8.1].define(version: 2026_08_20_184659) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -33,7 +33,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_14_152409) do
     t.datetime "created_at", null: false
     t.integer "guest_id", null: false
     t.integer "host_id", null: false
-    t.jsonb "squares"
     t.datetime "updated_at", null: false
   end
 
@@ -48,8 +47,11 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_14_152409) do
   end
 
   create_table "pieces", force: :cascade do |t|
+    t.integer "game_id", null: false
     t.integer "piece_card_id"
     t.string "player", null: false
+    t.string "position", null: false
+    t.index ["game_id", "position"], name: "index_pieces_on_game_id_and_position", unique: true
   end
 
   create_table "users", force: :cascade do |t|
