@@ -9,7 +9,7 @@ class GamesController < ApplicationController
     # TODO: protect from dissapearing pieces.  Return unless :to param is set. in fact, require all params
     captured_piece = @game.pieces.find_by(position: move_params[:to])
     captured_piece&.destroy
-    piece = @game.pieces.find_by(position: move_params[:from])
+    piece          = @game.pieces.find_by(position: move_params[:from])
     piece.update(position: move_params[:to])
     redirect_to @game
   end
@@ -38,10 +38,8 @@ class GamesController < ApplicationController
     respond_to do |format|
       if @game.update(game_params)
         format.html { redirect_to @game, notice: 'Game was successfully updated.', status: :see_other }
-        format.json { render :show, status: :ok, location: @game }
       else
         format.html { render :edit, status: :unprocessable_content }
-        format.json { render json: @game.errors, status: :unprocessable_content }
       end
     end
   end
@@ -51,7 +49,6 @@ class GamesController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to games_path, notice: 'Game was successfully destroyed.', status: :see_other }
-      format.json { head :no_content }
     end
   end
 

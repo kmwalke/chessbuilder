@@ -61,22 +61,14 @@ RSpec.feature 'Games' do
       end
 
       it 'sets up the host pieces on the board' do
-        skip('removed squares')
-        game.squares.each_pair do |square, piece_id|
-          piece = Piece.where(id: piece_id, player: Piece::HOST).first
-          next unless piece
-
-          expect(piece.rules['start'].include?(square)).to be true
+        game.pieces.host.each do |piece|
+          expect(piece.rules['start'].include?(piece.position)).to be true
         end
       end
 
       it 'sets up the guest pieces on the board' do
-        skip('removed squares')
-        game.squares.each_pair do |square, piece_id|
-          piece = Piece.where(id: piece_id, player: Piece::GUEST).first
-          next unless piece
-
-          expect(piece.rules['start'].include?(convert_to_guest(square))).to be true
+        game.pieces.guest.each do |piece|
+          expect(piece.rules['start'].include?(convert_to_guest(piece.position))).to be true
         end
       end
     end

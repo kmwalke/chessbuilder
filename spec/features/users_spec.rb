@@ -1,12 +1,31 @@
 require 'rails_helper'
 
 RSpec.feature 'Users' do
-  let!(:admin) { create(:user, role: User::ADMIN) }
+  # let!(:admin) { create(:user, role: User::ADMIN) }
   let!(:user) { create(:user) }
 
   describe 'Logged out' do
     before do
       visit users_path
+    end
+
+    describe 'bad form data' do
+      before do
+        click_link 'New user'
+        click_button 'Create User'
+      end
+
+      it 'requires name' do
+        expect(page).to have_text('Name can\'t be blank')
+      end
+
+      it 'requires email' do
+        expect(page).to have_text('Email can\'t be blank')
+      end
+
+      it 'requires password' do
+        expect(page).to have_text('Password can\'t be blank')
+      end
     end
 
     describe 'creates a user' do

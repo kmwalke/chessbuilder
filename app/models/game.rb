@@ -1,4 +1,7 @@
 class Game < ApplicationRecord
+  GUEST = 'Guest'.freeze
+  HOST  = 'Host'.freeze
+
   belongs_to :host, class_name: 'User'
   belongs_to :guest, class_name: 'User'
 
@@ -18,14 +21,12 @@ class Game < ApplicationRecord
     "#{host.name} VS #{guest.name} - #{created_at.to_fs(:long_ordinal)}"
   end
 
-  def valid_moves(piece, pos_x, pos_y)
+  def valid_moves(piece)
     moves = []
 
     piece.rules['moves'].each do |move|
-      operator      = '+'
-      operator      = '-' if piece.player == Piece::GUEST
-      move_position = algebraic_notation(pos_x + move['x'], pos_y.send(operator, move['y']))
-      next if pieces.find { |new_piece| new_piece.position == move_position && new_piece.player == piece.player }
+      move_position = calc_move_position(piece, move)
+      next if space_occupied?(piece, move_position)
 
       moves << move_position
     end
@@ -33,6 +34,21 @@ class Game < ApplicationRecord
   end
 
   private
+
+  def space_occupied?(piece, move_position)
+    pieces.find { |new_piece| new_piece.position == move_position && new_piece.player == piece.player }
+  end
+
+  def calc_move_position(piece, move)
+    position = xy_notation(piece.position)
+    algebraic_notation(position[:x] + move['x'], position[:y].send(operator(piece.player), move['y']))
+  end
+
+  def operator(player)
+    return '-' if player == Game::GUEST
+
+    '+'
+  end
 
   def setup_board
     place_host_pieces
@@ -44,7 +60,7 @@ class Game < ApplicationRecord
       card.rules['start'].each do |start_position|
         next if pieces.where(position: start_position).any?
 
-        Piece.create(piece_card: card, player: Piece::HOST, game: self, position: start_position)
+        Piece.create(piece_card: card, player: Game::HOST, game: self, position: start_position)
         break
       end
     end
@@ -56,7 +72,7 @@ class Game < ApplicationRecord
         start_position = convert_to_guest(start_position)
         next if pieces.where(position: start_position).any?
 
-        Piece.create(piece_card: card, player: Piece::GUEST, game: self, position: start_position)
+        Piece.create(piece_card: card, player: Game::GUEST, game: self, position: start_position)
         break
       end
     end
