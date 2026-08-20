@@ -10,6 +10,9 @@ class Piece < ApplicationRecord
 
   delegate :rules, to: :piece_card
 
+  scope :guest, -> { where(player: Game::GUEST) }
+  scope :host, -> { where(player: Game::HOST) }
+
   def symbol
     return host_symbol if player == Game::HOST
 

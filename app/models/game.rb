@@ -1,6 +1,6 @@
 class Game < ApplicationRecord
-  HOST  = 'Host'.freeze
   GUEST = 'Guest'.freeze
+  HOST  = 'Host'.freeze
 
   belongs_to :host, class_name: 'User'
   belongs_to :guest, class_name: 'User'
@@ -26,9 +26,7 @@ class Game < ApplicationRecord
     position = xy_notation(piece.position)
 
     piece.rules['moves'].each do |move|
-      operator      = '+'
-      operator      = '-' if piece.player == Game::GUEST
-      move_position = algebraic_notation(position[:x] + move['x'], position[:y].send(operator, move['y']))
+      move_position = algebraic_notation(position[:x] + move['x'], position[:y].send(operator(piece.player), move['y']))
       next if pieces.find { |new_piece| new_piece.position == move_position && new_piece.player == piece.player }
 
       moves << move_position
@@ -37,6 +35,12 @@ class Game < ApplicationRecord
   end
 
   private
+
+  def operator(player)
+    return '-' if player == Game::GUEST
+
+    '+'
+  end
 
   def setup_board
     place_host_pieces

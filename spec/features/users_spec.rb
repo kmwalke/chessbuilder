@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.feature 'Users' do
-  let!(:admin) { create(:user, role: User::ADMIN) }
+  # let!(:admin) { create(:user, role: User::ADMIN) }
   let!(:user) { create(:user) }
 
   describe 'Logged out' do
