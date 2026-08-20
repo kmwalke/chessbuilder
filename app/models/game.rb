@@ -18,13 +18,14 @@ class Game < ApplicationRecord
     "#{host.name} VS #{guest.name} - #{created_at.to_fs(:long_ordinal)}"
   end
 
-  def valid_moves(piece, pos_x, pos_y)
-    moves = []
+  def valid_moves(piece)
+    moves    = []
+    position = xy_notation(piece.position)
 
     piece.rules['moves'].each do |move|
       operator      = '+'
       operator      = '-' if piece.player == Piece::GUEST
-      move_position = algebraic_notation(pos_x + move['x'], pos_y.send(operator, move['y']))
+      move_position = algebraic_notation(position[:x] + move['x'], position[:y].send(operator, move['y']))
       next if pieces.find { |new_piece| new_piece.position == move_position && new_piece.player == piece.player }
 
       moves << move_position

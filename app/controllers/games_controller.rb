@@ -9,7 +9,7 @@ class GamesController < ApplicationController
     # TODO: protect from dissapearing pieces.  Return unless :to param is set. in fact, require all params
     captured_piece = @game.pieces.find_by(position: move_params[:to])
     captured_piece&.destroy
-    piece = @game.pieces.find_by(position: move_params[:from])
+    piece          = @game.pieces.find_by(position: move_params[:from])
     piece.update(position: move_params[:to])
     redirect_to @game
   end

@@ -8,8 +8,8 @@ RSpec.describe Deck do
   describe 'defaults' do
     let(:deck) { create(:deck) }
 
-    it 'piece_cards' do
-      expect(deck.piece_cards.first).to be_a(PieceCard)
+    it 'provisions the deck' do
+      expect(deck.piece_cards.count).to eq(16)
     end
   end
 end
