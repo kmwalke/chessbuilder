@@ -4,6 +4,7 @@ class Game < ApplicationRecord
 
   belongs_to :host, class_name: 'User'
   belongs_to :guest, class_name: 'User'
+  belongs_to :current_player, class_name: 'User'
 
   has_many :pieces, dependent: :destroy
 
