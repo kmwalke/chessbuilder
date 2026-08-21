@@ -4,8 +4,10 @@
 <%= render partial: 'deck' %>
 
 <div>
-  <%= link_to "Edit this user", edit_user_path(@user) %> |
-  <%= link_to "Back to users", users_path %>
+  <% if @user == current_user || current_user&.role == User::ADMIN %>
+    <%= link_to "Edit this user", edit_user_path(@user) %> |
+    <%= link_to "Back to users", users_path %>
+    <%= button_to "Destroy this user", @user, method: :delete %>
+  <% end %>
 
-  <%= button_to "Destroy this user", @user, method: :delete %>
 </div>

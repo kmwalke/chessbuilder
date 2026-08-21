@@ -38,10 +38,12 @@ class UsersController < ApplicationController
   end
 
   def destroy
+    path = users_path
+    path = logout_path if @user == current_user
     @user.destroy!
 
     respond_to do |format|
-      format.html { redirect_to users_path, notice: 'User was successfully destroyed.', status: :see_other }
+      format.html { redirect_to path, notice: 'User was successfully destroyed.', status: :see_other }
     end
   end
 
