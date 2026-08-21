@@ -8,6 +8,17 @@ RSpec.feature 'Gameplay' do
     visit game_path(game)
   end
 
+  it 'takes turns do' do
+    # when you move, it switches current player to the other player
+    expect(true).to be false
+  end
+
+  it 'doesn\'t move the other players pieces' do
+    # only show piece radio buttons if current_user == host/guest
+    # watchers can't move pieces
+    expect(true).to be false
+  end
+
   describe 'moves a piece' do
     let!(:piece) { game.pieces.find_by(position: 'e7') }
 
