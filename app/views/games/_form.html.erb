@@ -16,6 +16,10 @@
   </div>
 
   <div>
+    <%= form.hidden_field :current_player_id, value: current_user.id %>
+  </div>
+
+  <div>
     <%= form.label :guest %>
     <%= form.collection_select :guest_id, User.where.not(email: current_user.email), :id, :name %>
   </div>

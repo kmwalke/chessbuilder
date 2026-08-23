@@ -11,8 +11,8 @@
 PieceCardUtil.populate
 
 [
-  { email: 'kmwalke@gmail.com', name: 'Kent', motto: 'That\'s streets ahead!' },
-  { email: 'kfretz2@gmail.com', name: 'Keith', motto: 'But Prestidigitation _is_ a combat skill!' },
+  { email: 'kmwalke@gmail.com', name: 'Kent', motto: 'That\'s streets ahead!', role: User::ADMIN },
+  { email: 'kfretz2@gmail.com', name: 'Keith', motto: 'But Prestidigitation _is_ a combat skill!', role: User::ADMIN },
   { email: 'cristin.slaymaker@gmail.com', name: 'Cris' },
   { email: 'kerryslaymaker@gmail.com', name: 'Kerry' },
   { email: 'buttforker@gmail.com', name: 'Zack' },

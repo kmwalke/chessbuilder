@@ -1,8 +1,10 @@
 require 'rails_helper'
 
 RSpec.feature 'Project' do
-  it 'setup simplecov and catch testing up' do
-    skip('once some basic mvp is achieved')
+  it 'refreshes game page' do
+    skip('make page auto refresh for watchers and user whose turn it isn\'t')
+    # V1: Simple JS auto refresh unless current_player == @game.current_player
+    # V2: Some sort of push notification from server. clients must subscribe
   end
 
   it 'performance pass' do
