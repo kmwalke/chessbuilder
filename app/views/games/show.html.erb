@@ -1,6 +1,7 @@
 <p style="color: green"><%= notice %></p>
 
 <h1><%= @game.name %></h1>
+<h3><%= @game.current_player.name %>'s turn</h3>
 
 <%= form_with url: move_game_path do |form| %>
   <!--  TODO: big radio button in the background to deselect any pieces-->
@@ -15,7 +16,7 @@
           <td title="<%= position %>" id="<%= position %>">
             <% if piece %>
               <%= form.label "#{position}_piece_select", piece.symbol %>
-              <% if @game.send(piece.player.downcase) == current_user %>
+              <% if movable?(piece) %>
                 <%= form.radio_button(
                       nil,
                       "{ \"piece_id\": #{piece.id}, \"from\": \"#{position}\" }",

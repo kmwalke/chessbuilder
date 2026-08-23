@@ -34,6 +34,10 @@ class Game < ApplicationRecord
     moves
   end
 
+  def take_turn
+    update(current_player_id: [host_id, guest_id].difference([current_player_id])[0])
+  end
+
   private
 
   def space_occupied?(piece, move_position)

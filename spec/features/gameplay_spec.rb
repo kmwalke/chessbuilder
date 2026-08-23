@@ -2,15 +2,10 @@ require 'rails_helper'
 
 RSpec.feature 'Gameplay' do
   let!(:current_user) { login }
-  let!(:game) { create(:game, host: current_user) }
+  let!(:game) { create(:game, host: current_user, current_player: current_user) }
 
   before do
     visit game_path(game)
-  end
-
-  it 'takes turns do' do
-    # when you move, it switches current player to the other player
-    expect(true).to be false
   end
 
   it 'doesn\'t move the other players pieces' do
@@ -30,6 +25,14 @@ RSpec.feature 'Gameplay' do
     it 'updates the piece position' do
       expect(piece.reload.position).to eq('d3')
     end
+
+    it 'switches turns to the guest' do
+      expect(game.reload.current_player).to eq(game.guest)
+    end
+  end
+
+  describe 'moves a piece far' do
+    skip('not implemented')
   end
 
   describe 'captures a piece' do

@@ -11,6 +11,7 @@ class GamesController < ApplicationController
     captured_piece&.destroy
     piece          = @game.pieces.find_by(position: move_params[:from])
     piece.update(position: move_params[:to])
+    @game.take_turn
     redirect_to @game
   end
 
@@ -56,7 +57,8 @@ class GamesController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_game
-    @game = Game.strict_loading.eager_load(:host, :guest, pieces: :piece_card).find_by(id: params.expect(:id))
+    @game = Game.strict_loading.eager_load(:host, :guest, :current_player,
+                                           pieces: :piece_card).find_by(id: params.expect(:id))
   end
 
   # Only allow a list of trusted parameters through.
