@@ -3,9 +3,10 @@ require 'rails_helper'
 RSpec.feature 'Games' do
   let!(:user1) { create(:user) }
   let!(:user2) { create(:user) }
-  let!(:game) { create(:game, host: user1, guest: user2) }
 
   describe 'Logged out' do
+    let!(:game) { create(:game, host: user1, guest: user2) }
+
     before do
       visit games_path
     end
@@ -57,19 +58,23 @@ RSpec.feature 'Games' do
       end
 
       it 'assigns the pieces' do
-        expect(game.pieces.count).to eq(user1.deck.piece_cards.count + current_user.deck.piece_cards.count)
+        expect(Game.last.pieces.count).to eq(user1.deck.piece_cards.count + current_user.deck.piece_cards.count)
       end
 
       it 'sets up the host pieces on the board' do
-        game.pieces.host.each do |piece|
+        Game.last.pieces.host.each do |piece|
           expect(piece.rules['start'].include?(piece.position)).to be true
         end
       end
 
       it 'sets up the guest pieces on the board' do
-        game.pieces.guest.each do |piece|
+        Game.last.pieces.guest.each do |piece|
           expect(piece.rules['start'].include?(convert_to_guest(piece.position))).to be true
         end
+      end
+
+      it 'sets the host as current player' do
+        expect(Game.last.current_player).to eq(current_user)
       end
     end
 

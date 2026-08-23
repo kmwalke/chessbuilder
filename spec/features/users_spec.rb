@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.feature 'Users' do
-  # let!(:admin) { create(:user, role: User::ADMIN) }
+  let!(:admin) { create(:user, role: User::ADMIN) }
   let!(:user) { create(:user) }
 
   describe 'Logged out' do
@@ -68,9 +68,28 @@ RSpec.feature 'Users' do
   end
 
   describe 'logged in' do
+    let!(:user) { login }
+    let!(:user2) { create(:user) }
+
     before do
-      login
       visit users_path
+    end
+
+    describe 'another user' do
+      it 'can\'t edit' do
+        click_link user2.name
+        expect(page).to have_no_text('Edit this user')
+      end
+
+      it 'redirects from edit' do
+        visit edit_user_path(user2)
+        expect(page).to have_current_path(root_path)
+      end
+
+      it 'can\'t delete' do
+        click_link user2.name
+        expect(page).to have_no_text('Destroy this user')
+      end
     end
 
     describe 'edits a user' do
@@ -92,10 +111,31 @@ RSpec.feature 'Users' do
       end
     end
 
-    it 'deletes a user' do
+    it 'deletes self' do
       click_link user.name
       click_button 'Destroy this user'
 
+      expect(User.where(name: user.name)).to be_empty
+    end
+  end
+
+  describe 'logged in as admin' do
+    let(:new_user) { build(:user) }
+
+    before do
+      login_as(admin)
+      visit user_path(user)
+    end
+
+    it 'edits another user' do
+      click_link 'Edit this user'
+      fill_form new_user
+      click_button 'Update User'
+      expect(user.reload.name).to eq(new_user.name)
+    end
+
+    it 'deletes another user' do
+      click_button 'Destroy this user'
       expect(User.where(name: user.name)).to be_empty
     end
   end

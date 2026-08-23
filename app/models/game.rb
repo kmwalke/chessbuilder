@@ -4,6 +4,7 @@ class Game < ApplicationRecord
 
   belongs_to :host, class_name: 'User'
   belongs_to :guest, class_name: 'User'
+  belongs_to :current_player, class_name: 'User'
 
   has_many :pieces, dependent: :destroy
 
@@ -31,6 +32,10 @@ class Game < ApplicationRecord
       moves << move_position
     end
     moves
+  end
+
+  def take_turn
+    update(current_player_id: [host_id, guest_id].difference([current_player_id])[0])
   end
 
   private
