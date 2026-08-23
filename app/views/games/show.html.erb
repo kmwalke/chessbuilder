@@ -1,11 +1,15 @@
+<% if @game.current_player != current_user %>
+  <meta http-equiv="refresh" content="5">
+<% end %>
+
 <p style="color: green"><%= notice %></p>
 
 <h1><%= @game.name %></h1>
 <h3><%= @game.current_player.name %>'s turn</h3>
 
-<%= form_with url: move_game_path do |form| %>
+<%= form_with url: move_game_path, html: { autocomplete: 'off' } do |form| %>
   <!--  TODO: big radio button in the background to deselect any pieces-->
-  <%= form.radio_button(nil, nil, id: "nil_piece_select", name: "move[data]") %>
+  <%= form.radio_button(nil, nil, id: "nil_piece_select", name: "move[data]", checked: true) %>
   <%= form.label 'nil_piece_select', 'no piece', class: 'nil' %>
   <table class="board">
     <% (1..@game.board_height).sort.reverse.each do |y| %>
