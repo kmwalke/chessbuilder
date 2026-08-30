@@ -46,8 +46,12 @@ RSpec.feature 'Project' do
     skip('See Notes in project_spec')
   end
 
-  # https://en.wikipedia.org/wiki/Chess_symbols_in_Unicode
-  # https://en.wikipedia.org/wiki/Algebraic_notation_(chess)
+  it 'links' do
+    skip('a place to store links for research.  Maybe move to README?')
+    # https://en.wikipedia.org/wiki/Chess_symbols_in_Unicode
+    # https://en.wikipedia.org/wiki/Algebraic_notation_(chess)
+    # https://www.reddit.com/r/chess/comments/he6tmj/here_are_30_alternative_chess_pieces_as/
+  end
 
   # Piece card
   # - Just the pieces
