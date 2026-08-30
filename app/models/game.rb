@@ -22,6 +22,8 @@ class Game < ApplicationRecord
     "#{host.name} VS #{guest.name} - #{created_at.to_fs(:long_ordinal)}"
   end
 
+  # TODO: expand testing of this.  Its going to get complicated
+  # TODO: watch for readability/complication/maintainability
   def valid_moves(piece)
     moves = []
 
@@ -46,13 +48,13 @@ class Game < ApplicationRecord
 
   def calc_move_position(piece, move)
     position = xy_notation(piece.position)
-    algebraic_notation(position[:x] + move['x'], position[:y].send(operator(piece.player), move['y']))
+    algebraic_notation(position[:x] + move['x'], position[:y].send(direction(piece.player), move['y']))
   end
 
-  def operator(player)
-    return '-' if player == Game::GUEST
+  def direction(player)
+    return :- if player == Game::GUEST
 
-    '+'
+    :+
   end
 
   def setup_board

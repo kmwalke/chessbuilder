@@ -31,8 +31,33 @@ RSpec.feature 'Gameplay' do
     end
   end
 
+  # TODO: create a helper function that moves pieces in tests
+  # Use chess notation to move pieces
+  # errors if given invalid move
+  # Could be the beginning of enemy ai
+  # This way, can automate tests of whole games
+  # The below test could naturally get to the queen moving far, instead of magically deleting the pawn
+  # Testing lots of games actually playing through seems good for balance
+
   describe 'moves a piece far' do
-    skip('not implemented')
+    let!(:queen) { game.pieces.find_by(position: 'd1') }
+    let!(:pawn) { game.pieces.find_by(position: 'd2') }
+
+    before do
+      pawn.destroy
+      visit game_path(game)
+      page.find_by_id('d1_piece_select').click
+      page.find_by_id('d7_move_select').click
+      click_button 'Move piece'
+    end
+
+    it 'updates the piece position' do
+      expect(queen.reload.position).to eq('d7')
+    end
+
+    it 'switches turns to the guest' do
+      expect(game.reload.current_player).to eq(game.guest)
+    end
   end
 
   describe 'captures a piece' do
