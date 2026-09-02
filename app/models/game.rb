@@ -40,9 +40,6 @@ class Game < ApplicationRecord
   private
 
   def calc_move_positions(piece, move)
-    # TODO: Include distance here
-    # return array of all movements in this direction
-    # prob filter out friendly occupied spaces here instead of later
     valid_moves  = []
     position     = xy_notation(piece.position)
     (0..move['distance']).each do |distance|
@@ -50,7 +47,8 @@ class Game < ApplicationRecord
       new_x = position[:x] + (move['x'] * distance)
       new_y = position[:y].send(direction(piece.player), move['y'] * distance)
       new_position = algebraic_notation(new_x, new_y)
-      valid_moves << new_position if within_board?(new_x, new_y) && space_open?(piece, new_position)
+      next if space_occupied?(piece, new_position)
+      valid_moves << new_position if within_board?(new_x, new_y)
     end
     valid_moves
   end
@@ -59,8 +57,8 @@ class Game < ApplicationRecord
     pos_x <= board_width && pos_y <= board_height
   end
 
-  def space_open?(piece, move_position)
-    pieces.find { |new_piece| new_piece.position == move_position && new_piece.player == piece.player }.nil?
+  def space_occupied?(piece, move_position)
+    pieces.find { |new_piece| new_piece.position == move_position && new_piece.player == piece.player }
   end
 
   def direction(player)
