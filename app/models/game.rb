@@ -42,13 +42,14 @@ class Game < ApplicationRecord
   def calc_move_positions(piece, move)
     valid_moves  = []
     position     = xy_notation(piece.position)
-    (0..move['distance']).each do |distance|
+    (1..move['distance']).each do |distance|
       next if distance > board_height || distance > board_width
       new_x = position[:x] + (move['x'] * distance)
       new_y = position[:y].send(direction(piece.player), move['y'] * distance)
+      break unless within_board?(new_x, new_y)
       new_position = algebraic_notation(new_x, new_y)
-      next if space_occupied?(piece, new_position)
-      valid_moves << new_position if within_board?(new_x, new_y)
+      break if space_occupied?(piece, new_position)
+      valid_moves << new_position
     end
     valid_moves
   end
