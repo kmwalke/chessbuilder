@@ -1,5 +1,5 @@
 class PieceCardUtil < ApplicationRecord
-  INFINITY = Float::INFINITY
+  INFINITY = 1000
 
   def self.populate
     card_data.each do |card|

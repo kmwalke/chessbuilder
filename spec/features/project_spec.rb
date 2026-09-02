@@ -47,7 +47,7 @@ RSpec.feature 'Project' do
   end
 
   it 'links' do
-    skip('a place to store links for research.  Maybe move to README?')
+    skip('a place to store links for research. Maybe move to README?')
     # https://en.wikipedia.org/wiki/Chess_symbols_in_Unicode
     # https://en.wikipedia.org/wiki/Algebraic_notation_(chess)
     # https://www.reddit.com/r/chess/comments/he6tmj/here_are_30_alternative_chess_pieces_as/

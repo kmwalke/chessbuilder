@@ -23,15 +23,20 @@ class Game < ApplicationRecord
   end
 
   # TODO: expand testing of this.  Its going to get complicated
-  # TODO: watch for readability/complication/maintainability
+  # TODO: watch for readability/complication/maintainability/performance
   def valid_moves(piece)
     moves = []
 
+    # wow, this is complicated
+    # if the moves are vectors, then multiply by distance.
+    # But you almost have to loop and multiply by each value of distance
+    # Maybe better to just loop through each space on the board and check if it is covered by move(vector)*distance?
+    # that seems arduous
     piece.rules['moves'].each do |move|
-      move_position = calc_move_position(piece, move)
-      next if space_occupied?(piece, move_position)
+      move_positions = calc_move_positions(piece, move)
+      next if space_occupied?(piece, move_positions[0])
 
-      moves << move_position
+      moves = moves.union(move_positions)
     end
     moves
   end
@@ -46,9 +51,16 @@ class Game < ApplicationRecord
     pieces.find { |new_piece| new_piece.position == move_position && new_piece.player == piece.player }
   end
 
-  def calc_move_position(piece, move)
+  def calc_move_positions(piece, move)
+    # TODO: Include distance here
+    # return array of all movements in this direction
+    # prob filter out friendly occupied spaces here instead of later
     position = xy_notation(piece.position)
-    algebraic_notation(position[:x] + move['x'], position[:y].send(direction(piece.player), move['y']))
+    new_x    = position[:x] + move['x']
+    new_y    = position[:y].send(direction(piece.player), move['y'])
+    return [] if new_x > board_width || new_y > board_height
+
+    [algebraic_notation(new_x, new_y)]
   end
 
   def direction(player)
