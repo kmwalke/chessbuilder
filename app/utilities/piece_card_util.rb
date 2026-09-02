@@ -1,5 +1,5 @@
 class PieceCardUtil < ApplicationRecord
-  INFINITY = 1000
+  INFINITY = 10
 
   def self.populate
     card_data.each do |card|

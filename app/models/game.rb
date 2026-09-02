@@ -45,10 +45,13 @@ class Game < ApplicationRecord
     # prob filter out friendly occupied spaces here instead of later
     valid_moves  = []
     position     = xy_notation(piece.position)
-    new_x        = position[:x] + move['x']
-    new_y        = position[:y].send(direction(piece.player), move['y'])
-    new_position = algebraic_notation(new_x, new_y)
-    valid_moves << new_position if within_board?(new_x, new_y) && space_open?(piece, new_position)
+    (0..move['distance']).each do |distance|
+      next if distance > board_height || distance > board_width
+      new_x = position[:x] + (move['x'] * distance)
+      new_y = position[:y].send(direction(piece.player), move['y'] * distance)
+      new_position = algebraic_notation(new_x, new_y)
+      valid_moves << new_position if within_board?(new_x, new_y) && space_open?(piece, new_position)
+    end
     valid_moves
   end
 
