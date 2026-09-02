@@ -54,6 +54,7 @@ class Game < ApplicationRecord
   end
 
   def within_board?(pos_x, pos_y)
+    pos_x > 0 && pos_y > 0 &&
     pos_x <= board_width && pos_y <= board_height
   end
 
