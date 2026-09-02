@@ -48,8 +48,9 @@ class Game < ApplicationRecord
       new_y = position[:y].send(direction(piece.player), move['y'] * distance)
       break unless within_board?(new_x, new_y)
       new_position = algebraic_notation(new_x, new_y)
-      break if space_occupied?(piece, new_position)
+      break if space_occupied_by_self?(piece, new_position)
       valid_moves << new_position
+      break if space_occupied_by_enemy?(piece, new_position)
     end
     valid_moves
   end
@@ -59,8 +60,12 @@ class Game < ApplicationRecord
     pos_x <= board_width && pos_y <= board_height
   end
 
-  def space_occupied?(piece, move_position)
+  def space_occupied_by_self?(piece, move_position)
     pieces.find { |new_piece| new_piece.position == move_position && new_piece.player == piece.player }
+  end
+
+  def space_occupied_by_enemy?(piece, move_position)
+    pieces.find { |new_piece| new_piece.position == move_position && new_piece.player != piece.player }
   end
 
   def direction(player)
