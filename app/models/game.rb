@@ -39,10 +39,6 @@ class Game < ApplicationRecord
 
   private
 
-  def space_open?(piece, move_position)
-    pieces.find { |new_piece| new_piece.position == move_position && new_piece.player == piece.player }.nil?
-  end
-
   def calc_move_positions(piece, move)
     # TODO: Include distance here
     # return array of all movements in this direction
@@ -58,6 +54,10 @@ class Game < ApplicationRecord
 
   def within_board?(pos_x, pos_y)
     pos_x <= board_width && pos_y <= board_height
+  end
+
+  def space_open?(piece, move_position)
+    pieces.find { |new_piece| new_piece.position == move_position && new_piece.player == piece.player }.nil?
   end
 
   def direction(player)
@@ -85,7 +85,7 @@ class Game < ApplicationRecord
   def place_guest_pieces
     guest.deck.piece_cards.each do |card|
       card.rules['start'].each do |start_position|
-        start_position = convert_to_guest(start_position)
+        start_position = convert_position_to_guest(start_position)
         next if pieces.where(position: start_position).any?
 
         Piece.create(piece_card: card, player: Game::GUEST, game: self, position: start_position)
@@ -96,7 +96,7 @@ class Game < ApplicationRecord
     save
   end
 
-  def convert_to_guest(position)
+  def convert_position_to_guest(position)
     "#{position[0]}#{(board_height + 1) - position[1].to_i}"
   end
 end
