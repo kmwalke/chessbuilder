@@ -76,6 +76,10 @@ RSpec.feature 'Games' do
       it 'sets the host as current player' do
         expect(Game.last.current_player).to eq(current_user)
       end
+
+      it 'detects a check & checkmate' do
+        skip('not implemented yet')
+      end
     end
 
     describe 'rejoins a game' do
