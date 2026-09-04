@@ -43,16 +43,14 @@ class Game < ApplicationRecord
   #
   def calc_move_positions(piece, move)
     valid_moves  = []
-    position     = xy_notation(piece.position)
     (1..move['distance']).each do |distance|
       next if distance > board_height || distance > board_width
 
-      new_x        = position[:x] + (move['x'] * distance)
-      new_y        = position[:y].send(direction(piece.player), move['y'] * distance)
+      new_x, new_y = calc_new_position(move, distance, piece)
       break unless within_board?(new_x, new_y)
 
       new_position = algebraic_notation(new_x, new_y)
-      break if space_occupied_by_self?(piece, new_position)
+      break if space_occupied_by_friendly?(piece, new_position)
 
       valid_moves << new_position
       break if space_occupied_by_enemy?(piece, new_position)
@@ -60,12 +58,21 @@ class Game < ApplicationRecord
     valid_moves
   end
 
+  def calc_new_position(move, distance, piece)
+    position = xy_notation(piece.position)
+
+    [
+      position[:x] + (move['x'] * distance),
+      position[:y].send(direction(piece.player), move['y'] * distance)
+    ]
+  end
+
   def within_board?(pos_x, pos_y)
     pos_x.positive? && pos_y.positive? &&
       pos_x <= board_width && pos_y <= board_height
   end
 
-  def space_occupied_by_self?(piece, move_position)
+  def space_occupied_by_friendly?(piece, move_position)
     pieces.find { |new_piece| new_piece.position == move_position && new_piece.player == piece.player }
   end
 
