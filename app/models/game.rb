@@ -40,7 +40,6 @@ class Game < ApplicationRecord
   private
 
   # TODO: Refactor for readability, including submethods
-  #
   def calc_move_positions(piece, move_vector)
     valid_moves  = []
     (1..move_vector['distance']).each do |distance|
@@ -58,12 +57,12 @@ class Game < ApplicationRecord
     valid_moves
   end
 
-  def calc_new_position(move, distance, piece)
+  def calc_new_position(move_vector, distance, piece)
     position = xy_notation(piece.position)
 
     [
-      position[:x] + (move['x'] * distance),
-      position[:y].send(direction(piece.player), move['y'] * distance)
+      position[:x] + (move_vector['x'] * distance),
+      position[:y].send(direction(piece.player), move_vector['y'] * distance)
     ]
   end
 
