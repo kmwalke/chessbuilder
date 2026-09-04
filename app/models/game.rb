@@ -27,8 +27,8 @@ class Game < ApplicationRecord
   def valid_moves(piece)
     moves = []
 
-    piece.rules['moves'].each do |move|
-      moves = moves.union(calc_move_positions(piece, move))
+    piece.rules['move_vectors'].each do |move_vector|
+      moves = moves.union(calc_move_positions(piece, move_vector))
     end
     moves
   end
@@ -41,12 +41,12 @@ class Game < ApplicationRecord
 
   # TODO: Refactor for readability, including submethods
   #
-  def calc_move_positions(piece, move)
+  def calc_move_positions(piece, move_vector)
     valid_moves  = []
-    (1..move['distance']).each do |distance|
+    (1..move_vector['distance']).each do |distance|
       next if distance > board_height || distance > board_width
 
-      new_x, new_y = calc_new_position(move, distance, piece)
+      new_x, new_y = calc_new_position(move_vector, distance, piece)
       break unless within_board?(new_x, new_y)
 
       new_position = algebraic_notation(new_x, new_y)
