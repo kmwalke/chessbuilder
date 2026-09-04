@@ -22,14 +22,13 @@ class Game < ApplicationRecord
     "#{host.name} VS #{guest.name} - #{created_at.to_fs(:long_ordinal)}"
   end
 
+  # TODO: expand testing of this.  Its going to get complicated
+  # TODO: watch for readability/complication/maintainability/performance
   def valid_moves(piece)
     moves = []
 
-    piece.rules['moves'].each do |move|
-      move_position = calc_move_position(piece, move)
-      next if space_occupied?(piece, move_position)
-
-      moves << move_position
+    piece.rules['move_vectors'].each do |move_vector|
+      moves = moves.union(calc_move_positions(piece, move_vector))
     end
     moves
   end
@@ -40,19 +39,50 @@ class Game < ApplicationRecord
 
   private
 
-  def space_occupied?(piece, move_position)
+  # TODO: Refactor for readability, including submethods
+  def calc_move_positions(piece, move_vector)
+    valid_moves  = []
+    (1..move_vector['distance']).each do |distance|
+      next if distance > board_height || distance > board_width
+
+      new_x, new_y = calc_new_position(move_vector, distance, piece)
+      break unless within_board?(new_x, new_y)
+
+      new_position = algebraic_notation(new_x, new_y)
+      break if space_occupied_by_friendly?(piece, new_position)
+
+      valid_moves << new_position
+      break if space_occupied_by_enemy?(piece, new_position)
+    end
+    valid_moves
+  end
+
+  def calc_new_position(move_vector, distance, piece)
+    position = xy_notation(piece.position)
+
+    [
+      position[:x] + (move_vector['x'] * distance),
+      position[:y].send(direction(piece.player), move_vector['y'] * distance)
+    ]
+  end
+
+  def within_board?(pos_x, pos_y)
+    pos_x.positive? && pos_y.positive? &&
+      pos_x <= board_width && pos_y <= board_height
+  end
+
+  def space_occupied_by_friendly?(piece, move_position)
     pieces.find { |new_piece| new_piece.position == move_position && new_piece.player == piece.player }
   end
 
-  def calc_move_position(piece, move)
-    position = xy_notation(piece.position)
-    algebraic_notation(position[:x] + move['x'], position[:y].send(operator(piece.player), move['y']))
+  def space_occupied_by_enemy?(piece, move_position)
+    pieces.find { |new_piece| new_piece.position == move_position && new_piece.player != piece.player }
   end
 
-  def operator(player)
-    return '-' if player == Game::GUEST
+  def direction(player)
+    return :- if player == Game::GUEST
 
-    '+'
+    :+
   end
 
   def setup_board
@@ -74,7 +104,7 @@ class Game < ApplicationRecord
   def place_guest_pieces
     guest.deck.piece_cards.each do |card|
       card.rules['start'].each do |start_position|
-        start_position = convert_to_guest(start_position)
+        start_position = convert_position_to_guest(start_position)
         next if pieces.where(position: start_position).any?
 
         Piece.create(piece_card: card, player: Game::GUEST, game: self, position: start_position)
@@ -85,7 +115,7 @@ class Game < ApplicationRecord
     save
   end
 
-  def convert_to_guest(position)
+  def convert_position_to_guest(position)
     "#{position[0]}#{(board_height + 1) - position[1].to_i}"
   end
 end
