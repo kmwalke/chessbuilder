@@ -34,10 +34,14 @@ class Game < ApplicationRecord
   end
 
   def take_turn
-    update(current_player_id: [host_id, guest_id].difference([current_player_id])[0])
+    update(current_player_id: non_current_player_id)
   end
 
   private
+
+  def non_current_player_id
+    [host_id, guest_id].difference([current_player_id])[0]
+  end
 
   # TODO: Refactor for readability, including submethods
   def calc_move_positions(piece, move_vector)
