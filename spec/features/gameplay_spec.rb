@@ -81,4 +81,11 @@ RSpec.feature 'Gameplay' do
       expect(piece.reload.position).to eq('d7')
     end
   end
+
+  describe 'check & checkmate' do
+
+    it 'detects check' do
+      skip('not implemented yet')
+    end
+  end
 end
