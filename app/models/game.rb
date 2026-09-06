@@ -24,6 +24,7 @@ class Game < ApplicationRecord
 
   # TODO: expand testing of this.  Its going to get complicated
   # TODO: watch for readability/complication/maintainability/performance
+  # TODO: CPU Intensive.  Each viewer puts CPU strain on server.  Add DB caching of valid_moves if this becomes a problem, so this is calculate once and fetch answer
   def valid_moves(piece)
     moves = []
 
