@@ -1,8 +1,6 @@
 class Game < ApplicationRecord
-  GUEST  = 'Guest'.freeze
-  HOST   = 'Host'.freeze
-  ATTACK = :attack
-  MOVE   = :move
+  GUEST = 'Guest'.freeze
+  HOST  = 'Host'.freeze
 
   belongs_to :host, class_name: 'User'
   belongs_to :guest, class_name: 'User'
@@ -26,17 +24,14 @@ class Game < ApplicationRecord
 
   # TODO: expand testing of this.  Its going to get complicated
   # TODO: watch for readability/complication/maintainability/performance
-  # TODO: CPU Intensive.  Each viewer puts CPU strain on server.  Add DB caching of valid_moves if this becomes a problem, so this is calculate once and fetch answer
-  # This is run 64 times for each piece on the board!  Should at least be memory cached in the controller/view
+  # TODO: CPU Intensive.  Each viewer puts CPU strain on server.
+  #       Add DB/RAM caching of valid_moves if this becomes a problem, so this is calculate once and fetch answer
+  #       @valid_moves[piece] = [list of moves]
   def valid_moves(piece)
     moves = []
 
-    piece.rules['move_vectors'].each do |move_vector|
+    piece.rules['move_vectors'].union(piece.rules['attack_vectors']).each do |move_vector|
       moves = moves.union(calc_move_positions(piece, move_vector))
-    end
-
-    piece.rules['attack_vectors'].each do |attack_vector|
-      moves = moves.union(calc_attack_positions(piece, attack_vector))
     end
     moves
   end
@@ -52,26 +47,17 @@ class Game < ApplicationRecord
   end
 
   # TODO: Refactor for readability, including submethods
-  def calc_attack_positions(piece, attack_vector)
-    calc_positions(piece, attack_vector, ATTACK)
-  end
-
   def calc_move_positions(piece, move_vector)
-    calc_positions(piece, move_vector, MOVE)
-  end
-
-  def calc_positions(piece, vector, mode)
     valid_moves  = []
-    (1..vector['distance']).each do |distance|
+    (1..move_vector['distance']).each do |distance|
       next if distance > board_height || distance > board_width
 
-      new_x, new_y = calc_new_position(vector, distance, piece)
+      new_x, new_y = calc_new_position(move_vector, distance, piece)
       break unless within_board?(new_x, new_y)
 
       new_position = algebraic_notation(new_x, new_y)
       break if space_occupied_by_friendly?(piece, new_position)
-      break if space_occupied_by_enemy?(piece, new_position) && mode == MOVE
-      break if !space_occupied_by_enemy?(piece, new_position) && mode == ATTACK
+      break if pawn_like_attack?(piece, move_vector, new_position)
 
       valid_moves << new_position
       break if space_occupied_by_enemy?(piece, new_position)
@@ -79,12 +65,12 @@ class Game < ApplicationRecord
     valid_moves
   end
 
-  def calc_new_position(vector, distance, piece)
+  def calc_new_position(move_vector, distance, piece)
     position = xy_notation(piece.position)
 
     [
-      position[:x] + (vector['x'] * distance),
-      position[:y].send(direction(piece.player), vector['y'] * distance)
+      position[:x] + (move_vector['x'] * distance),
+      position[:y].send(direction(piece.player), move_vector['y'] * distance)
     ]
   end
 
@@ -94,17 +80,26 @@ class Game < ApplicationRecord
   end
 
   def space_occupied_by_friendly?(piece, move_position)
-    pieces.find { |new_piece| new_piece.position == move_position && new_piece.player == piece.player }
+    !pieces.find { |new_piece| new_piece.position == move_position && new_piece.player == piece.player }.nil?
   end
 
   def space_occupied_by_enemy?(piece, move_position)
-    pieces.find { |new_piece| new_piece.position == move_position && new_piece.player != piece.player }
+    !pieces.find { |new_piece| new_piece.position == move_position && new_piece.player != piece.player }.nil?
   end
 
   def direction(player)
     return :- if player == Game::GUEST
 
     :+
+  end
+
+  def pawn_like_attack?(piece, move_vector, new_position)
+    piece.rules['attack_vectors'].any? &&
+      (space_occupied_by_enemy?(piece, new_position) ^
+        (
+          piece.rules['attack_vectors'].include?(move_vector) &&
+            piece.rules['move_vectors'].exclude?(move_vector)
+        ))
   end
 
   def setup_board
