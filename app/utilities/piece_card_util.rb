@@ -19,7 +19,8 @@ class PieceCardUtil < ApplicationRecord
         name: PieceCard::PAWN, level: 0, host_symbol: '♙', guest_symbol: '♟',
         rules: {
           start: %w[a2 b2 c2 d2 e2 f2 g2 h2],
-          move_vectors: [{ x: 0, y: 1, distance: 1 }]
+          move_vectors: [{ x: 0, y: 1, distance: 1 }],
+          attack_vectors: [{ x: 1, y: 1, distance: 1 }, { x: -1, y: 1, distance: 1 }]
         }
       },
       { name: PieceCard::ROOK, level: 0, host_symbol: '♖', guest_symbol: '♜',
@@ -30,7 +31,8 @@ class PieceCardUtil < ApplicationRecord
             { x: 1, y: 0, distance: INFINITY },
             { x: 0, y: -1, distance: INFINITY },
             { x: -1, y: 0, distance: INFINITY }
-          ]
+          ],
+          attack_vectors: []
         } },
       { name: PieceCard::KNIGHT, level: 0, host_symbol: '♘', guest_symbol: '♞',
         rules: {
@@ -44,7 +46,8 @@ class PieceCardUtil < ApplicationRecord
             { x: -2, y: 1, distance: 1 },
             { x: 2, y: -1, distance: 1 },
             { x: -2, y: -1, distance: 1 }
-          ]
+          ],
+          attack_vectors: []
         } },
       { name: PieceCard::BISHOP, level: 0, host_symbol: '♗', guest_symbol: '♝',
         rules: {
@@ -54,7 +57,8 @@ class PieceCardUtil < ApplicationRecord
             { x: -1, y: 1, distance: INFINITY },
             { x: 1, y: -1, distance: INFINITY },
             { x: -1, y: -1, distance: INFINITY }
-          ]
+          ],
+          attack_vectors: []
         } },
       { name: PieceCard::QUEEN, level: 0, host_symbol: '♕', guest_symbol: '♛',
         rules: {
@@ -68,7 +72,8 @@ class PieceCardUtil < ApplicationRecord
             { x: 0, y: 1, distance: INFINITY },
             { x: -1, y: 0, distance: INFINITY },
             { x: 0, y: -1, distance: INFINITY }
-          ]
+          ],
+          attack_vectors: []
         } },
       { name: PieceCard::KING, level: 0, host_symbol: '♔', guest_symbol: '♚',
         rules: {
@@ -82,7 +87,8 @@ class PieceCardUtil < ApplicationRecord
             { x: 0, y: 1, distance: 1 },
             { x: -1, y: 0, distance: 1 },
             { x: 0, y: -1, distance: 1 }
-          ]
+          ],
+          attack_vectors: []
         } }
     ]
   end
