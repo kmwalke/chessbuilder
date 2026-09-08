@@ -12,12 +12,7 @@ x-chessbuilder-common:
     - /app/node_modules
   stdin_open: true # docker run -i
   tty: true        # docker run -t
-  environment:
-    DB_DEV: chessbuilder-development
-    DB_HOST: db
-    DB_TEST: chessbuilder-test
-    DB_USERNAME: postgres
-    HEROKU_RELEASE_VERSION: "buildnumber"
+  env_file: ".env"
 
 
 services:
