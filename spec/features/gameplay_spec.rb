@@ -62,14 +62,14 @@ RSpec.feature 'Gameplay' do
 
   describe 'captures a piece' do
     let!(:piece) { game.pieces.find_by(position: 'd2') }
-    let!(:captured_piece_id) { game.pieces.find_by(position: 'd7').id }
+    let!(:captured_piece_id) { game.pieces.find_by(position: 'c7').id }
 
     before do
       piece.update(position: 'd6')
       visit game_path(game)
 
       page.find_by_id('d6_piece_select').click
-      page.find_by_id('d7_move_select').click
+      page.find_by_id('c7_move_select').click
       click_button 'Move piece'
     end
 
@@ -78,12 +78,11 @@ RSpec.feature 'Gameplay' do
     end
 
     it 'updates the piece position' do
-      expect(piece.reload.position).to eq('d7')
+      expect(piece.reload.position).to eq('c7')
     end
   end
 
   describe 'check & checkmate' do
-
     it 'detects check' do
       skip('not implemented yet')
     end

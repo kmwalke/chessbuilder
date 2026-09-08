@@ -24,11 +24,13 @@ class Game < ApplicationRecord
 
   # TODO: expand testing of this.  Its going to get complicated
   # TODO: watch for readability/complication/maintainability/performance
-  # TODO: CPU Intensive.  Each viewer puts CPU strain on server.  Add DB caching of valid_moves if this becomes a problem, so this is calculate once and fetch answer
+  # TODO: CPU Intensive.  Each viewer puts CPU strain on server.
+  #       Add DB/RAM caching of valid_moves if this becomes a problem, so this is calculate once and fetch answer
+  #       @valid_moves[piece] = [list of moves]
   def valid_moves(piece)
     moves = []
 
-    piece.rules['move_vectors'].each do |move_vector|
+    piece.rules['move_vectors'].union(piece.rules['attack_vectors']).each do |move_vector|
       moves = moves.union(calc_move_positions(piece, move_vector))
     end
     moves
@@ -55,6 +57,7 @@ class Game < ApplicationRecord
 
       new_position = algebraic_notation(new_x, new_y)
       break if space_occupied_by_friendly?(piece, new_position)
+      break if pawn_like_attack?(piece, move_vector, new_position)
 
       valid_moves << new_position
       break if space_occupied_by_enemy?(piece, new_position)
@@ -77,17 +80,26 @@ class Game < ApplicationRecord
   end
 
   def space_occupied_by_friendly?(piece, move_position)
-    pieces.find { |new_piece| new_piece.position == move_position && new_piece.player == piece.player }
+    !pieces.find { |new_piece| new_piece.position == move_position && new_piece.player == piece.player }.nil?
   end
 
   def space_occupied_by_enemy?(piece, move_position)
-    pieces.find { |new_piece| new_piece.position == move_position && new_piece.player != piece.player }
+    !pieces.find { |new_piece| new_piece.position == move_position && new_piece.player != piece.player }.nil?
   end
 
   def direction(player)
     return :- if player == Game::GUEST
 
     :+
+  end
+
+  def pawn_like_attack?(piece, move_vector, new_position)
+    piece.rules['attack_vectors'].any? &&
+      (space_occupied_by_enemy?(piece, new_position) ^
+        (
+          piece.rules['attack_vectors'].include?(move_vector) &&
+            piece.rules['move_vectors'].exclude?(move_vector)
+        ))
   end
 
   def setup_board

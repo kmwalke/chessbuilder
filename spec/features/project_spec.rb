@@ -4,6 +4,8 @@ RSpec.feature 'Project' do
   it 'integration testing' do
     # This is the place to simulate entire games.
     # manage multiple logins, with two players and multiple watchers
+    # maybe just model entire games at the request level
+    # will be way easier/perfomant than rendering browsers
   end
 
   it 'refreshes game page' do
