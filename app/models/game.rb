@@ -1,6 +1,6 @@
 class Game < ApplicationRecord
-  GUEST = 'Guest'.freeze
-  HOST  = 'Host'.freeze
+  GUEST  = 'Guest'.freeze
+  HOST   = 'Host'.freeze
   ATTACK = :attack
   MOVE   = :move
 
