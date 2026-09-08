@@ -19,7 +19,8 @@ class PieceCardUtil < ApplicationRecord
         name: PieceCard::PAWN, level: 0, host_symbol: '♙', guest_symbol: '♟',
         rules: {
           start: %w[a2 b2 c2 d2 e2 f2 g2 h2],
-          move_vectors: [{ x: 0, y: 1, distance: 1 }]
+          move_vectors: [{ x: 0, y: 1, distance: 1 }],
+          attack_vectors: [{ x: 1, y: 1, distance: 1 }, { x: -1, y: 1, distance: 1 }],
         }
       },
       { name: PieceCard::ROOK, level: 0, host_symbol: '♖', guest_symbol: '♜',
