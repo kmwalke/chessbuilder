@@ -33,7 +33,7 @@ class Game < ApplicationRecord
     piece.rules['move_vectors'].union(piece.rules['attack_vectors']).each do |move_vector|
       moves = moves.union(calc_move_positions(piece, move_vector))
     end
-    moves
+    moves.sort
   end
 
   def take_turn
