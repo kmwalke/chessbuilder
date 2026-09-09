@@ -7,5 +7,8 @@ def setup_board(layout)
 end
 
 def moves_from(position)
-  game.valid_moves(game.pieces.where(position:).first)
+  piece = game.pieces.where(position:).first
+  raise "No piece at #{position}" unless piece
+
+  game.valid_moves(piece)
 end

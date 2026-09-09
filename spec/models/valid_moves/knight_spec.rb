@@ -11,7 +11,7 @@ RSpec.describe 'Game' do
       game.pieces.destroy_all
     end
 
-    describe 'rooks' do
+    describe 'knights' do
       before do
         setup_board(
           {
