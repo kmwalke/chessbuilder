@@ -1,5 +1,5 @@
 require 'rails_helper'
-require './spec/models/valid_moves/helper'
+require './spec/models/valid_moves/vm_helper'
 
 RSpec.describe 'Game' do
   describe 'valid moves' do
