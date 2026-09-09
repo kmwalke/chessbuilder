@@ -8,8 +8,17 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
-PieceCardUtil.populate
+log = ActiveSupport::Logger.new($stdout)
 
+log.warn 'SEEDING DATA...'
+log.warn ''
+
+log.warn 'CREATING CONSTANTS...'
+PieceCardUtil.populate
+log.warn '...DONE'
+log.warn ''
+
+log.warn 'CREATING USERS...'
 [
   { email: 'kmwalke@gmail.com', name: 'Kent', motto: 'That\'s streets ahead!', role: User::ADMIN },
   { email: 'kfretz2@gmail.com', name: 'Keith', motto: 'But Prestidigitation _is_ a combat skill!', role: User::ADMIN },
@@ -26,3 +35,7 @@ PieceCardUtil.populate
   @user.password              = '123'
   @user.save
 end
+log.warn '...DONE'
+log.warn ''
+
+log.warn '...DATA SEEDING DONE'

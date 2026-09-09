@@ -12,14 +12,14 @@ RSpec.describe Game do
       piece = game.pieces.find_by(piece_card: PieceCard.find_by(name: PieceCard::KING), player: Game::GUEST)
       piece.update(position: 'd4')
 
-      expect(game.valid_moves(piece)).to eq(%w[e3 e5 c3 c5 e4 d3 c4 d5])
+      expect(game.valid_moves(piece)).to eq(%w[c3 c4 c5 d3 d5 e3 e4 e5])
     end
 
     it 'doesn\'t list your own pieces as valid move' do
       piece = game.pieces.find_by(piece_card: PieceCard.find_by(name: PieceCard::KING), player: Game::GUEST)
       piece.update(position: 'd6')
 
-      expect(game.valid_moves(piece)).to eq(%w[e5 c5 e6 d5 c6])
+      expect(game.valid_moves(piece)).to eq(%w[c5 c6 d5 e5 e6])
     end
   end
 end
