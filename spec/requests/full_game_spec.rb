@@ -46,7 +46,7 @@ RSpec.describe 'Full Game' do
   let!(:host) { create(:user) }
   let!(:game) { create(:game, host:, guest:) }
 
-  #TODO: this should break currently.  non-valid moves should be blocked at the request level
+  # TODO: this should break currently.  non-valid moves should be blocked at the request level
   it 'play the game' do
     expect do
       display(game) if VERBOSE

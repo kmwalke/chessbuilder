@@ -2,7 +2,7 @@ class GamesController < ApplicationController
   before_action :set_game, only: [:show, :edit, :update, :destroy, :move]
 
   def index
-    @games = Game.all
+    @games = Game.strict_loading.eager_load(:host, :guest)
   end
 
   # TODO: validate moves.  Raise error if :to is not a valid move.  prevent cheating
@@ -69,7 +69,9 @@ class GamesController < ApplicationController
   end
 
   def move_params
-    temp_params = params.expect(move: [:data, :to])
-    temp_params.merge JSON.parse(temp_params[:data]).symbolize_keys
+    return @move_params if @move_params
+
+    temp_params  = params.expect(move: [:data, :to])
+    @move_params = temp_params.merge JSON.parse(temp_params[:data]).symbolize_keys
   end
 end
