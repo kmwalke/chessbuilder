@@ -10,6 +10,11 @@ RSpec.feature 'Project' do
     it 'movement overlay is misaligned' do
       skip('seems like a character width rendering issue')
     end
+
+    it 'refresh bug' do
+      skip('will keep refreshing after navigating away from page')
+      # probably due to the meta refresh tag.  fixed byu switching to JS or something
+    end
   end
 
   it 'refreshes game page' do
