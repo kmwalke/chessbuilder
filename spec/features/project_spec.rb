@@ -6,10 +6,6 @@ RSpec.feature 'Project' do
       skip('find how to reproduce')
       # is it a timeout thing?
     end
-
-    it 'movement overlay is misaligned' do
-      skip('seems like a character width rendering issue')
-    end
   end
 
   it 'refreshes game page' do

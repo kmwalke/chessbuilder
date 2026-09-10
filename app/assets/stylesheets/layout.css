@@ -34,6 +34,7 @@ table.board {
   border: 4px outset goldenrod;
   background: #f8faef;
   color: black;
+  font-family: monospace;
   position: relative;
 
   tr:nth-child(2n+1) {
