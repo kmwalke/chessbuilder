@@ -10,17 +10,13 @@ RSpec.feature 'Project' do
     it 'movement overlay is misaligned' do
       skip('seems like a character width rendering issue')
     end
-
-    it 'refresh bug' do
-      skip('will keep refreshing after navigating away from page')
-      # probably due to the meta refresh tag.  fixed byu switching to JS or something
-    end
   end
 
   it 'refreshes game page' do
     skip('make page auto refresh for watchers and user whose turn it isn\'t')
-    # V1: Simple JS auto refresh unless current_player == @game.current_player
+    # DONE: V1: Simple JS auto refresh unless current_player == @game.current_player
     # V2: Some sort of push notification from server. clients must subscribe
+    #     Use Turbo, only reload partial
   end
 
   it 'performance pass' do
