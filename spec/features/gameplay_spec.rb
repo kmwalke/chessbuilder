@@ -18,7 +18,7 @@ RSpec.feature 'Gameplay' do
 
     before do
       page.find_by_id('d2_piece_select').click
-      page.find_by_id('d3_move_select').click
+      page.find_by_id('d2d3_move_select').click
       click_button 'Move piece'
     end
 
@@ -47,7 +47,7 @@ RSpec.feature 'Gameplay' do
       pawn.destroy
       visit game_path(game)
       page.find_by_id('d1_piece_select').click
-      page.find_by_id('d7_move_select').click
+      page.find_by_id('d1d7_move_select').click
       click_button 'Move piece'
     end
 
@@ -69,7 +69,7 @@ RSpec.feature 'Gameplay' do
       visit game_path(game)
 
       page.find_by_id('d6_piece_select').click
-      page.find_by_id('c7_move_select').click
+      page.find_by_id('d6c7_move_select').click
       click_button 'Move piece'
     end
 
@@ -82,8 +82,12 @@ RSpec.feature 'Gameplay' do
     end
   end
 
-  describe 'check & checkmate' do
+  describe 'win conditions' do
     it 'detects check' do
+      skip('not implemented yet')
+    end
+
+    it 'detects checkmate' do
       skip('not implemented yet')
     end
   end
