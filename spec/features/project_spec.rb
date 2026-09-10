@@ -68,6 +68,7 @@ RSpec.feature 'Project' do
   # - not exposed to the player.  The player just thinks of "pieces", not piece cards
   # - can be upgraded in crafting.  combine the same piece to upgrade
   #   = upgrading is like typical COMMON, RARE, Epic, etc...
+  #   = what do upgraded pieces get?  More starting positions?
   #   = but named for military ranks
   #     + Front row(pawns) is enlisted ranks
   #     + Back row is officer ranks
