@@ -1,5 +1,9 @@
 <% if @game.current_player != current_user %>
-  <meta http-equiv="refresh" content="5">
+  <script language="javascript">
+    window.setTimeout( function() {
+        window.location.reload();
+    }, 5000);
+  </script>
 <% end %>
 
 <p style="color: green"><%= notice %></p>
