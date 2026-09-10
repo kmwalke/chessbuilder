@@ -7,6 +7,7 @@
 <% end %>
 
 <div class="game-wrapper">
+  <h3 class="turn"><%= @game.current_player.name %>'s turn</h3>
   <%= form_with url: move_game_path, html: { autocomplete: 'off' } do |form| %>
     <!--  TODO: big radio button in the background to deselect any pieces-->
     <table class="board">
@@ -62,4 +63,3 @@
 <p style="color: green"><%= notice %></p>
 
 <h1><%= @game.name %></h1>
-<h3><%= @game.current_player.name %>'s turn</h3>

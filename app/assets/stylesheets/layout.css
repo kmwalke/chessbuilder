@@ -16,7 +16,16 @@ div.header {
   padding: .5em 0;
 }
 
+h3.turn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: -2em 0.5em 0 0;
+  line-height: 2em;
+}
+
 div.game-wrapper {
+  position: relative;
   display: inline-block;
 }
 
