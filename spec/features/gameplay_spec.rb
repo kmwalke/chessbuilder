@@ -77,6 +77,10 @@ RSpec.feature 'Gameplay' do
       expect(Piece.find_by(id: captured_piece_id)).to be_nil
     end
 
+    it 'capturing player gets the piece' do
+      expect(current_user.deck.size).to eq(17)
+    end
+
     it 'updates the piece position' do
       expect(piece.reload.position).to eq('c7')
     end

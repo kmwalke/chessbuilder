@@ -5,10 +5,9 @@ class GamesController < ApplicationController
     @games = Game.strict_loading.eager_load(:host, :guest)
   end
 
-  # TODO: validate moves.  Raise error if :to is not a valid move.  prevent cheating
+  # TODO: validate moves.  Raise error if :to is not a valid move.  prevent cheating from request spoofing
   # TODO: validate which turn it is.  can't go twice
   def move
-    # TODO: protect from disappearing pieces.  Return unless :to param is set. in fact, require all params
     captured_piece = @game.pieces.find_by(position: move_params[:to])
     captured_piece&.destroy
     piece          = @game.pieces.find_by(position: move_params[:from])
