@@ -87,13 +87,17 @@ table.board {
 }
 
 table.move {
-  opacity: 25%;
+  background-color: transparent !important;
+
+  td {
+    opacity: 75%;
+    background-color: transparent !important;
+  }
 
   label {
     box-shadow: 0 0 20px cornflowerblue inset;
   }
 
-  /*TODO: highlight only seems to work on the thop-left piece.*/
   input[type="radio"]:checked + label {
     box-shadow: 0 0 50px darkred inset;
   }
