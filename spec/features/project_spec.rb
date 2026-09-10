@@ -1,17 +1,18 @@
 require 'rails_helper'
 
 RSpec.feature 'Project' do
-  it 'integration testing' do
-    # This is the place to simulate entire games.
-    # manage multiple logins, with two players and multiple watchers
-    # maybe just model entire games at the request level
-    # will be way easier/perfomant than rendering browsers
+  describe 'bugs' do
+    it 'sometimes logs users out' do
+      skip('find how to reproduce')
+      # is it a timeout thing?
+    end
   end
 
   it 'refreshes game page' do
     skip('make page auto refresh for watchers and user whose turn it isn\'t')
-    # V1: Simple JS auto refresh unless current_player == @game.current_player
+    # DONE: V1: Simple JS auto refresh unless current_player == @game.current_player
     # V2: Some sort of push notification from server. clients must subscribe
+    #     Use Turbo, only reload partial
   end
 
   it 'performance pass' do

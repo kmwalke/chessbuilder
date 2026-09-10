@@ -4,7 +4,7 @@ html {
   color: white;
 
   a, a:visited {
-    color: green;
+    color: #00dd00;
   }
 
   a:hover {
@@ -12,9 +12,21 @@ html {
   }
 }
 
-label.nil {
-  border: 1px solid green;
+div.header {
+  padding: .5em 0;
+}
+
+h3.turn {
   position: absolute;
+  top: 0;
+  right: 0;
+  margin: -2em 0.5em 0 0;
+  line-height: 2em;
+}
+
+div.game-wrapper {
+  position: relative;
+  display: inline-block;
 }
 
 table.board {
@@ -22,6 +34,7 @@ table.board {
   border: 4px outset goldenrod;
   background: #f8faef;
   color: black;
+  font-family: monospace;
   position: relative;
 
   tr:nth-child(2n+1) {
@@ -83,5 +96,35 @@ table.move {
   /*TODO: highlight only seems to work on the thop-left piece.*/
   input[type="radio"]:checked + label {
     box-shadow: 0 0 50px darkred inset;
+  }
+}
+
+div.buttons {
+  font-size: large;
+  margin: 1em 0;
+
+  input[type="radio"] {
+    display: none;
+  }
+
+  label {
+    background: #eee;
+    border: 1px solid #777;
+    border-radius: .25em;
+    padding: 0 .25em;
+    color: black;
+  }
+
+  label:hover {
+    background: #ccc;
+  }
+
+  label:active {
+    background: #777;
+  }
+
+  input[type="submit"] {
+    float: right;
+    font-size: large;
   }
 }

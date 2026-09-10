@@ -2,11 +2,13 @@ class GamesController < ApplicationController
   before_action :set_game, only: [:show, :edit, :update, :destroy, :move]
 
   def index
-    @games = Game.all
+    @games = Game.strict_loading.eager_load(:host, :guest)
   end
 
+  # TODO: validate moves.  Raise error if :to is not a valid move.  prevent cheating
+  # TODO: validate which turn it is.  can't go twice
   def move
-    # TODO: protect from dissapearing pieces.  Return unless :to param is set. in fact, require all params
+    # TODO: protect from disappearing pieces.  Return unless :to param is set. in fact, require all params
     captured_piece = @game.pieces.find_by(position: move_params[:to])
     captured_piece&.destroy
     piece          = @game.pieces.find_by(position: move_params[:from])
@@ -67,7 +69,9 @@ class GamesController < ApplicationController
   end
 
   def move_params
-    temp_params = params.expect(move: [:data, :to])
-    temp_params.merge JSON.parse(temp_params[:data]).symbolize_keys
+    return @move_params if @move_params
+
+    temp_params  = params.expect(move: [:data, :to])
+    @move_params = temp_params.merge JSON.parse(temp_params[:data]).symbolize_keys
   end
 end
