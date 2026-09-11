@@ -6,6 +6,10 @@ RSpec.feature 'Project' do
       skip('find how to reproduce')
       # is it a timeout thing?
     end
+
+    it 'movement overlay is misaligned' do
+      skip('seems like a character width rendering issue')
+    end
   end
 
   it 'refreshes game page' do
@@ -64,6 +68,7 @@ RSpec.feature 'Project' do
   # - not exposed to the player.  The player just thinks of "pieces", not piece cards
   # - can be upgraded in crafting.  combine the same piece to upgrade
   #   = upgrading is like typical COMMON, RARE, Epic, etc...
+  #   = what do upgraded pieces get?  More starting positions?
   #   = but named for military ranks
   #     + Front row(pawns) is enlisted ranks
   #     + Back row is officer ranks

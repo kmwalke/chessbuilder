@@ -18,7 +18,7 @@ RSpec.feature 'Gameplay' do
 
     before do
       page.find_by_id('d2_piece_select').click
-      page.find_by_id('d3_move_select').click
+      page.find_by_id('d2d3_move_select').click
       click_button 'Move piece'
     end
 
@@ -47,7 +47,7 @@ RSpec.feature 'Gameplay' do
       pawn.destroy
       visit game_path(game)
       page.find_by_id('d1_piece_select').click
-      page.find_by_id('d7_move_select').click
+      page.find_by_id('d1d7_move_select').click
       click_button 'Move piece'
     end
 
@@ -62,14 +62,15 @@ RSpec.feature 'Gameplay' do
 
   describe 'captures a piece' do
     let!(:piece) { game.pieces.find_by(position: 'd2') }
-    let!(:captured_piece_id) { game.pieces.find_by(position: 'c7').id }
+    let!(:captured_piece) { game.pieces.find_by(position: 'c7') }
+    let!(:captured_piece_id) { captured_piece.id }
 
     before do
       piece.update(position: 'd6')
       visit game_path(game)
 
       page.find_by_id('d6_piece_select').click
-      page.find_by_id('c7_move_select').click
+      page.find_by_id('d6c7_move_select').click
       click_button 'Move piece'
     end
 
@@ -80,10 +81,24 @@ RSpec.feature 'Gameplay' do
     it 'updates the piece position' do
       expect(piece.reload.position).to eq('c7')
     end
+
+    describe 'capturing player gets the piece' do
+      it 'adds the piece' do
+        expect(current_user.reload.deck.size).to eq(17)
+      end
+
+      it 'adds the correct piece' do
+        expect(current_user.reload.deck.piece_cards.include?(captured_piece.piece_card)).to be(true)
+      end
+    end
   end
 
-  describe 'check & checkmate' do
+  describe 'win conditions' do
     it 'detects check' do
+      skip('not implemented yet')
+    end
+
+    it 'detects checkmate' do
       skip('not implemented yet')
     end
   end

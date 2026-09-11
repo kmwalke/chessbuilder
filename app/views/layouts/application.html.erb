@@ -24,7 +24,7 @@
   <%= javascript_importmap_tags %>
 </head>
 
-<body>
+<body data-turbo-prefetch="false">
 <div class="header">
   <% if current_user %>
     <%= link_to 'Home', root_path %>

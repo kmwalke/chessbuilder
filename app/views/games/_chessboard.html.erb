@@ -1,0 +1,61 @@
+<!--TODO: replace JS with turbo stream-->
+<% if @game.current_player != current_user %>
+  <script language="javascript">
+      window.setTimeout(function () {
+          window.location.reload();
+      }, 5000);
+  </script>
+<% end %>
+
+<div class="game-wrapper">
+  <h3 class="turn"><%= @game.current_player.name %>'s turn</h3>
+  <%= form_with url: move_game_path, html: { autocomplete: 'off' } do |form| %>
+    <table class="board">
+      <% (1..@game.board_height).sort.reverse.each do |y| %>
+        <tr>
+          <% (1..@game.board_width).each do |x| %>
+            <% position = algebraic_notation(x, y) %>
+            <% piece = @game.pieces.find { |piece| piece.position == position } %>
+            <td title="<%= position %>" id="<%= position %>">
+              <% if piece %>
+                <%= form.label "#{position}_piece_select", piece.symbol %>
+                <% if movable?(piece) %>
+                  <%= form.radio_button(
+                        nil,
+                        "{ \"piece_id\": #{piece.id}, \"from\": \"#{position}\" }",
+                        id: "#{position}_piece_select",
+                        name: "move[data]")
+                  %>
+                  <table class="board move">
+                    <% (1..@game.board_height).sort.reverse.each do |y_move| %>
+                      <tr>
+                        <% (1..@game.board_width).each do |x_move| %>
+                          <% move_position = algebraic_notation(x_move, y_move) %>
+                          <td title="<%= move_position %>" id="<%= move_position %>_move_to">
+                            <% if @game.valid_moves(piece).include?(move_position) %>
+                              <%= form.radio_button nil, move_position, id: "#{position}#{move_position}_move_select", name: 'move[to]' %>
+                              <%= form.label "#{position}#{move_position}_move_select", piece.symbol, class: 'move_to' %>
+                            <% else %>
+                              &nbsp;
+                            <% end %>
+                          </td>
+                        <% end %>
+                      </tr>
+                    <% end %>
+                  </table>
+                <% end %>
+              <% else %>
+                &nbsp;
+              <% end %>
+            </td>
+          <% end %>
+        </tr>
+      <% end %>
+    </table>
+    <div class="buttons">
+      <%= form.radio_button(nil, nil, id: "nil_piece_select", name: "move[data]", checked: true) %>
+      <%= form.label 'nil_piece_select', 'Deselect Piece' %>
+      <%= form.submit "Move piece" %>
+    </div>
+  <% end %>
+</div>
