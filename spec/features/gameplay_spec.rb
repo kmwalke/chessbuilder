@@ -62,7 +62,8 @@ RSpec.feature 'Gameplay' do
 
   describe 'captures a piece' do
     let!(:piece) { game.pieces.find_by(position: 'd2') }
-    let!(:captured_piece_id) { game.pieces.find_by(position: 'c7').id }
+    let!(:captured_piece) { game.pieces.find_by(position: 'c7') }
+    let!(:captured_piece_id) { captured_piece.id }
 
     before do
       piece.update(position: 'd6')
@@ -79,6 +80,16 @@ RSpec.feature 'Gameplay' do
 
     it 'updates the piece position' do
       expect(piece.reload.position).to eq('c7')
+    end
+
+    describe 'capturing player gets the piece' do
+      it 'adds the piece' do
+        expect(current_user.reload.deck.size).to eq(17)
+      end
+
+      it 'adds the correct piece' do
+        expect(current_user.reload.deck.piece_cards.include?(captured_piece.piece_card)).to be(true)
+      end
     end
   end
 

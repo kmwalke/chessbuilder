@@ -9,6 +9,8 @@ class Deck < ApplicationRecord
 
   after_create :provision_deck
 
+  delegate :size, to: :piece_cards
+
   private
 
   def provision_deck
