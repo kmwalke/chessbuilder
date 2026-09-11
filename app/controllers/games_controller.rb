@@ -17,7 +17,7 @@ class GamesController < ApplicationController
     piece          = @game.pieces.find_by(position: move_params[:from])
     piece.update(position: move_params[:to])
     @game.take_turn
-    redirect_to @game
+    @game.reload
   end
 
   def show; end
