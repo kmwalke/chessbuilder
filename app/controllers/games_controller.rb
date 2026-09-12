@@ -9,12 +9,10 @@ class GamesController < ApplicationController
   # TODO: validate which turn it is.  can't go twice
   # TODO: Add transactional "game_action" like in crafty to this and other controller actions
   def move
-    captured_piece = @game.pieces.find_by(position: move_params[:to])
-    if captured_piece
-      @game.reload.current_player.deck.piece_cards << captured_piece.piece_card
-      captured_piece.destroy
-    end
     piece          = @game.pieces.find_by(position: move_params[:from])
+    captured_piece = @game.pieces.find_by(position: move_params[:to])
+    current_user.update(upgrade_points: current_user.upgrade_points + 1) if captured_piece&.name == PieceCard::PAWN
+    captured_piece&.destroy
     piece.update(position: move_params[:to])
     @game.take_turn
     @game.reload

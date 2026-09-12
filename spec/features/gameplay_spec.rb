@@ -82,14 +82,8 @@ RSpec.feature 'Gameplay' do
       expect(piece.reload.position).to eq('c7')
     end
 
-    describe 'capturing player gets the piece' do
-      it 'adds the piece' do
-        expect(current_user.reload.deck.size).to eq(17)
-      end
-
-      it 'adds the correct piece' do
-        expect(current_user.reload.deck.piece_cards.include?(captured_piece.piece_card)).to be(true)
-      end
+    it 'capturing player gets resources for the piece' do
+      expect(current_user.reload.upgrade_points).to eq(1)
     end
   end
 
