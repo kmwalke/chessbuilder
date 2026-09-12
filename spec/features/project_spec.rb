@@ -102,4 +102,47 @@ RSpec.feature 'Project' do
   # - pawn + bishop gives another
   # - armor + armor gives stronger armor?
   # - crafting element !?!?!
+
+  # 9/11 play session
+  # 'Hmm' button
+  # highlight piece that just moved
+  # Don't capture pieces, get resources from the pieces. craft with the resources
+  # or captured pieces
+
+  # on a win, pieces that didnt get captured upgrade.  So they can equip better/more equipment
+  # Crafting pieces changes the piece behavior. Upgrading pieces changes their equipment capacity
+  # "Equipment sets" set bonuses and a name change for all the set pieces
+  # Maybe only combining with pawns can upgrade things
+  #   like rook + 3 pawns = garrison
+  #     rook + 1 upgraded pawn = garrison
+  # So I want to capture lots of pawns, but since captured pawns get knocked to level 1, the other player wants to protect them
+  # Maybe upgrade multiple time
+  #    Garrison + 6 pawns = fortress
+  # But you ALWAYS have 2 "rook-like" pieces (rook class with garrison specialization class)
+  #   This solves the insane placement problem of how to place all the pieces when many have different starting positions
+  # V1 is JUST pawns to craft.  later versions could be bishop + queen, etc...
+  # So DONT allocate pieces to capturing player
+  #   Instead, captured pawns becomes "upgrade points" or "captured pawns", but they are just an integer on a user account
+  #     user.pawn_points
+  #  Now we basically have an "upgrade store" where you spend pawn points to upgrade pieces
+
+  # perhaps a level 2 bishop (archbisop) can move sideways once, switching colors and becoming a bishop for the rest of the game
+  # focus on single use abilities that downgrade a level 2 piece to its level 1 version
+  #  (level 1 is normal chess pieces)
+  #  Maybe level 3 can do the move twice or do a bigger move once (xcom like AP, basically)
+  #
+  #
+  # Live game with Keith:
+  # Rook - Garrison (spawns pawn on death)
+  # Knight - 3-1 L movement ONCE
+  # Bishop - Archbishop (Switch colors once)
+  # Queen - teleport via sacrifice once
+  # King - It can move 2 Orthogonal ONCE (not diagonal)
+
+  # The one time use abilities seems good
+  # "You can use it to set up a strike or get out of a jam"
+  # "the move is crazy, but we are left with a normal chess situation after"
+  # The special move is something you keep in reserve for the right moment
+  # These pieces feel pretty good for now
+  # A garrison that makes it to the back row can spawn a pawn and upgrade it to queen!
 end
