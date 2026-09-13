@@ -11,7 +11,9 @@ class GamesController < ApplicationController
   def move
     piece          = @game.pieces.find_by(position: move_params[:from])
     captured_piece = @game.pieces.find_by(position: move_params[:to])
-    current_user.update(upgrade_points: current_user.upgrade_points + 1) if captured_piece&.name == PieceCard::PAWN
+    if current_user && (captured_piece&.name == PieceCard::PAWN)
+      current_user.update(upgrade_points: current_user.upgrade_points + 1)
+    end
     captured_piece&.destroy
     piece.update(position: move_params[:to])
     @game.take_turn
