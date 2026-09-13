@@ -2,40 +2,45 @@ class GamesController < ApplicationController
   before_action :set_game, only: [:show, :edit, :update, :destroy, :move]
 
   def index
-    @games = Game.strict_loading.eager_load(:host, :guest)
+    game_action do
+      @games = Game.strict_loading.eager_load(:host, :guest)
+    end
   end
 
   # TODO: validate moves.  Raise error if :to is not a valid move.  prevent cheating from request spoofing
   # TODO: validate which turn it is.  can't go twice
   # TODO: Add transactional "game_action" like in crafty to this and other controller actions
   def move
-    piece          = @game.pieces.find_by(position: move_params[:from])
-    captured_piece = @game.pieces.find_by(position: move_params[:to])
-    if current_user && (captured_piece&.name == PieceCard::PAWN)
-      current_user.update(upgrade_points: current_user.upgrade_points + 1)
+    game_action(redirect: true, path: game_path(@game)) do
+      piece          = @game.pieces.find_by(position: move_params[:from])
+      captured_piece = @game.pieces.find_by(position: move_params[:to])
+      current_user.update(upgrade_points: current_user.upgrade_points + 1) if captured_piece&.name == PieceCard::PAWN
+      captured_piece&.destroy
+      piece.update(position: move_params[:to])
+      @game.take_turn
     end
-    captured_piece&.destroy
-    piece.update(position: move_params[:to])
-    @game.take_turn
-    @game.reload
   end
 
   def show; end
 
   def new
-    @game = Game.new
+    game_action do
+      @game = Game.new
+    end
   end
 
   def edit; end
 
   def create
-    @game = Game.new(game_params)
+    game_action do
+      @game = Game.new(game_params)
 
-    respond_to do |format|
-      if @game.save
-        format.html { redirect_to @game, notice: 'Game was successfully created.' }
-      else
-        format.html { render :new, status: :unprocessable_content }
+      respond_to do |format|
+        if @game.save
+          format.html { redirect_to @game, notice: 'Game was successfully created.' }
+        else
+          format.html { render :new, status: :unprocessable_content }
+        end
       end
     end
   end

@@ -10,6 +10,11 @@ VERBOSE = false
 RSpec.describe 'Full Game' do
   include ApplicationHelper
 
+  let!(:current_user) { login }
+  let!(:guest) { create(:user) }
+  let!(:host) { create(:user) }
+  let!(:game) { create(:game, host:, guest:) }
+
   def move_piece(game, move)
     LOG.debug move if VERBOSE
     from_position = move[0..1]
@@ -39,10 +44,6 @@ RSpec.describe 'Full Game' do
     LOG.debug ' abcdefgh'
     LOG.debug ''
   end
-
-  let!(:guest) { create(:user) }
-  let!(:host) { create(:user) }
-  let!(:game) { create(:game, host:, guest:) }
 
   # TODO: this should break currently.  non-valid moves should be blocked at the request level
   it 'play the game' do

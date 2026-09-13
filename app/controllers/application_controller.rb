@@ -27,4 +27,16 @@ class ApplicationController < ActionController::Base
 
     redirect_to root_path
   end
+
+  private
+
+  def game_action(redirect: false, path: root_path)
+    ActiveRecord::Base.transaction do
+      yield
+    rescue StandardError => e
+      @notice = e.to_s
+    ensure
+      redirect_to path, notice: @notice if redirect
+    end
+  end
 end
