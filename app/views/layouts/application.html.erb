@@ -36,6 +36,15 @@
     <%= link_to 'Log In', login_path %>
   <% end %>
 </div>
+
+<% if notice %>
+  <div class="notice">
+    <div class="notice-popup">
+      <%= notice&.html_safe %>
+    </div>
+  </div>
+<% end %>
+
 <%= yield %>
 </body>
 </html>

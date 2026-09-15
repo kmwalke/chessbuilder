@@ -115,18 +115,22 @@ RSpec.feature 'Project' do
   # Maybe only combining with pawns can upgrade things
   #   like rook + 3 pawns = garrison
   #     rook + 1 upgraded pawn = garrison
-  # So I want to capture lots of pawns, but since captured pawns get knocked to level 1, the other player wants to protect them
+  # So I want to capture lots of pawns, but since captured pawns get knocked to level 1,
+  #           the other player wants to protect them
   # Maybe upgrade multiple time
   #    Garrison + 6 pawns = fortress
   # But you ALWAYS have 2 "rook-like" pieces (rook class with garrison specialization class)
-  #   This solves the insane placement problem of how to place all the pieces when many have different starting positions
+  #   This solves the insane placement problem of how to place all the pieces when many have
+  #         different starting positions
   # V1 is JUST pawns to craft.  later versions could be bishop + queen, etc...
   # So DONT allocate pieces to capturing player
-  #   Instead, captured pawns becomes "upgrade points" or "captured pawns", but they are just an integer on a user account
+  #   Instead, captured pawns becomes "upgrade points" or "captured pawns", but they are just an
+  #          integer on a user account
   #     user.pawn_points
   #  Now we basically have an "upgrade store" where you spend pawn points to upgrade pieces
 
-  # perhaps a level 2 bishop (archbisop) can move sideways once, switching colors and becoming a bishop for the rest of the game
+  # perhaps a level 2 bishop (archbisop) can move sideways once, switching colors and
+  #         becoming a bishop for the rest of the game
   # focus on single use abilities that downgrade a level 2 piece to its level 1 version
   #  (level 1 is normal chess pieces)
   #  Maybe level 3 can do the move twice or do a bigger move once (xcom like AP, basically)
