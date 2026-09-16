@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '4.0.6'
+ruby '4.0.7'
 
 gem 'bcrypt', '~> 3.1.7'
 gem 'bootsnap', require: false
