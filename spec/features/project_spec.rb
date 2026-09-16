@@ -49,6 +49,10 @@ RSpec.feature 'Project' do
     skip('search for all TODOs')
   end
 
+  it 'rubocop' do
+    skip('get rubocop passing fully')
+  end
+
   it 'gameplay outline' do
     skip('See Notes in project_spec')
   end
@@ -63,18 +67,33 @@ RSpec.feature 'Project' do
   # Piece card
   # - Just the pieces
   # - name, move
-  # - could have cool new pieces:
-  #                         https://www.reddit.com/r/chess/comments/he6tmj/here_are_30_alternative_chess_pieces_as/
-  # - not exposed to the player.  The player just thinks of "pieces", not piece cards
-  # - can be upgraded in crafting.  combine the same piece to upgrade
-  #   = upgrading is like typical COMMON, RARE, Epic, etc...
-  #   = what do upgraded pieces get?  More starting positions?
+  # - not exposed to the player
+  #   = The player just thinks of "pieces", not piece cards
+  #   = just a code contrivance
+  # - pieces that survive a match get promoted
+  #   = 4 or five promotions to gain
   #   = but named for military ranks
   #     + Front row(pawns) is enlisted ranks
   #     + Back row is officer ranks
-  #   = upgrading increases possible starting positions
-  #     + what other stuff does upgrading do?
-  # - combine two different pieces to get a new piece
+  #   = promoted pieces can equip things
+  #     + higher rank can equip more
+  # - piece that get captured get knocked back to lowest rank
+  #   = they don't downgrade, though
+  # - Upgrade a piece with upgrade points
+  #   = Bishop to Archbishop, etc..
+  #   = maybe call this something other than upgrade
+  #     + transmute, pledge service....
+  #   = theme the pieces to be angel or demon
+  #     + bishop becomes Archbishop or Cult Leader
+  #     + functions the same?  subtly different? Just cosmetic?
+  #   = Upgraded pieces have a one time use ability
+  #     + see 9/11 playnotes below
+  #     + after using their ability, they "downgrade" to the lvl 1 version
+  #       - this is just for the rest of the game, the PieceCard is still upgraded for the next game
+  #       - mostly this is so the players can tell the piece downgraded and knows what movements to expect
+  #       - in a physical game, upgraded pieces have a marker under them
+  #   = level 2 only for now.  level 3 later, if at all
+  # - promoting and upgrading are two different things
   #
   #
   #  Equipment Card
@@ -84,7 +103,7 @@ RSpec.feature 'Project' do
   # - Boots make it move faster
   # - earn cards by capturing pieces with equipment equipped
   #   = Could "fake" this if needed: pick up COMMON equipment from unequipped pieces
-  #   = combine equipment to level it up, COMMON, RARE, EPIC, etc..
+  #   = use upgrade points to level it up, COMMON, RARE, EPIC, etc..
   #
   # Power/bonus card
   # - affect the rules of the game
@@ -93,15 +112,6 @@ RSpec.feature 'Project' do
   # - pacman torus movement mode
   # - etc...
   #
-  #
-  #   Start with a Deck that makes a normal deck
-  # Can earn new cards by capturing pieces in game.
-  # You get the cards of pieces you capture, then craft with them between games
-  # Can combine cards to upgrade?
-  # - pawn + knight gives one thing
-  # - pawn + bishop gives another
-  # - armor + armor gives stronger armor?
-  # - crafting element !?!?!
 
   # 9/11 play session
   # 'Hmm' button
@@ -138,9 +148,9 @@ RSpec.feature 'Project' do
   #
   # Live game with Keith:
   # Rook - Garrison (spawns pawn on death)
-  # Knight - 3-1 L movement ONCE
-  # Bishop - Archbishop (Switch colors once)
-  # Queen - teleport via sacrifice once
+  # Knight - 3-1 L movement ONCE (or it has a squire, meaning it can move a pawn along with it ONCE)
+  # Bishop - Archbishop (Switch colors ONCE)
+  # Queen - teleport via sacrifice ONCE
   # King - It can move 2 Orthogonal ONCE (not diagonal)
 
   # The one time use abilities seems good

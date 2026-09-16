@@ -14,20 +14,27 @@ RSpec.describe 'Rules' do
     end
 
     describe 'test generic chess rules here' do
-      # TODO: Check that enemy pieces block travel, but can be captured
-      # TODO: Check that friendly pieces block travel, but can't be captured
       # TODO: En passante, dear god
       # TODO: Castling???  Dual piece movement!!! :barf
       # TODO: Check for other chess rules
       # TODO: Break up in sections for each piece?
       # TODO: Get original pieces up and running fully before making new pieces
 
-      # TODO: prevent request spoof cheating
-      it 'no illegal moves' do
-        skip('not implemented')
-        move_piece(game, 'd2e6')
+      describe 'no cheating with request spoofing' do
+        it 'no illegal moves' do
+          skip('not implemented')
+          move_piece(game, 'd2e6')
 
-        expect(game.pieces.find_by(position: 'd2')).to be_a(Piece)
+          expect(game.pieces.find_by(position: 'd2')).to be_a(Piece)
+        end
+
+        it 'no double moves' do
+          skip('not implemented')
+          move_piece(game, 'd2d4')
+          move_piece(game, 'a2a3')
+
+          expect(game.pieces.find_by(position: 'a2')).to be_a(Piece)
+        end
       end
 
       it 'updates has_moved?' do
