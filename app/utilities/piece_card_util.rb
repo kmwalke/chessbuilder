@@ -39,6 +39,13 @@ class PieceCardUtil < ApplicationRecord
           start_vectors: [],
           attack_vectors: []
         } },
+      { name: PieceCard::GARRISON, level: 2, host_symbol: '♖', guest_symbol: '♜',
+        rules: {
+          start: %w[a1 h1],
+          upgrades: PieceCard::ROOK,
+          upgrade_cost: 50,
+          special_move: 'spawns pawn on death'
+        } },
       { name: PieceCard::KNIGHT, level: 1, host_symbol: '♘', guest_symbol: '♞',
         rules: {
           start: %w[b1 g1],
@@ -55,6 +62,13 @@ class PieceCardUtil < ApplicationRecord
           start_vectors: [],
           attack_vectors: []
         } },
+      { name: PieceCard::BANNERET, level: 2, host_symbol: '♘', guest_symbol: '♞',
+        rules: {
+          start: %w[b1 g1],
+          upgrades: PieceCard::KNIGHT,
+          upgrade_cost: 50,
+          special_move: '3-1 L'
+        } },
       { name: PieceCard::BISHOP, level: 1, host_symbol: '♗', guest_symbol: '♝',
         rules: {
           start: %w[c1 f1],
@@ -66,6 +80,13 @@ class PieceCardUtil < ApplicationRecord
           ],
           start_vectors: [],
           attack_vectors: []
+        } },
+      { name: PieceCard::ARCHBISHOP, level: 2, host_symbol: '♗', guest_symbol: '♝',
+        rules: {
+          start: %w[c1 f1],
+          upgrades: PieceCard::BISHOP,
+          upgrade_cost: 50,
+          special_move: 'orthogonal 1 distance'
         } },
       { name: PieceCard::QUEEN, level: 1, host_symbol: '♕', guest_symbol: '♛',
         rules: {
@@ -83,6 +104,13 @@ class PieceCardUtil < ApplicationRecord
           start_vectors: [],
           attack_vectors: []
         } },
+      { name: PieceCard::EMPRESS, level: 2, host_symbol: '♕', guest_symbol: '♛',
+        rules: {
+          start: ['d1'],
+          upgrades: PieceCard::QUEEN,
+          upgrade_cost: 50,
+          special_move: 'teleport via sacrifice of friendly piece'
+        } },
       { name: PieceCard::KING, level: 1, host_symbol: '♔', guest_symbol: '♚',
         rules: {
           start: ['e1'],
@@ -98,6 +126,13 @@ class PieceCardUtil < ApplicationRecord
           ],
           start_vectors: [],
           attack_vectors: []
+        } },
+      { name: PieceCard::EMPEROR, level: 2, host_symbol: '♔', guest_symbol: '♚',
+        rules: {
+          start: ['e1'],
+          upgrades: PieceCard::KING,
+          upgrade_cost: 50,
+          special_move: 'orthogonal 2 distance'
         } }
     ]
   end
