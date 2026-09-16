@@ -30,8 +30,13 @@ RSpec.describe 'Rules' do
         expect(game.pieces.find_by(position: 'd2')).to be_a(Piece)
       end
 
-      describe 'pawns' do
+      it 'updates has_moved?' do
+        move_piece(game, 'a2a3')
 
+        expect(game.pieces.find_by(position: 'a3').has_moved?).to be(true)
+      end
+
+      describe 'pawns' do
         it 'moves 2 spaces at beginning' do
           expect(game.valid_moves(game.pieces.find_by(position: 'd2'))).to eq(%w[d3 d4])
         end
