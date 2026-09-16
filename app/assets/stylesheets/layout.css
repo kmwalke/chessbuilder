@@ -192,7 +192,9 @@ fieldset.chess-set {
 
     li {
       display: inline-block;
-      border: 1px solid white;
+      border: 3px outset tan;
+      background: #f8faef;
+      color: black;
       border-radius: .25em;
       margin: 0.75em 0.25em;
       padding: 0.1em 0.25em;
