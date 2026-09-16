@@ -1,26 +1,15 @@
-<fieldset>
-  <legend>Deck</legend>
-  <span><%= @user.deck.piece_cards.count %> piece cards</span>
-  <table>
-    <thead>
-    <tr>
-      <td>Level</td>
-      <td>Name</td>
-      <td>Host</td>
-      <td>Guest</td>
-      <td>Start</td>
-      <td>Moves</td>
-    </tr>
-    </thead>
+<fieldset class="chess-set">
+  <legend>Chess Set</legend>
+  <ul>
     <% @user.deck.piece_cards.each do |piece_card| %>
-      <tr>
-        <td><%= piece_card.level %></td>
-        <td><%= piece_card.name %></td>
-        <td><%= piece_card.host_symbol %></td>
-        <td><%= piece_card.guest_symbol %></td>
-        <td><%= piece_card.rules['start'] %></td>
-        <td><%= piece_card.rules['move_vectors'] %></td>
-      </tr>
+      <li>
+        <span class="level">Level <%= piece_card.level %></span>
+        <span class="name"><%= piece_card.name %></span>
+        <span class="symbols">
+          <%= piece_card.host_symbol %>
+          <%= piece_card.guest_symbol %>
+        </span>
+      </li>
     <% end %>
-  </table>
+  </ul>
 </fieldset>
