@@ -29,8 +29,9 @@ class Game < ApplicationRecord
   #       @valid_moves[piece] = [list of moves]
   def valid_moves(piece)
     moves = []
-
-    piece.rules['move_vectors'].union(piece.rules['attack_vectors']).each do |move_vector|
+    rules = piece.rules['move_vectors'].union(piece.rules['attack_vectors'])
+    rules = rules.union(piece.rules['start_vectors']) unless piece.has_moved?
+    rules.each do |move_vector|
       moves = moves.union(calc_move_positions(piece, move_vector))
     end
     moves.sort

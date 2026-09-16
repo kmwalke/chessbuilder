@@ -36,6 +36,17 @@
     <%= link_to 'Log In', login_path %>
   <% end %>
 </div>
+
+<!--TODO: BUG: This interacts oddly with turboframes.  -->
+<!--  often doesn't popup until you navigate away from the page-->
+<% if notice %>
+  <div class="notice">
+    <div class="notice-popup">
+      <%= notice&.html_safe %>
+    </div>
+  </div>
+<% end %>
+
 <%= yield %>
 </body>
 </html>
