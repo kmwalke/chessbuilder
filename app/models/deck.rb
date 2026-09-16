@@ -11,6 +11,12 @@ class Deck < ApplicationRecord
 
   delegate :size, to: :piece_cards
 
+  def strength
+    piece_cards.map do |p|
+      p.level * p.rank
+    end.sum
+  end
+
   private
 
   def provision_deck

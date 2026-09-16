@@ -79,7 +79,7 @@ RSpec.feature 'Project' do
   #     + higher rank can equip more
   # - piece that get captured get knocked back to lowest rank
   #   = they don't downgrade, though
-  # - Upgrade a piece with upgrade points
+  # - Upgrade a piece's level with upgrade points
   #   = Bishop to Archbishop, etc..
   #   = maybe call this something other than upgrade
   #     + transmute, pledge service....

@@ -1,8 +1,13 @@
+<ul>
+  <li>These are all the chess pieces in the game</li>
+  <li>Pieces that survive a game get promoted</li>
+  <li>Upgrade pieces using upgrade points</li>
+  <li>Earn upgrade points by capturing pawns</li>
+</ul>
 <fieldset class="chess-set">
-  <legend>Chess Set</legend>
-  <strong>Strength: <%= @user.deck.strength %></strong>
+  <legend>Piece Cards</legend>
   <ul>
-    <% @user.deck.piece_cards.each do |piece_card| %>
+    <% @piece_cards.each do |piece_card| %>
       <li>
         <span class="name"><%= piece_card.name %></span>
         <span class="rank"><%= piece_card.rank_name %></span>

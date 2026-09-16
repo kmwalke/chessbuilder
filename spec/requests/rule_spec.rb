@@ -2,12 +2,11 @@ require 'rails_helper'
 require './spec/requests/requests_helper'
 
 RSpec.describe 'Rules' do
-  let!(:user1) { create(:user) }
-  let!(:user2) { create(:user) }
+  let!(:guest) { create(:user) }
 
   describe 'logged in' do
     let!(:current_user) { login }
-    let!(:game) { create(:game, host: current_user, guest: user2) }
+    let!(:game) { create(:game, host: current_user, guest:) }
 
     before do
       visit games_path

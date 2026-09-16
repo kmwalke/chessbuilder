@@ -13,12 +13,12 @@ log = ActiveSupport::Logger.new($stdout)
 log.warn 'SEEDING DATA...'
 log.warn ''
 
-log.warn 'CREATING CONSTANTS...'
+log.warn 'CREATING PIECE CARDS...'
 PieceCardUtil.populate
 log.warn '...DONE'
 log.warn ''
 
-log.warn 'CREATING USERS...'
+log.warn 'CREATING USERS & DECKS...'
 [
   { email: 'kmwalke@gmail.com', name: 'Kent', motto: 'That\'s streets ahead!', role: User::ADMIN },
   { email: 'kfretz2@gmail.com', name: 'Keith', motto: 'But Prestidigitation _is_ a combat skill!', role: User::ADMIN },
