@@ -4,8 +4,8 @@
   <ul>
     <% @user.deck.piece_cards.each do |piece_card| %>
       <li>
-        <span class="rank"><%= piece_card.rank_name %></span>
         <span class="name"><%= piece_card.name %></span>
+        <span class="rank"><%= piece_card.rank_name %></span>
         <span class="symbols">
           <%= piece_card.host_symbol %>
           <%= piece_card.guest_symbol %>
