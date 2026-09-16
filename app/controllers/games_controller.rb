@@ -12,7 +12,6 @@ class GamesController < ApplicationController
   # TODO: Add transactional "game_action" like in crafty to this and other controller actions
   def move
     game_action(redirect: true, path: game_path(@game)) do
-      # raise 'ERROAR'
       piece          = @game.pieces.find_by(position: move_params[:from])
       captured_piece = @game.pieces.find_by(position: move_params[:to])
       current_user.update(upgrade_points: current_user.upgrade_points + 1) if captured_piece&.name == PieceCard::PAWN

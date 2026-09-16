@@ -13,30 +13,45 @@ RSpec.describe 'Rules' do
       visit games_path
     end
 
-    describe 'test generic chess rules here', skip: 'working on it' do
+    describe 'test generic chess rules here' do
       # TODO: Check that enemy pieces block travel, but can be captured
       # TODO: Check that friendly pieces block travel, but can't be captured
-      # TODO: Diagonal attacks from pawns
       # TODO: En passante, dear god
       # TODO: Castling???  Dual piece movement!!! :barf
-      # TODO: Pawns moving twice at the opening
       # TODO: Check for other chess rules
       # TODO: Break up in sections for each piece?
       # TODO: Get original pieces up and running fully before making new pieces
 
+      # TODO: prevent request spoof cheating
+      it 'no illegal moves' do
+        skip('not implemented')
+        move_piece(game, 'd2e6')
+
+        expect(game.pieces.find_by(position: 'd2')).to be_a(Piece)
+      end
+
       describe 'pawns' do
+
         it 'moves 2 spaces at beginning' do
           expect(game.valid_moves(game.pieces.find_by(position: 'd2'))).to eq(%w[d3 d4])
         end
 
         it 'moves 1 space after first movement' do
           move_piece(game, 'd2d4')
+          move_piece(game, 'a7a6')
+          expect(game.valid_moves(game.pieces.find_by(position: 'd4'))).to eq(%w[d5])
         end
 
         it 'attack diagonally' do
+          move_piece(game, 'd2d4')
+          move_piece(game, 'e7e5')
+          expect(game.valid_moves(game.pieces.find_by(position: 'd4'))).to eq(%w[d5 e5])
         end
 
         it 'can\'t attack straight ahead' do
+          move_piece(game, 'd2d4')
+          move_piece(game, 'd7d5')
+          expect(game.valid_moves(game.pieces.find_by(position: 'd4'))).to eq(%w[])
         end
       end
     end
