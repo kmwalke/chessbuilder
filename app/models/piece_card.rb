@@ -8,4 +8,13 @@ class PieceCard < ApplicationRecord
   BISHOP = 'Bishop'.freeze
   QUEEN  = 'Queen'.freeze
   KING   = 'King'.freeze
+
+  ENLISTED_RANKS = %w[Private PFC Specialist Corporal Sergeant].freeze
+  OFFICER_RANKS  = %w[Lieutenant Captain Major Colonel General].freeze
+
+  def rank_name
+    return ENLISTED_RANKS[rank - 1] if name == PAWN
+
+    OFFICER_RANKS[rank - 1]
+  end
 end

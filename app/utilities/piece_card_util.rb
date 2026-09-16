@@ -16,7 +16,7 @@ class PieceCardUtil < ApplicationRecord
   def self.card_data
     [
       {
-        name: PieceCard::PAWN, level: 0, host_symbol: '♙', guest_symbol: '♟',
+        name: PieceCard::PAWN, level: 1, host_symbol: '♙', guest_symbol: '♟',
         rules: {
           start: %w[a2 b2 c2 d2 e2 f2 g2 h2],
           move_vectors: [{ x: 0, y: 1, distance: 1 }],
@@ -24,7 +24,7 @@ class PieceCardUtil < ApplicationRecord
           attack_vectors: [{ x: 1, y: 1, distance: 1 }, { x: -1, y: 1, distance: 1 }]
         }
       },
-      { name: PieceCard::ROOK, level: 0, host_symbol: '♖', guest_symbol: '♜',
+      { name: PieceCard::ROOK, level: 1, host_symbol: '♖', guest_symbol: '♜',
         rules: {
           start: %w[a1 h1],
           move_vectors: [
@@ -36,7 +36,7 @@ class PieceCardUtil < ApplicationRecord
           start_vectors: [],
           attack_vectors: []
         } },
-      { name: PieceCard::KNIGHT, level: 0, host_symbol: '♘', guest_symbol: '♞',
+      { name: PieceCard::KNIGHT, level: 1, host_symbol: '♘', guest_symbol: '♞',
         rules: {
           start: %w[b1 g1],
           move_vectors: [
@@ -52,7 +52,7 @@ class PieceCardUtil < ApplicationRecord
           start_vectors: [],
           attack_vectors: []
         } },
-      { name: PieceCard::BISHOP, level: 0, host_symbol: '♗', guest_symbol: '♝',
+      { name: PieceCard::BISHOP, level: 1, host_symbol: '♗', guest_symbol: '♝',
         rules: {
           start: %w[c1 f1],
           move_vectors: [
@@ -64,7 +64,7 @@ class PieceCardUtil < ApplicationRecord
           start_vectors: [],
           attack_vectors: []
         } },
-      { name: PieceCard::QUEEN, level: 0, host_symbol: '♕', guest_symbol: '♛',
+      { name: PieceCard::QUEEN, level: 1, host_symbol: '♕', guest_symbol: '♛',
         rules: {
           start: ['d1'],
           move_vectors: [
@@ -80,7 +80,7 @@ class PieceCardUtil < ApplicationRecord
           start_vectors: [],
           attack_vectors: []
         } },
-      { name: PieceCard::KING, level: 0, host_symbol: '♔', guest_symbol: '♚',
+      { name: PieceCard::KING, level: 1, host_symbol: '♔', guest_symbol: '♚',
         rules: {
           start: ['e1'],
           move_vectors: [

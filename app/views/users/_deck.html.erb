@@ -1,9 +1,10 @@
 <fieldset class="chess-set">
   <legend>Chess Set</legend>
+  <strong>Strength: <%= @user.deck.strength %></strong>
   <ul>
     <% @user.deck.piece_cards.each do |piece_card| %>
       <li>
-        <span class="level">Level <%= piece_card.level %></span>
+        <span class="rank"><%= piece_card.rank_name %></span>
         <span class="name"><%= piece_card.name %></span>
         <span class="symbols">
           <%= piece_card.host_symbol %>
