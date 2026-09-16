@@ -39,6 +39,7 @@ class PieceCardUtil < ApplicationRecord
           start_vectors: [],
           attack_vectors: []
         } },
+      # TODO: Find fun unicode characters for level 2 pieces
       { name: PieceCard::GARRISON, level: 2, host_symbol: '♖', guest_symbol: '♜',
         rules: {
           start: %w[a1 h1],
