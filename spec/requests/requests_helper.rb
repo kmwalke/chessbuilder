@@ -1,4 +1,4 @@
-include ApplicationHelper
+require './app/helpers/application_helper'
 
 LOG     = ActiveSupport::Logger.new($stdout)
 VERBOSE = false
