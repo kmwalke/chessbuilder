@@ -27,7 +27,7 @@ log.warn 'CREATING USERS...'
   { email: 'kerryslaymaker@gmail.com', name: 'Kerry' },
   { email: 'buttforker@gmail.com', name: 'Zack' },
   { email: 'Aaron.m.lee.al@gmail.com', name: 'Aaron' },
-  { email: 'polymangler@gmail.com', name: 'Bruce' },
+  { email: 'polymangler@gmail.com', name: 'Bruce', motto: 'This game is Unreal™!' },
   { email: 'a@b.com', name: 'Lumber Jack' },
   { email: 'b@b.com', name: 'Shifty Rogue' }
 ].each do |user_params|

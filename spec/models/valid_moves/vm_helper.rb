@@ -1,7 +1,7 @@
 def setup_board(layout)
   [Game::HOST, Game::GUEST].each do |player|
     layout[player].each_pair do |position, piece_class|
-      Piece.create(game:, piece_card: PieceCard.where(name: piece_class).first, player:, position:)
+      Piece.create(game:, piece_card: PieceCard.where(name: piece_class).first, player:, position:, has_moved?: true)
     end
   end
 end
