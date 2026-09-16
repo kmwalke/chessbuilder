@@ -2,14 +2,17 @@ class PieceCardUtil < ApplicationRecord
   INFINITY = 10
 
   def self.populate
-    card_data.each do |card|
-      PieceCard.find_or_create_by(
-        name: card[:name],
-        level: card[:level],
-        host_symbol: card[:host_symbol],
-        guest_symbol: card[:guest_symbol],
-        rules: card[:rules]
-      )
+    (1..5).each do |rank|
+      card_data.each do |card|
+        PieceCard.find_or_create_by(
+          name: card[:name],
+          level: card[:level],
+          rank: rank,
+          host_symbol: card[:host_symbol],
+          guest_symbol: card[:guest_symbol],
+          rules: card[:rules]
+        )
+      end
     end
   end
 
