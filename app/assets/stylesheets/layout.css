@@ -138,7 +138,7 @@ table.board {
         display: block;
         width: 12vw;
         height: 12vw;
-        line-height: 100%;
+        line-height: 12vw;
       }
 
       label {
