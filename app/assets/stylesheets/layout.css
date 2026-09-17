@@ -225,3 +225,38 @@ fieldset.chess-set {
     }
   }
 }
+
+@media (orientation: landscape) {
+  div.header {
+    height: 8vh;
+  }
+
+  h3.turn {
+    margin: -8vh 1vh 0 0;
+    line-height: 8vh;
+  }
+  table.board {
+
+    tr {
+      height: 9vh;
+      td {
+        font-size: 7vh;
+        width: 9vh;
+
+        label, span {
+          display: block;
+          width: 9vh;
+          height: 9vh;
+          line-height: 9vh;
+        }
+      }
+    }
+  }
+  table.move {
+    background-color: transparent !important;
+
+    tr {
+      height: 9vh;
+    }
+  }
+}
