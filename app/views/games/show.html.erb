@@ -1,6 +1,5 @@
-<%= turbo_frame_tag 'chessboard' do %>
-  <%= render partial: 'chessboard'  %>
-<% end %>
+<%= turbo_stream_from @game %>
+<%= render @game %>
 
 <div>
   <%= link_to "Back to games", games_path %>
