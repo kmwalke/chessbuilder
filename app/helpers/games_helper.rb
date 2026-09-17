@@ -3,8 +3,6 @@ module GamesHelper
     belongs_to_current_user?(game, piece) && current_users_turn?(game) && game.valid_moves(piece).any?
   end
 
-  private
-
   def current_users_turn?(game)
     game.current_player == current_user
   end

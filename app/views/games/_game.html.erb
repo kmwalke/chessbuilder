@@ -27,7 +27,7 @@
                               <%= form.radio_button nil, move_position, id: "#{position}#{move_position}_move_select", name: 'move[to]' %>
                               <%= form.label "#{position}#{move_position}_move_select", piece.symbol, class: 'move_to' %>
                             <% else %>
-                            <span>&nbsp;</span>
+                              <span>&nbsp;</span>
                             <% end %>
                           </td>
                         <% end %>
@@ -43,10 +43,12 @@
         </tr>
       <% end %>
     </table>
-    <div class="buttons">
-      <%= form.radio_button(nil, nil, id: "nil_piece_select", name: "move[data]", checked: true) %>
-      <%= form.label 'nil_piece_select', 'Deselect Piece' %>
-      <%= form.submit "Move piece" %>
-    </div>
+    <% if current_users_turn?(game) %>
+      <div class="buttons">
+        <%= form.radio_button(nil, nil, id: "nil_piece_select", name: "move[data]", checked: true) %>
+        <%= form.label 'nil_piece_select', 'Deselect Piece' %>
+        <%= form.submit "Move piece" %>
+      </div>
+    <% end %>
   <% end %>
 </div>
