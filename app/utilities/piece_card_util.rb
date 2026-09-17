@@ -39,8 +39,7 @@ class PieceCardUtil < ApplicationRecord
           start_vectors: [],
           attack_vectors: []
         } },
-      # TODO: Find fun unicode characters for level 2 pieces
-      { name: PieceCard::GARRISON, level: 2, host_symbol: '♖', guest_symbol: '♜',
+      { name: PieceCard::GARRISON, level: 2, host_symbol: '🨠', guest_symbol: '🨦',
         rules: {
           start: %w[a1 h1],
           upgrades: PieceCard::ROOK,
@@ -63,7 +62,7 @@ class PieceCardUtil < ApplicationRecord
           start_vectors: [],
           attack_vectors: []
         } },
-      { name: PieceCard::BANNERET, level: 2, host_symbol: '♘', guest_symbol: '♞',
+      { name: PieceCard::BANNERET, level: 2, host_symbol: '🨢', guest_symbol: '🨨',
         rules: {
           start: %w[b1 g1],
           upgrades: PieceCard::KNIGHT,
@@ -82,7 +81,7 @@ class PieceCardUtil < ApplicationRecord
           start_vectors: [],
           attack_vectors: []
         } },
-      { name: PieceCard::ARCHBISHOP, level: 2, host_symbol: '♗', guest_symbol: '♝',
+      { name: PieceCard::ARCHBISHOP, level: 2, host_symbol: '🨡', guest_symbol: '🨧',
         rules: {
           start: %w[c1 f1],
           upgrades: PieceCard::BISHOP,
@@ -105,7 +104,7 @@ class PieceCardUtil < ApplicationRecord
           start_vectors: [],
           attack_vectors: []
         } },
-      { name: PieceCard::EMPRESS, level: 2, host_symbol: '♕', guest_symbol: '♛',
+      { name: PieceCard::EMPRESS, level: 2, host_symbol: '🨟', guest_symbol: '🨥',
         rules: {
           start: ['d1'],
           upgrades: PieceCard::QUEEN,
@@ -128,7 +127,7 @@ class PieceCardUtil < ApplicationRecord
           start_vectors: [],
           attack_vectors: []
         } },
-      { name: PieceCard::EMPEROR, level: 2, host_symbol: '♔', guest_symbol: '♚',
+      { name: PieceCard::EMPEROR, level: 2, host_symbol: '🨞', guest_symbol: '🨤',
         rules: {
           start: ['e1'],
           upgrades: PieceCard::KING,
