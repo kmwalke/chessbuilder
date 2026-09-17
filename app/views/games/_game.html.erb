@@ -1,17 +1,16 @@
 <div class="game-wrapper" id="chessboard">
-  <% @game = game %>
-  <h3 class="turn"><%= @game.current_player.name %>'s turn</h3>
-  <%= form_with url: move_game_path(@game), html: { autocomplete: 'off' } do |form| %>
+  <h3 class="turn"><%= game.current_player.name %>'s turn</h3>
+  <%= form_with url: move_game_path(game), html: { autocomplete: 'off' } do |form| %>
     <table class="board">
-      <% (1..@game.board_height).sort.reverse.each do |y| %>
+      <% (1..game.board_height).sort.reverse.each do |y| %>
         <tr>
-          <% (1..@game.board_width).each do |x| %>
+          <% (1..game.board_width).each do |x| %>
             <% position = algebraic_notation(x, y) %>
-            <% piece = @game.pieces.find { |piece| piece.position == position } %>
+            <% piece = game.pieces.find { |piece| piece.position == position } %>
             <td title="<%= position %>" id="<%= position %>">
               <% if piece %>
                 <%= form.label "#{position}_piece_select", piece.symbol %>
-                <% if movable?(piece) %>
+                <% if movable?(game, piece) %>
                   <%= form.radio_button(
                         nil,
                         "{ \"piece_id\": #{piece.id}, \"from\": \"#{position}\" }",
@@ -19,12 +18,12 @@
                         name: "move[data]")
                   %>
                   <table class="board move">
-                    <% (1..@game.board_height).sort.reverse.each do |y_move| %>
+                    <% (1..game.board_height).sort.reverse.each do |y_move| %>
                       <tr>
-                        <% (1..@game.board_width).each do |x_move| %>
+                        <% (1..game.board_width).each do |x_move| %>
                           <% move_position = algebraic_notation(x_move, y_move) %>
                           <td title="<%= move_position %>" id="<%= move_position %>_move_to">
-                            <% if @game.valid_moves(piece).include?(move_position) %>
+                            <% if game.valid_moves(piece).include?(move_position) %>
                               <%= form.radio_button nil, move_position, id: "#{position}#{move_position}_move_select", name: 'move[to]' %>
                               <%= form.label "#{position}#{move_position}_move_select", piece.symbol, class: 'move_to' %>
                             <% else %>

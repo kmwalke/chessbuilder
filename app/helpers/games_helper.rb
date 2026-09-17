@@ -1,15 +1,15 @@
 module GamesHelper
-  def movable?(piece)
-    belongs_to_current_user?(piece) && current_users_turn? && @game.valid_moves(piece).any?
+  def movable?(game,piece)
+    belongs_to_current_user?(game, piece) && current_users_turn?(game) && game.valid_moves(piece).any?
   end
 
   private
 
-  def current_users_turn?
-    @game.current_player == current_user
+  def current_users_turn?(game)
+    game.current_player == current_user
   end
 
-  def belongs_to_current_user?(piece)
-    @game.send(piece.player.downcase) == current_user
+  def belongs_to_current_user?(game, piece)
+    game.send(piece.player.downcase) == current_user
   end
 end
