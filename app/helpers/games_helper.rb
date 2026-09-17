@@ -1,5 +1,5 @@
 module GamesHelper
-  def movable?(game,piece)
+  def movable?(game, piece)
     belongs_to_current_user?(game, piece) && current_users_turn?(game) && game.valid_moves(piece).any?
   end
 

@@ -13,8 +13,8 @@ class Piece < ApplicationRecord
   scope :guest, -> { where(player: Game::GUEST) }
   scope :host, -> { where(player: Game::HOST) }
 
-  after_update_commit -> {
-    broadcast_refresh_to game, target: 'chessboard', partial: game, locals: {game: game}
+  after_update_commit lambda {
+    broadcast_refresh_to game, target: 'chessboard', partial: game, locals: { game: game }
   }
 
   def symbol
