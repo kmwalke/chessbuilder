@@ -1,13 +1,3 @@
-<!--TODO: replace JS with turbo stream-->
-<!--https://ahmednadar.hashnode.dev/turbo-streams-broadcasting-in-rails-update-methods-->
-<% if @game.current_player != current_user %>
-  <script language="javascript">
-      window.setTimeout(function () {
-          window.location.reload();
-      }, 5000);
-  </script>
-<% end %>
-
 <div class="game-wrapper">
   <h3 class="turn"><%= @game.current_player.name %>'s turn</h3>
   <%= form_with url: move_game_path, html: { autocomplete: 'off' } do |form| %>
