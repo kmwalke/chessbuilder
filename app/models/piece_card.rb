@@ -22,4 +22,20 @@ class PieceCard < ApplicationRecord
 
     OFFICER_RANKS[rank - 1]
   end
+
+  def start_positions
+    rules['start']
+  end
+
+  def start_vectors
+    rules['start_vectors']
+  end
+
+  def move_vectors
+    rules['move_vectors']
+  end
+
+  def attack_vectors
+    rules['attack_vectors']
+  end
 end
