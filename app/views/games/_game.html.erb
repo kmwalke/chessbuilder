@@ -1,7 +1,7 @@
-<div class="game-wrapper" id="chessboard">
+<div class="game-wrapper">
   <h3 class="turn"><%= game.current_player.name %>'s turn</h3>
   <%= form_with url: move_game_path(game), html: { autocomplete: 'off' } do |form| %>
-    <table class="board">
+    <table class="board" id="chessboard">
       <% (1..game.board_height).sort.reverse.each do |y| %>
         <tr>
           <% (1..game.board_width).each do |x| %>
