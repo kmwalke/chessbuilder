@@ -25,7 +25,7 @@ RSpec.feature 'Games' do
       end
 
       it 'shows the name' do
-        expect(page).to have_text(game.name)
+        expect(page).to have_text("#{user1.name}'s turn")
       end
     end
 

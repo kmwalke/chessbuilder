@@ -9,6 +9,9 @@ AllCops:
   Exclude:
     - 'db/queue_schema.rb'
     - 'db/schema.rb'
+    - 'db/cable_migrate/*'
+    - 'db/cache_migrate/*'
+    - 'db/queue_migrate/*'
     - 'config/environments/*'
     - 'bin/*'
     - 'node_modules/**/*'
