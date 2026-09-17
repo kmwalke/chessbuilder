@@ -63,13 +63,13 @@ RSpec.feature 'Games' do
 
       it 'sets up the host pieces on the board' do
         Game.last.pieces.host.each do |piece|
-          expect(piece.rules['start'].include?(piece.position)).to be true
+          expect(piece.start_positions.include?(piece.position)).to be true
         end
       end
 
       it 'sets up the guest pieces on the board' do
         Game.last.pieces.guest.each do |piece|
-          expect(piece.rules['start'].include?(convert_to_guest(piece.position))).to be true
+          expect(piece.start_positions.include?(convert_to_guest(piece.position))).to be true
         end
       end
 
