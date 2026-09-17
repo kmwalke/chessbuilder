@@ -29,10 +29,6 @@ RSpec.describe Piece do
       expect(host_piece.guest_symbol).to eq(host_piece.piece_card.guest_symbol)
     end
 
-    it 'rules' do
-      expect(host_piece.rules).to eq(host_piece.piece_card.rules)
-    end
-
     it 'start positions' do
       expect(host_piece.start_positions).to eq(host_piece.piece_card.start_positions)
     end

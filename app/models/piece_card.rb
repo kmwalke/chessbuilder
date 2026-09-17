@@ -38,4 +38,16 @@ class PieceCard < ApplicationRecord
   def attack_vectors
     rules['attack_vectors']
   end
+
+  def rules=(val)
+    raise 'ah ah ah.  didn\'t say the magic word.  Seriously, edit rules in the db, not code' unless Rails.env.test?
+
+    write_attribute :rules, val
+  end
+
+  private
+
+  def rules
+    self[:rules]
+  end
 end

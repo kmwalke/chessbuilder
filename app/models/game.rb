@@ -29,8 +29,8 @@ class Game < ApplicationRecord
   #       @valid_moves[piece] = [list of moves]
   def valid_moves(piece)
     moves = []
-    rules = piece.rules['move_vectors'].union(piece.rules['attack_vectors'])
-    rules = rules.union(piece.rules['start_vectors']) unless piece.has_moved?
+    rules = piece.move_vectors.union(piece.attack_vectors)
+    rules = rules.union(piece.start_vectors) unless piece.has_moved?
     rules.each do |move_vector|
       moves = moves.union(calc_move_positions(piece, move_vector))
     end
@@ -95,11 +95,11 @@ class Game < ApplicationRecord
   end
 
   def pawn_like_attack?(piece, move_vector, new_position)
-    piece.rules['attack_vectors'].any? &&
+    piece.attack_vectors.any? &&
       (space_occupied_by_enemy?(piece, new_position) ^
         (
-          piece.rules['attack_vectors'].include?(move_vector) &&
-            piece.rules['move_vectors'].exclude?(move_vector)
+          piece.attack_vectors.include?(move_vector) &&
+            piece.move_vectors.exclude?(move_vector)
         ))
   end
 
@@ -110,7 +110,7 @@ class Game < ApplicationRecord
 
   def place_host_pieces
     host.deck.piece_cards.each do |card|
-      card.rules['start'].each do |start_position|
+      card.start_positions.each do |start_position|
         next if pieces.where(position: start_position).any?
 
         Piece.create(piece_card: card, player: Game::HOST, game: self, position: start_position)
@@ -121,7 +121,7 @@ class Game < ApplicationRecord
 
   def place_guest_pieces
     guest.deck.piece_cards.each do |card|
-      card.rules['start'].each do |start_position|
+      card.start_positions.each do |start_position|
         start_position = convert_position_to_guest(start_position)
         next if pieces.where(position: start_position).any?
 

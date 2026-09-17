@@ -13,20 +13,4 @@ RSpec.describe PieceCard do
       expect(rook_piece_card.rank_name).to eq('Lieutenant')
     end
   end
-
-  it 'gets start positions' do
-    expect(pawn_piece_card.start_positions).to eq(pawn_piece_card.rules['start'])
-  end
-
-  it 'gets move vectors' do
-    expect(pawn_piece_card.move_vectors).to eq(pawn_piece_card.rules['move_vectors'])
-  end
-
-  it 'gets attack vectors' do
-    expect(pawn_piece_card.attack_vectors).to eq(pawn_piece_card.rules['attack_vectors'])
-  end
-
-  it 'gets start vectors' do
-    expect(pawn_piece_card.start_vectors).to eq(pawn_piece_card.rules['start_vectors'])
-  end
 end

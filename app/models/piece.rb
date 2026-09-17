@@ -5,7 +5,6 @@ class Piece < ApplicationRecord
   delegate :name, to: :piece_card
   delegate :host_symbol, to: :piece_card
   delegate :guest_symbol, to: :piece_card
-  delegate :rules, to: :piece_card
   delegate :start_positions, to: :piece_card
   delegate :start_vectors, to: :piece_card
   delegate :attack_vectors, to: :piece_card
