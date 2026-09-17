@@ -9,7 +9,6 @@ class GamesController < ApplicationController
 
   # TODO: validate moves.  Raise error if :to is not a valid move.  prevent cheating from request spoofing
   # TODO: validate which turn it is.  can't go twice
-  # TODO: Add transactional "game_action" like in crafty to this and other controller actions
   def move
     game_action(redirect: true, path: game_path(@game)) do
       piece          = @game.pieces.find_by(position: move_params[:from])
