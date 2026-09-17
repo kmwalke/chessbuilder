@@ -14,7 +14,7 @@ class Piece < ApplicationRecord
   scope :host, -> { where(player: Game::HOST) }
 
   after_update_commit lambda {
-    broadcast_refresh_later_to game, target: 'chessboard', partial: game, locals: { game: game }
+    broadcast_refresh_to game, target: 'chessboard', partial: game, locals: { game: game }
   }
 
   def symbol
