@@ -6,3 +6,4 @@ to make games in rails
 To contribute:
 * Clone the repo
 * Work items are in the specs and TODO's
+* Contact [kentslaymaker@gmail.com](mailto:kentslaymaker@gmail.com) for info
