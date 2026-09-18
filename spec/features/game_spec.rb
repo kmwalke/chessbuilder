@@ -37,13 +37,26 @@ RSpec.feature 'Games' do
   describe 'logged in' do
     let!(:current_user) { login }
     let!(:game) { create(:game, host: current_user, guest: user2) }
+    let!(:other_game) { create(:game) }
 
     before do
       visit games_path
     end
 
-    it 'shows my games' do
-      skip('not implemented')
+    describe 'displays games' do
+      it 'shows my games' do
+        expect(page).to have_text(game.name)
+      end
+
+      it 'doesn\'t show other games' do
+        expect(page).to have_no_text(other_game.name)
+      end
+
+      it 'shows other games when requested' do
+        click_link 'View all games'
+
+        expect(page).to have_text(other_game.name)
+      end
     end
 
     describe 'starts a game' do

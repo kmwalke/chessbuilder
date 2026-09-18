@@ -1,6 +1,15 @@
 <% content_for :title, "Games" %>
 
 <h1>Games</h1>
+<%= link_to 'View all games', games_path(all: true) %>
+<br/>
+<br/>
+<% if current_user %>
+  <%= link_to "New game", new_game_path %>
+  <br/>
+  <br/>
+<% end %>
+
 
 <div id="games">
   <ul>
@@ -12,6 +21,3 @@
   </ul>
 </div>
 
-<% if current_user %>
-  <%= link_to "New game", new_game_path %>
-<% end %>

@@ -3,7 +3,12 @@ class GamesController < ApplicationController
 
   def index
     game_action do
-      @games = Game.strict_loading.eager_load(:host, :guest)
+      @games = if current_user && !params[:all]
+                 Game.where(host: current_user).or(Game.where(guest: current_user))
+                     .strict_loading.eager_load(:host, :guest)
+               else
+                 Game.strict_loading.eager_load(:host, :guest)
+               end
     end
   end
 

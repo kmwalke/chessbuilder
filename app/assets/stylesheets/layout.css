@@ -48,6 +48,11 @@ html {
   a:hover {
     color: white;
   }
+
+  ul {
+    list-style-type: disc;
+    list-style-position: inside;
+  }
 }
 
 div.notice {
@@ -131,7 +136,6 @@ table.board {
 
       input[type="radio"] {
         position: absolute;
-        /*opacity: 0;*/
         display: none;
         cursor: pointer;
       }
