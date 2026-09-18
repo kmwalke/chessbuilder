@@ -1,17 +1,23 @@
 <% content_for :title, "Games" %>
 
 <h1>Games</h1>
+<%= link_to 'View all games', games_path(all: true) %>
+<br/>
+<br/>
+<% if current_user %>
+  <%= link_to "New game", new_game_path %>
+  <br/>
+  <br/>
+<% end %>
+
 
 <div id="games">
   <ul>
     <% @games.each do |game| %>
       <li>
-        <%= link_to game.name, game_path(game) %>
+        <%= link_to game.name_and_status(current_user), game_path(game) %>
       </li>
     <% end %>
   </ul>
 </div>
 
-<% if current_user %>
-  <%= link_to "New game", new_game_path %>
-<% end %>

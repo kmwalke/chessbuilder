@@ -11,15 +11,30 @@
   }
   100% {
     height: 15em;
-    opacity: 0%;
+    opacity: 0;
     margin-top: -2em;
   }
 }
 
+@keyframes blink {
+  0% {
+    box-shadow: 0 0 20vw gold inset;
+  }
+
+  100% {
+    box-shadow: none;
+  }
+}
+
 * {
-    box-sizing: border-box;
-    padding: 0;
-    margin: 0;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+.blink {
+  animation-name: blink;
+  animation-duration: 3s;
 }
 
 html {
@@ -32,6 +47,11 @@ html {
 
   a:hover {
     color: white;
+  }
+
+  ul {
+    list-style-type: disc;
+    list-style-position: inside;
   }
 }
 
@@ -116,7 +136,6 @@ table.board {
 
       input[type="radio"] {
         position: absolute;
-        /*opacity: 0;*/
         display: none;
         cursor: pointer;
       }
@@ -222,6 +241,41 @@ fieldset.chess-set {
       span.rank {
        font-size: small;
       }
+    }
+  }
+}
+
+@media (orientation: landscape) {
+  div.header {
+    height: 8vh;
+  }
+
+  h3.turn {
+    margin: -8vh 1vh 0 0;
+    line-height: 8vh;
+  }
+  table.board {
+
+    tr {
+      height: 9vh;
+      td {
+        font-size: 7vh;
+        width: 9vh;
+
+        label, span {
+          display: block;
+          width: 9vh;
+          height: 9vh;
+          line-height: 9vh;
+        }
+      }
+    }
+  }
+  table.move {
+    background-color: transparent !important;
+
+    tr {
+      height: 9vh;
     }
   }
 }

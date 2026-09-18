@@ -8,6 +8,30 @@ RSpec.describe 'Sessions' do
     end
   end
 
+  describe 'typos' do
+    let(:user) { create(:user) }
+
+    before do
+      visit login_path
+    end
+
+    it 'logs in with caps' do
+      fill_in 'Email', with: user.email.upcase
+      fill_in 'Password', with: user.password
+      click_button 'Log In'
+
+      expect(page).to have_text('Log Out')
+    end
+
+    it 'logs in with spaces' do
+      fill_in 'Email', with: "   #{user.email}  "
+      fill_in 'Password', with: user.password
+      click_button 'Log In'
+
+      expect(page).to have_text('Log Out')
+    end
+  end
+
   describe 'logged in' do
     before do
       login

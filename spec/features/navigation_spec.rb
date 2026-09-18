@@ -7,25 +7,33 @@ RSpec.feature 'Navigation' do
 
   it 'navigates home' do
     visit users_path
-    click_link 'Home'
+    within '.header' do
+      click_link 'Home'
+    end
 
     expect(page).to have_current_path(root_path)
   end
 
   it 'navigates to games' do
-    click_link 'Games'
+    within '.header' do
+      click_link 'Games'
+    end
 
     expect(page).to have_current_path(games_path)
   end
 
   it 'navigates to users' do
-    click_link 'Users'
+    within '.header' do
+      click_link 'Users'
+    end
 
     expect(page).to have_current_path(users_path)
   end
 
   it 'navigates to piece_cards' do
-    click_link 'Piece Cards'
+    within '.header' do
+      click_link 'Piece Cards'
+    end
 
     expect(page).to have_current_path(piece_cards_path)
   end

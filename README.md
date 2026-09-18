@@ -1,24 +1,9 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Chessbuilder is the continuation of experiments 
+to make games in rails
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+To contribute:
+* Clone the repo
+* Work items are in the specs and TODO's
+* Contact [kentslaymaker@gmail.com](mailto:kentslaymaker@gmail.com) for info

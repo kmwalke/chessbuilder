@@ -1,16 +1,39 @@
 require 'rails_helper'
 
 RSpec.feature 'Gameplay' do
-  let!(:current_user) { login }
-  let!(:game) { create(:game, host: current_user, current_player: current_user) }
+  let!(:current_player) { login }
+  let!(:game) { create(:game, host: current_player, current_player:) }
 
   before do
     visit game_path(game)
   end
 
-  it 'doesn\'t move the other players pieces' do
-    piece = game.pieces.guest.first
-    expect { page.find_by_id("#{piece.position}_piece_select") }.to raise_error(Capybara::ElementNotFound)
+  describe 'cheating' do
+    it 'doesn\'t move the other players pieces' do
+      piece = game.pieces.guest.first
+      expect { page.find_by_id("#{piece.position}_piece_select") }.to raise_error(Capybara::ElementNotFound)
+    end
+
+    it 'doesn\'t go twice' do
+      skip('not implemented')
+    end
+
+    it 'doesn\'t make an illegal move' do
+      skip('not implemented')
+    end
+  end
+
+  describe 'bad input' do
+    it 'must select a piece' do
+      click_button 'Move piece'
+      expect(page).to have_text(ErrorMessages::BAD_INPUT[:select_piece])
+    end
+
+    it 'must select a move' do
+      page.find_by_id('d2_piece_select').click
+      click_button 'Move piece'
+      expect(page).to have_text(ErrorMessages::BAD_INPUT[:select_move])
+    end
   end
 
   describe 'moves a piece' do
@@ -75,17 +98,30 @@ RSpec.feature 'Gameplay' do
     end
 
     it 'capturing player gets resources for the piece' do
-      expect(current_user.reload.upgrade_points).to eq(1)
+      expect(current_player.reload.upgrade_points).to eq(1)
     end
   end
 
-  describe 'win conditions' do
-    it 'detects check' do
-      skip('not implemented yet')
+  describe 'finished game' do
+    before do
+      game.update(winner: current_player, current_player:)
+      visit game_path(game)
     end
 
-    it 'detects checkmate' do
-      skip('not implemented yet')
+    it 'cannot select' do
+      expect { page.find_by_id('d2_piece_select') }.to raise_error(Capybara::ElementNotFound)
+    end
+
+    it 'cannot move' do
+      expect(page).to have_no_button('Move piece')
+    end
+
+    it 'doesn\'t show a turn' do
+      expect(page).to have_no_text("#{current_player.name}'s turn")
+    end
+
+    it 'displays the winner' do
+      expect(page).to have_text("#{current_player.name} won!")
     end
   end
 end
