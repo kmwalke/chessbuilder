@@ -109,7 +109,7 @@ RSpec.feature 'Gameplay' do
     end
 
     it 'cannot select' do
-      expect(page.find_by_id('d2_piece_select')).to be_nil
+      expect { page.find_by_id('d2_piece_select') }.to raise_error(Capybara::ElementNotFound)
     end
 
     it 'cannot move' do

@@ -80,7 +80,7 @@ class GamesController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_game
-    @game = Game.strict_loading.eager_load(:host, :guest, :current_player,
+    @game = Game.strict_loading.eager_load(:host, :guest, :current_player, :winner,
                                            pieces: :piece_card).find_by(id: params.expect(:id))
   end
 
