@@ -15,7 +15,7 @@ RSpec.describe Game do
   end
 
   it 'doesn\'t take turn if game is over' do
-    game.winner = game.host
+    game.update(winner: game.host)
 
     expect { game.take_turn }.to raise_error(RuntimeError, ErrorMessages::GAME[:game_over])
   end
@@ -33,6 +33,27 @@ RSpec.describe Game do
       piece.update(position: 'd6')
 
       expect(game.valid_moves(piece)).to eq(%w[c5 c6 d5 e5 e6])
+    end
+  end
+
+  describe 'name_and_status' do
+    it 'unfinished game' do
+      expect(game.name_and_status(game.host)).to eq(game.name)
+    end
+
+    it 'won game' do
+      game.update(winner: game.host)
+      expect(game.name_and_status(game.host)).to eq("Won - #{game.name}")
+    end
+
+    it 'lost game' do
+      game.update(winner: game.guest)
+      expect(game.name_and_status(game.host)).to eq("Lost - #{game.name}")
+    end
+
+    it 'not your finished game' do
+      game.update(winner: game.host)
+      expect(game.name_and_status(create(:user))).to eq(game.name)
     end
   end
 end

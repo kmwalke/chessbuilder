@@ -59,14 +59,14 @@ RSpec.feature 'Games' do
       end
 
       it 'shows games you lost' do
-        game.winner = game.guest
+        game.update(winner: game.guest)
         visit games_path
 
         expect(page).to have_text("Lost - #{game.name}")
       end
 
       it 'shows games you won' do
-        game.winner = current_user
+        game.update(winner: current_user)
         visit games_path
 
         expect(page).to have_text("Won - #{game.name}")

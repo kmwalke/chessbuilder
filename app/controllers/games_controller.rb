@@ -5,9 +5,9 @@ class GamesController < ApplicationController
     game_action do
       @games = if current_user && !params[:all]
                  Game.where(host: current_user).or(Game.where(guest: current_user))
-                     .strict_loading.eager_load(:host, :guest)
+                     .strict_loading.eager_load(:host, :guest, :winner)
                else
-                 Game.strict_loading.eager_load(:host, :guest)
+                 Game.strict_loading.eager_load(:host, :guest, :winner)
                end
     end
   end

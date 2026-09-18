@@ -23,6 +23,15 @@ class Game < ApplicationRecord
     "#{host.name} VS #{guest.name} - #{created_at.to_fs(:long_ordinal)}"
   end
 
+  def name_and_status(player)
+    status = ''
+    if guest == player || host == player
+      status = 'Lost - ' if winner
+      status = 'Won - ' if winner == player
+    end
+    status + name
+  end
+
   # TODO: expand testing of this.  Its going to get complicated
   # TODO: watch for readability/complication/maintainability/performance
   # TODO: CPU Intensive.  Each viewer puts CPU strain on server.
