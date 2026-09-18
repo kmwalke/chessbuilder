@@ -115,5 +115,13 @@ RSpec.feature 'Gameplay' do
     it 'cannot move' do
       expect(page).to have_no_button('Move piece')
     end
+
+    it 'doesn\'t show a turn' do
+      expect(page).to have_no_text("#{current_player.name}'s turn")
+    end
+
+    it 'displays the winner' do
+      expect(page).to have_text("#{current_player.name} won!")
+    end
   end
 end
