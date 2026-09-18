@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.feature 'Gameplay' do
-  let!(:current_user) { login }
-  let!(:game) { create(:game, host: current_user, current_player: current_user) }
+  let!(:current_player) { login }
+  let!(:game) { create(:game, host: current_player, current_player:) }
 
   before do
     visit game_path(game)
@@ -98,17 +98,21 @@ RSpec.feature 'Gameplay' do
     end
 
     it 'capturing player gets resources for the piece' do
-      expect(current_user.reload.upgrade_points).to eq(1)
+      expect(current_player.reload.upgrade_points).to eq(1)
     end
   end
 
-  describe 'win conditions' do
-    it 'detects check' do
-      skip('not implemented yet')
+  describe 'checkmate' do
+    it 'sets the winner' do
+      expect(game.winner).to eq(current_player)
     end
 
-    it 'detects checkmate' do
-      skip('not implemented yet')
+    it 'ends the game' do
+      expect { game.take_turns }.to raise_error
+    end
+
+    it 'promotes surviving pieces' do
+      expect(game.pieces.first.rank).to eq(2)
     end
   end
 end
