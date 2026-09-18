@@ -101,4 +101,19 @@ RSpec.feature 'Gameplay' do
       expect(current_player.reload.upgrade_points).to eq(1)
     end
   end
+
+  describe 'finished game' do
+    before do
+      game.update(winner: current_player, current_player:)
+      visit game_path(game)
+    end
+
+    it 'cannot select' do
+      expect(page.find_by_id('d2_piece_select')).to be_nil
+    end
+
+    it 'cannot move' do
+      expect(page).to have_no_button('Move piece')
+    end
+  end
 end
