@@ -39,6 +39,8 @@ class Game < ApplicationRecord
   end
 
   def take_turn
+    raise ErrorMessages::GAME[:game_over] if winner
+
     update(current_player_id: non_current_player_id)
   end
 

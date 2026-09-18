@@ -6,6 +6,9 @@ class ErrorMessages
   CHEATING  = {
     request_spoofing: 'Nice try. You have skills.  Email kentslaymaker@gmail.com to contribute.'
   }.freeze
+  GAME      = {
+    game_over: 'The game is over.'
+  }.freeze
   GENERIC   = {
     error: 'An error has occured.'
   }.freeze

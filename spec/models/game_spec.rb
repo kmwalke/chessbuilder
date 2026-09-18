@@ -17,7 +17,7 @@ RSpec.describe Game do
   it 'doesn\'t take turn if game is over' do
     game.winner = game.host
 
-    expect { game.take_turn }.to raise_error
+    expect { game.take_turn }.to raise_error(RuntimeError, ErrorMessages::GAME[:game_over])
   end
 
   describe 'valid moves' do
