@@ -8,9 +8,32 @@ RSpec.feature 'Gameplay' do
     visit game_path(game)
   end
 
-  it 'doesn\'t move the other players pieces' do
-    piece = game.pieces.guest.first
-    expect { page.find_by_id("#{piece.position}_piece_select") }.to raise_error(Capybara::ElementNotFound)
+  describe 'cheating' do
+    it 'doesn\'t move the other players pieces' do
+      piece = game.pieces.guest.first
+      expect { page.find_by_id("#{piece.position}_piece_select") }.to raise_error(Capybara::ElementNotFound)
+    end
+
+    it 'doesn\'t go twice' do
+      skip('not implemented')
+    end
+
+    it 'doesn\'t make an illegal move' do
+      skip('not implemented')
+    end
+  end
+
+  describe 'bad input' do
+    it 'must select a piece' do
+      click_button 'Move piece'
+      expect(page).to have_text('Select a piece.')
+    end
+
+    it 'must select a move' do
+      page.find_by_id('d2_piece_select').click
+      click_button 'Move piece'
+      expect(page).to have_text('Select a move for your piece.')
+    end
   end
 
   describe 'moves a piece' do

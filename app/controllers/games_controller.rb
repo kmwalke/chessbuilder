@@ -80,11 +80,18 @@ class GamesController < ApplicationController
     params.expect(game: [:host_id, :guest_id, :current_player_id])
   end
 
-  # TODO: validate :to and :from.  raise error if they didn't select pieces
   def move_params
     return @move_params if @move_params
 
     temp_params  = params.expect(move: [:data, :to])
+    raise 'Select a piece.' if temp_params['data'] == 'on'
+
     @move_params = temp_params.merge JSON.parse(temp_params[:data]).symbolize_keys
+    unless @move_params[:to]
+      @move_params = nil
+      raise 'Select a move for your piece.'
+    end
+
+    @move_params
   end
 end
