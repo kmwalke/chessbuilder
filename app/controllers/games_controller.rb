@@ -84,12 +84,12 @@ class GamesController < ApplicationController
     return @move_params if @move_params
 
     temp_params  = params.expect(move: [:data, :to])
-    raise 'Select a piece.' if temp_params['data'] == 'on'
+    raise ErrorMessages::BAD_INPUT[:select_piece] if temp_params['data'] == 'on'
 
     @move_params = temp_params.merge JSON.parse(temp_params[:data]).symbolize_keys
     unless @move_params[:to]
       @move_params = nil
-      raise 'Select a move for your piece.'
+      raise ErrorMessages::BAD_INPUT[:select_move]
     end
 
     @move_params
