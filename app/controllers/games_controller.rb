@@ -9,6 +9,7 @@ class GamesController < ApplicationController
                else
                  Game.strict_loading.eager_load(:host, :guest, :winner)
                end
+      @games = @games.order(:winner_id).reverse
     end
   end
 
