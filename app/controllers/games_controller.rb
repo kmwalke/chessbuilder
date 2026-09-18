@@ -17,17 +17,21 @@ class GamesController < ApplicationController
   # TODO: refactor for readability/performance
   def move
     game_action(redirect: true, path: game_path(@game)) do
-      piece              = @game.pieces.find_by(position: move_params[:from])
-      if (captured_piece = @game.pieces.find_by(position: move_params[:to]))
-        if captured_piece.name == PieceCard::PAWN
-          @game.current_player.update(upgrade_points: @game.current_player.upgrade_points + 1)
-        end
-        @game.update(winner: @game.current_player) if captured_piece.name == PieceCard::KING
-        captured_piece.destroy
-      end
+      piece = @game.pieces.find_by(position: move_params[:from])
+      capture(@game.pieces.find_by(position: move_params[:to]))
       piece.update(position: move_params[:to], has_moved?: true)
       @game.take_turn unless @game.winner
     end
+  end
+
+  def capture(piece)
+    return unless piece
+
+    if piece.name == PieceCard::PAWN
+      @game.current_player.update(upgrade_points: @game.current_player.upgrade_points + 1)
+    end
+    @game.update(winner: @game.current_player) if piece.name == PieceCard::KING
+    piece.destroy
   end
 
   def show; end

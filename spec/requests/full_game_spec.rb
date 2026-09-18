@@ -28,7 +28,8 @@ RSpec.describe 'Full Game' do
     expect(game.reload.winner).to eq(host)
   end
 
-  xit 'promotes surviving pieces' do
+  it 'promotes surviving pieces' do
+    skip('not implemented')
     game.pieces.each do |piece|
       expect(piece.rank).to eq(2)
     end
