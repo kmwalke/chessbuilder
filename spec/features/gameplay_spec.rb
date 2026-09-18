@@ -107,10 +107,6 @@ RSpec.feature 'Gameplay' do
       expect(game.winner).to eq(current_player)
     end
 
-    it 'ends the game' do
-      expect { game.take_turns }.to raise_error
-    end
-
     it 'promotes surviving pieces' do
       expect(game.pieces.first.rank).to eq(2)
     end

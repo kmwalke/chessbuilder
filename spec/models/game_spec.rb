@@ -7,6 +7,19 @@ RSpec.describe Game do
     expect(game.name).to eq("#{game.host.name} VS #{game.guest.name} - #{game.created_at.to_fs(:long_ordinal)}")
   end
 
+  it 'takes turns' do
+    player = game.current_player
+    game.take_turn
+
+    expect(game.current_player).not_to eq(player)
+  end
+
+  it 'doesn\'t take turn if game is over' do
+    game.winner = game.host
+
+    expect { game.take_turn }.to raise_error
+  end
+
   describe 'valid moves' do
     it 'lists valid moves' do
       piece = game.pieces.find_by(piece_card: PieceCard.find_by(name: PieceCard::KING), player: Game::GUEST)

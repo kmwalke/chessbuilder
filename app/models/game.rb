@@ -42,10 +42,6 @@ class Game < ApplicationRecord
     update(current_player_id: non_current_player_id)
   end
 
-  def win_condition?
-    false
-  end
-
   private
 
   def non_current_player_id
