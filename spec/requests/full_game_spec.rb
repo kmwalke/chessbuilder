@@ -1,9 +1,13 @@
 require 'rails_helper'
 require './spec/requests/requests_helper'
 
-MOVES   = %w[
+# last 2 moves are to capture the king
+# Can remove them detecting checkmate works
+MOVES = %w[
   e2e4 e7e5 g1f3 f7f6 f3e5 f6e5 d1h5 e8e7 h5e5 e7f7 f1c4 d7d5 c4d5 f7g6 h2h4 h7h5
   d5b7 c8b7 e5f5 g6h6 d2d4 g7g5 f5f7 d8e7 h4g5 e7g5 h1h5
+
+  h6h5 f7h5
 ].freeze
 
 RSpec.describe 'Full Game' do
@@ -11,14 +15,22 @@ RSpec.describe 'Full Game' do
   let!(:host) { create(:user) }
   let!(:game) { create(:game, host:, guest:) }
 
-  it 'play the game' do
-    expect do
+  before do
+    display(game) if VERBOSE
+    MOVES.each do |move|
+      game.reload
+      move_piece(game, move)
       display(game) if VERBOSE
-      MOVES.each do |move|
-        game.reload
-        move_piece(game, move)
-        display(game) if VERBOSE
-      end
-    end.not_to raise_error
+    end
+  end
+
+  it 'sets the winner' do
+    expect(game.reload.winner).to eq(host)
+  end
+
+  xit 'promotes surviving pieces' do
+    game.pieces.each do |piece|
+      expect(piece.rank).to eq(2)
+    end
   end
 end

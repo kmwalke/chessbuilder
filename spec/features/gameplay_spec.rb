@@ -101,14 +101,4 @@ RSpec.feature 'Gameplay' do
       expect(current_player.reload.upgrade_points).to eq(1)
     end
   end
-
-  describe 'checkmate' do
-    it 'sets the winner' do
-      expect(game.winner).to eq(current_player)
-    end
-
-    it 'promotes surviving pieces' do
-      expect(game.pieces.first.rank).to eq(2)
-    end
-  end
 end

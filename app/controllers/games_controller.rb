@@ -14,14 +14,19 @@ class GamesController < ApplicationController
 
   # TODO: validate moves.  Raise error if :to is not a valid move.  prevent cheating from request spoofing
   # TODO: validate which turn it is.  can't go twice
+  # TODO: refactor for readability/performance
   def move
     game_action(redirect: true, path: game_path(@game)) do
-      piece          = @game.pieces.find_by(position: move_params[:from])
-      captured_piece = @game.pieces.find_by(position: move_params[:to])
-      current_user.update(upgrade_points: current_user.upgrade_points + 1) if captured_piece&.name == PieceCard::PAWN
-      captured_piece&.destroy
+      piece              = @game.pieces.find_by(position: move_params[:from])
+      if (captured_piece = @game.pieces.find_by(position: move_params[:to]))
+        if captured_piece.name == PieceCard::PAWN
+          @game.current_player.update(upgrade_points: @game.current_player.upgrade_points + 1)
+        end
+        @game.update(winner: @game.current_player) if captured_piece.name == PieceCard::KING
+        captured_piece.destroy
+      end
       piece.update(position: move_params[:to], has_moved?: true)
-      @game.take_turn
+      @game.take_turn unless @game.winner
     end
   end
 
@@ -83,7 +88,7 @@ class GamesController < ApplicationController
   def move_params
     return @move_params if @move_params
 
-    temp_params  = params.expect(move: [:data, :to])
+    temp_params = params.expect(move: [:data, :to])
     raise ErrorMessages::BAD_INPUT[:select_piece] if temp_params['data'] == 'on'
 
     @move_params = temp_params.merge JSON.parse(temp_params[:data]).symbolize_keys
