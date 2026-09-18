@@ -5,6 +5,7 @@ class Game < ApplicationRecord
   belongs_to :host, class_name: 'User'
   belongs_to :guest, class_name: 'User'
   belongs_to :current_player, class_name: 'User'
+  belongs_to :winner, class_name: 'User'
 
   has_many :pieces, dependent: :destroy
 
@@ -39,6 +40,10 @@ class Game < ApplicationRecord
 
   def take_turn
     update(current_player_id: non_current_player_id)
+  end
+
+  def win_condition?
+    false
   end
 
   private

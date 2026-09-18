@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_09_16_201841) do
+ActiveRecord::Schema[8.1].define(version: 2026_09_18_154603) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -35,6 +35,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_16_201841) do
     t.integer "guest_id", null: false
     t.integer "host_id", null: false
     t.datetime "updated_at", null: false
+    t.integer "winner_id"
   end
 
   create_table "piece_cards", force: :cascade do |t|
