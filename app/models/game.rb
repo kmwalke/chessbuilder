@@ -5,6 +5,7 @@ class Game < ApplicationRecord
   belongs_to :host, class_name: 'User'
   belongs_to :guest, class_name: 'User'
   belongs_to :current_player, class_name: 'User'
+  belongs_to :winner, class_name: 'User', optional: true
 
   has_many :pieces, dependent: :destroy
 
@@ -20,6 +21,15 @@ class Game < ApplicationRecord
 
   def name
     "#{host.name} VS #{guest.name} - #{created_at.to_fs(:long_ordinal)}"
+  end
+
+  def name_and_status(player)
+    status = ''
+    if guest == player || host == player
+      status = 'Lost - ' if winner
+      status = 'Won - ' if winner == player
+    end
+    status + name
   end
 
   # TODO: expand testing of this.  Its going to get complicated
@@ -38,6 +48,8 @@ class Game < ApplicationRecord
   end
 
   def take_turn
+    raise ErrorMessages::GAME[:game_over] if winner
+
     update(current_player_id: non_current_player_id)
   end
 

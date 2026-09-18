@@ -44,5 +44,13 @@ RSpec.describe Piece do
     it 'attack vectors' do
       expect(host_piece.attack_vectors).to eq(host_piece.piece_card.attack_vectors)
     end
+
+    it 'rank' do
+      expect(host_piece.rank).to eq(host_piece.piece_card.rank)
+    end
+
+    it 'rank name' do
+      expect(host_piece.rank_name).to eq(host_piece.piece_card.rank_name)
+    end
   end
 end

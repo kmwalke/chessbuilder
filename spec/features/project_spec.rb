@@ -46,7 +46,12 @@ RSpec.feature 'Project' do
   end
 
   it 'address TODOs' do
-    skip('search for all TODOs')
+    skip('convert TODOs into specs')
+  end
+
+  # Stub specs just have a one line skip() method
+  it 'build out specs' do
+    skip('convert stub specs into real specs')
   end
 
   it 'rubocop' do
@@ -159,4 +164,8 @@ RSpec.feature 'Project' do
   # The special move is something you keep in reserve for the right moment
   # These pieces feel pretty good for now
   # A garrison that makes it to the back row can spawn a pawn and upgrade it to queen!
+
+  # 9/17 Live game with Cris
+  # We prefer Banneret moving with a pawn(their squire)
+  # Maybe the Emperor gets 2 HP instead of more movement?
 end

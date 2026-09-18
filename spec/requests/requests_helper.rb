@@ -1,4 +1,4 @@
-require './app/helpers/application_helper'
+include ApplicationHelper
 
 LOG     = ActiveSupport::Logger.new($stdout)
 VERBOSE = false
@@ -26,9 +26,10 @@ def display(game)
     (1..game.board_width).each do |x|
       piece = game.pieces.where(position: algebraic_notation(x, y)).first
       line += piece&.symbol || '-'
+      line += ' '
     end
     LOG.debug line
   end
-  LOG.debug ' abcdefgh'
+  LOG.debug ' a b c d e f g h'
   LOG.debug ''
 end
