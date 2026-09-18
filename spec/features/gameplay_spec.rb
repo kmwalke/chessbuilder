@@ -26,13 +26,13 @@ RSpec.feature 'Gameplay' do
   describe 'bad input' do
     it 'must select a piece' do
       click_button 'Move piece'
-      expect(page).to have_text('Select a piece.')
+      expect(page).to have_text(ErrorMessages::BAD_INPUT[:select_piece])
     end
 
     it 'must select a move' do
       page.find_by_id('d2_piece_select').click
       click_button 'Move piece'
-      expect(page).to have_text('Select a move for your piece.')
+      expect(page).to have_text(ErrorMessages::BAD_INPUT[:select_move])
     end
   end
 
