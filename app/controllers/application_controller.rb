@@ -34,7 +34,11 @@ class ApplicationController < ActionController::Base
     ActiveRecord::Base.transaction do
       yield
     rescue StandardError => e
-      @notice = e.to_s
+      @notice = if Rails.env.development?
+                  e.to_s
+                else
+                  'An error has occurred.'
+                end
     ensure
       redirect_to path, notice: @notice if redirect
     end
