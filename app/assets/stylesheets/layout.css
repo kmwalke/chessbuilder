@@ -151,13 +151,10 @@ div.header {
             text-decoration: none;
             display: block;
             line-height: 2em;
-            border-bottom-style: groove;
-            border-bottom-color: green;
-            border-bottom-width: 5px;
+            border-bottom: 5px groove green;
           }
 
           a:hover {
-            /*text-decoration: underline;*/
             background: darkgreen;
           }
         }
