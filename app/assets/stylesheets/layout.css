@@ -93,14 +93,12 @@ div.header {
   height: 8vw;
 
   button.hamburger-menu, nav {
-
     transition: opacity .35s, visibility .35s, width .35s;
   }
 
   button.hamburger-menu:hover .hamburger {
     color: white;
     cursor: pointer;
-
   }
 
   button.hamburger-menu {
@@ -108,7 +106,7 @@ div.header {
     position: fixed;
     left: 0;
     top: 0;
-    margin: 3vh 1vw;
+    margin: 1vh 1vw;
     width: 3vw;
     height: 3vh;
     display: block;
@@ -120,8 +118,8 @@ div.header {
       font-weight: normal;
       display: block;
       clear: both;
-      font-size: 10vh;
-      line-height: 2vh;
+      font-size: 7vh;
+      line-height: 1.5vh;
     }
 
     span.hamburger:first-child {
