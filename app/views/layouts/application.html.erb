@@ -24,18 +24,30 @@
   <%= javascript_importmap_tags %>
 </head>
 
-<body data-turbo-prefetch="false">
 <div class="header">
-  <% if current_user %>
-    <%= link_to 'Home', root_path %>
-    <%= link_to 'Games', games_path %>
-    <%= link_to 'Piece Cards', piece_cards_path %>
-    <%= link_to 'Users', users_path %>
-    <%= link_to 'Log Out', logout_path %>
-  <% else %>
-    <%= link_to 'Sign Up', new_user_path %>
-    <%= link_to 'Log In', login_path %>
-  <% end %>
+  <button class="hamburger-menu" onclick="this.focus()">
+    <span class="hamburger">_</span>
+    <span class="hamburger">_</span>
+    <span class="hamburger">_</span>
+    <nav class="sidebar-menu">
+      <div class="info">
+        <h4 class="title">Game Menu</h4>
+        <span class="version">Version 0.3</span><span>build_<%= ENV['HEROKU_RELEASE_VERSION'] %></span>
+      </div>
+      <ul class="links">
+        <% if current_user %>
+          <li><%= link_to 'Home', root_path %></li>
+          <li><%= link_to 'Games', games_path %></li>
+          <li><%= link_to 'Piece Cards', piece_cards_path %></li>
+          <li><%= link_to 'Users', users_path %></li>
+          <li><%= link_to 'Log Out', logout_path %></li>
+        <% else %>
+          <li><%= link_to 'Sign Up', new_user_path %></li>
+          <li><%= link_to 'Log In', login_path %></li>
+        <% end %>
+      </ul>
+    </nav>
+  </button>
 </div>
 
 <% if notice %>

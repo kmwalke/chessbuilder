@@ -91,6 +91,89 @@ div.notice {
 div.header {
   padding: .5em 0;
   height: 8vw;
+
+  button.hamburger-menu, nav {
+
+    transition: opacity .35s, visibility .35s, width .35s;
+  }
+
+  button.hamburger-menu:hover .hamburger {
+    color: white;
+    cursor: pointer;
+
+  }
+
+  button.hamburger-menu {
+    z-index: 100;
+    position: fixed;
+    left: 0;
+    top: 0;
+    margin: 3vh 1vw;
+    width: 3vw;
+    height: 3vh;
+    display: block;
+    background: black;
+    color: green;
+    border: none;
+
+    span.hamburger {
+      font-weight: normal;
+      display: block;
+      clear: both;
+      font-size: 10vh;
+      line-height: 2vh;
+    }
+
+    span.hamburger:first-child {
+      margin-top: -1em;
+    }
+
+    nav.sidebar-menu {
+      visibility: hidden;
+      opacity: 0;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 20%;
+      height: 100%;
+      background: black;
+      padding: 0;
+      border-right: 5px solid darkgreen;
+
+      div.info {
+        color: white;
+        margin: 1em 0;
+      }
+
+      ul {
+        list-style: none;
+
+        li {
+          a {
+            text-decoration: none;
+            display: block;
+            line-height: 2em;
+            border-bottom-style: groove;
+            border-bottom-color: green;
+            border-bottom-width: 5px;
+          }
+
+          a:hover {
+            /*text-decoration: underline;*/
+            background: darkgreen;
+          }
+        }
+      }
+    }
+  }
+
+  button.hamburger-menu:focus, button.hamburger-menu:focus-within {
+    nav {
+      visibility: visible;
+      opacity: 1;
+      width: 50%;
+    }
+  }
 }
 
 h3.turn {
