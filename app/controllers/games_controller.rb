@@ -32,6 +32,7 @@ class GamesController < ApplicationController
       @game.current_player.update(upgrade_points: @game.current_player.upgrade_points + 1)
     end
     @game.update(winner: @game.current_player) if piece.name == PieceCard::KING
+    # TODO: Promote surviving pieces here
     piece.destroy
   end
 
