@@ -58,6 +58,23 @@ RSpec.feature 'Project' do
     # https://www.reddit.com/r/chess/comments/he6tmj/here_are_30_alternative_chess_pieces_as/
   end
 
+  it 'BUG: Errant Knight' do
+    skip('bug')
+    # Submitted a move without a destination, intended to be f1e3. Opening move
+    # got expected error
+    # clicked destination , submit.  Knight dissapears, now the other player's turn
+  end
+
+  it 'highlight the piece that just moved' do
+    skip('todo')
+  end
+
+  it 'moves log' do
+    skip('todo')
+    # display at the bottom of screen.
+    # could be used for "replays"
+  end
+
   # Piece card
   # - Just the pieces
   # - name, move
