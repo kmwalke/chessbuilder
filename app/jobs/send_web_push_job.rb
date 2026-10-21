@@ -1,12 +1,10 @@
 class SendWebPushJob < ApplicationJob
   queue_as :default
 
-  def perform(user_id, title, body)
-    user = User.find(user_id)
-
+  def perform(user, body)
     user.web_push_subscriptions.each do |sub|
       WebPush.payload_send(
-        message: { title: title, body: body }.to_json,
+        message: { title: 'ChessBuilder', body: body }.to_json,
         endpoint: sub.endpoint,
         p256dh: sub.p256dh_key,
         auth: sub.auth_key,

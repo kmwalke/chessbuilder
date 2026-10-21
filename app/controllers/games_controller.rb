@@ -22,6 +22,7 @@ class GamesController < ApplicationController
       capture(@game.pieces.find_by(position: move_params[:to]))
       piece.update(position: move_params[:to], has_moved?: true)
       @game.take_turn unless @game.winner
+      SendWebPushJob.perform_later(@game.current_player, "Your turn in #{@game.name}")
     end
   end
 
@@ -51,6 +52,7 @@ class GamesController < ApplicationController
 
       respond_to do |format|
         if @game.save
+          SendWebPushJob.perform_later(@game.guest, "#{@game.host.name} invited you to a game")
           format.html { redirect_to @game, notice: 'Game was successfully created.' }
         else
           format.html { render :new, status: :unprocessable_content }
