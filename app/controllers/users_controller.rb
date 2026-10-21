@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :web_push_subscription]
   before_action :logged_in, except: [:new, :create, :index, :show]
   before_action :logged_in_as_admin_or_self, only: [:edit, :update, :destroy]
 
@@ -45,6 +45,18 @@ class UsersController < ApplicationController
     respond_to do |format|
       format.html { redirect_to path, notice: 'User was successfully destroyed.', status: :see_other }
     end
+  end
+
+  def web_push_subscription
+    puts params
+    puts params[:keys]
+    puts params[:keys][:p256dh]
+    WebPushSubscription.create(
+      user: @user,
+      endpoint: params[:endpoint],
+      p256dh_key: params[:keys][:p256dh],
+      auth_key: params[:keys][:auth]
+    )
   end
 
   private

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_09_18_154603) do
+ActiveRecord::Schema[8.1].define(version: 2026_10_21_124321) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -71,5 +71,16 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_18_154603) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  create_table "web_push_subscriptions", force: :cascade do |t|
+    t.string "auth_key"
+    t.datetime "created_at", null: false
+    t.string "endpoint"
+    t.string "p256dh_key"
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.index ["user_id"], name: "index_web_push_subscriptions_on_user_id"
+  end
+
   add_foreign_key "decks", "users"
+  add_foreign_key "web_push_subscriptions", "users"
 end
