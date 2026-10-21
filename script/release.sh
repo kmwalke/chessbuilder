@@ -13,7 +13,7 @@ psql $DATABASE_URL -c 'SELECT id FROM users LIMIT 1'
   bundle exec rails db:migrate
   echo "Seeding data..."
   bundle exec rails db:seed
-  ./script/project_manager.sh
+  ./script/roadmap.sh
 #else
 #  echo 'Skipping Rails DB migrations!!'
 #  echo 'If this is happening outside review app provisioning something went wrong!'
