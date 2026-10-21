@@ -37,4 +37,12 @@ RSpec.feature 'Navigation' do
 
     expect(page).to have_current_path(piece_cards_path)
   end
+
+  it 'navigates to roadmap' do
+    within '.header' do
+      click_link 'Roadmap'
+    end
+
+    expect(page).to have_current_path(roadmap_path)
+  end
 end

@@ -2,7 +2,21 @@ require 'rails_helper'
 
 RSpec.feature 'Project' do
   describe 'bugs' do
-    it 'sometimes logs users out' do
+    pending 'version_0.1 push notifications'
+    pending 'version_0.1 moves log'
+    pending 'version_0.1 replays'
+    pending 'version_0.2 craft pieces'
+    pending 'version_0.2 manual matchmaking by showing players level'
+    pending 'version_0.2 normal chess mode'
+    pending 'version_0.3 Earn Promotions'
+    pending 'version_0.4 Equipment'
+    pending 'version_0.5 Power Cards'
+    pending 'version_0.6 Seasons'
+    pending 'version_0.x Art Improvements'
+    pending 'version_0.x Themed Chess Sets'
+    pending 'version_0.x auto matchmaking'
+
+    it 'BUG: sometimes logs users out' do
       skip('find how to reproduce')
       # is it a timeout thing?
     end
@@ -73,6 +87,16 @@ RSpec.feature 'Project' do
     skip('todo')
     # display at the bottom of screen.
     # could be used for "replays"
+  end
+
+  it 'notifications' do
+    skip('todo')
+    # push if possible, text if not
+    # Global notifications settings on user.notifications_enabled?
+    # game specific setting, too.  game.notifications_enabled?  Defaults to global setting, can be changed
+    # game setting on game page.  on click changes setting, no "save" button
+    # https://norvilis.com/real-time-engagement-web-push-notifications-in-rails-8/
+    # https://github.com/pushpad/web-push
   end
 
   # Piece card
