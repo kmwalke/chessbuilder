@@ -1,5 +1,6 @@
 require 'rails_helper'
 
+# This isn't meant to have real specs.  Just high level descriptions of upcoming work
 RSpec.feature 'Project' do
   describe 'bugs' do
     pending 'version_0.1 moves log'
@@ -25,7 +26,7 @@ RSpec.feature 'Project' do
   end
 
   it 'performance pass' do
-    skip('later')
+    skip('put performance ideas in comments below')
     # always watch for n+1 and unnecessary DB Calls
     # add `strict_loading` to everything that makes sense(maybe every single controller global var)
 
@@ -58,6 +59,11 @@ RSpec.feature 'Project' do
   it 'build out specs' do
     skip('convert stub specs into real specs')
   end
+
+  pending 'logs errors'
+  # errors should all be logged.  Maybe to the db')
+  # So I can make sure the app isn't erroring all the time
+  # some top level rescue, I guess
 
   it 'gameplay outline' do
     skip('See Notes in project_spec')

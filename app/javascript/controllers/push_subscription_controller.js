@@ -16,6 +16,6 @@ export default class extends Controller {
             body: JSON.stringify(subscription)
         });
 
-        alert("Subscribed!");
+        alert("Notifications Enabled!");
     }
 }
