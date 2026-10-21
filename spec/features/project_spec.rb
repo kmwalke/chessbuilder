@@ -1,17 +1,11 @@
 require 'rails_helper'
 
+# This isn't meant to have real specs.  Just high level descriptions of upcoming work
 RSpec.feature 'Project' do
   describe 'bugs' do
-    pending 'version_0.1 push notifications'
-      # push if possible, text if not
-      # Global notifications settings on user.notifications_enabled?
-      # game specific setting, too.  game.notifications_enabled?  Defaults to global setting, can be changed
-      # game setting on game page.  on click changes setting, no "save" button
-      # https://norvilis.com/real-time-engagement-web-push-notifications-in-rails-8/
-      # https://github.com/pushpad/web-push
     pending 'version_0.1 moves log'
-      # display at the bottom of screen.
-      # could be used for "replays"
+    # display at the bottom of screen.
+    # could be used for "replays"
     pending 'version_0.1 replays'
     pending 'version_0.1 detect check'
     pending 'version_0.2 craft pieces'
@@ -32,7 +26,7 @@ RSpec.feature 'Project' do
   end
 
   it 'performance pass' do
-    skip('later')
+    skip('put performance ideas in comments below')
     # always watch for n+1 and unnecessary DB Calls
     # add `strict_loading` to everything that makes sense(maybe every single controller global var)
 
@@ -66,9 +60,10 @@ RSpec.feature 'Project' do
     skip('convert stub specs into real specs')
   end
 
-  it 'rubocop' do
-    skip('get rubocop passing fully')
-  end
+  pending 'logs errors'
+  # errors should all be logged.  Maybe to the db')
+  # So I can make sure the app isn't erroring all the time
+  # some top level rescue, I guess
 
   it 'gameplay outline' do
     skip('See Notes in project_spec')

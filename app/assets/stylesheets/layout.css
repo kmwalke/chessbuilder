@@ -137,6 +137,8 @@ div.header {
       background: black;
       padding: 0;
       border-right: 5px solid darkgreen;
+      overflow-x: hidden;
+      white-space: nowrap;
 
       div.info {
         color: white;
@@ -150,7 +152,7 @@ div.header {
           a {
             text-decoration: none;
             display: block;
-            line-height: 2em;
+            line-height: 3em;
             border-bottom: 5px groove green;
           }
 

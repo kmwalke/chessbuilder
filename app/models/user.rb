@@ -14,6 +14,7 @@ class User < ApplicationRecord
 
   has_many :host_games, inverse_of: :host, class_name: 'Game'
   has_many :guest_games, inverse_of: :guest, class_name: 'Game'
+  has_many :web_push_subscriptions
 
   private
 

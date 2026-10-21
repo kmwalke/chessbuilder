@@ -16,6 +16,7 @@ gem 'solid_queue'
 gem 'stimulus-rails'
 gem 'thruster', require: false
 gem 'turbo-rails'
+gem 'web-push'
 
 group :development, :test do
   gem 'brakeman', require: false

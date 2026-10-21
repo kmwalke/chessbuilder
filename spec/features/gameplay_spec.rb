@@ -14,13 +14,9 @@ RSpec.feature 'Gameplay' do
       expect { page.find_by_id("#{piece.position}_piece_select") }.to raise_error(Capybara::ElementNotFound)
     end
 
-    it 'doesn\'t go twice' do
-      skip('not implemented')
-    end
+    pending 'doesn\'t go twice'
 
-    it 'doesn\'t make an illegal move' do
-      skip('not implemented')
-    end
+    pending 'doesn\'t make an illegal move'
   end
 
   describe 'bad input' do
