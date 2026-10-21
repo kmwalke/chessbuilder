@@ -16,7 +16,7 @@ class SendWebPushJob < ApplicationJob
           private_key: ENV["WEBPUSH_PRIVATE_KEY"]
         }
       )
-    rescue WebPush::InvalidSubscription
+    rescue WebPush::ExpiredSubscription, WebPush::InvalidSubscription
       sub.destroy
     end
   end

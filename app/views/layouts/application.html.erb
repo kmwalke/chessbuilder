@@ -48,7 +48,7 @@
             data-push-subscription-id-param="<%= current_user.id %>"
           >enable notifications</button>
           <script>
-              Notification.requestPermission();
+              // Notification.requestPermission();
               window.vapidPublicKey = new Uint8Array(<%= Base64.urlsafe_decode64(ENV['WEBPUSH_PUBLIC_KEY']).bytes %>)
           </script>
         <% else %>
