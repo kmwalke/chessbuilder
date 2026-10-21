@@ -112,6 +112,9 @@ Rails/HelperInstanceVariable:
 Rails/NotNullColumn:
   Enabled: false
 
+Rails/Output:
+  Severity: warning
+
 Rails/OutputSafety:
   Enabled: false
 

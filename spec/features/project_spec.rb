@@ -1,15 +1,32 @@
 require 'rails_helper'
 
+# This isn't meant to have real specs.  Just high level descriptions of upcoming work
 RSpec.feature 'Project' do
   describe 'bugs' do
-    it 'sometimes logs users out' do
+    pending 'version_0.1 moves log'
+    # display at the bottom of screen.
+    # could be used for "replays"
+    pending 'version_0.1 replays'
+    pending 'version_0.1 detect check'
+    pending 'version_0.2 craft pieces'
+    pending 'version_0.2 manual matchmaking by showing players level'
+    pending 'version_0.2 normal chess mode'
+    pending 'version_0.3 Earn Promotions'
+    pending 'version_0.4 Equipment'
+    pending 'version_0.5 Power Cards'
+    pending 'version_0.6 Seasons'
+    pending 'version_0.x Art Improvements'
+    pending 'version_0.x Themed Chess Sets'
+    pending 'version_0.x auto matchmaking'
+
+    it 'BUG: sometimes logs users out' do
       skip('find how to reproduce')
       # is it a timeout thing?
     end
   end
 
   it 'performance pass' do
-    skip('later')
+    skip('put performance ideas in comments below')
     # always watch for n+1 and unnecessary DB Calls
     # add `strict_loading` to everything that makes sense(maybe every single controller global var)
 
@@ -43,9 +60,10 @@ RSpec.feature 'Project' do
     skip('convert stub specs into real specs')
   end
 
-  it 'rubocop' do
-    skip('get rubocop passing fully')
-  end
+  pending 'logs errors'
+  # errors should all be logged.  Maybe to the db')
+  # So I can make sure the app isn't erroring all the time
+  # some top level rescue, I guess
 
   it 'gameplay outline' do
     skip('See Notes in project_spec')
@@ -56,6 +74,17 @@ RSpec.feature 'Project' do
     # https://en.wikipedia.org/wiki/Chess_symbols_in_Unicode
     # https://en.wikipedia.org/wiki/Algebraic_notation_(chess)
     # https://www.reddit.com/r/chess/comments/he6tmj/here_are_30_alternative_chess_pieces_as/
+  end
+
+  it 'BUG: Errant Knight' do
+    skip('bug')
+    # Submitted a move without a destination, intended to be f1e3. Opening move
+    # got expected error
+    # clicked destination , submit.  Knight dissapears, now the other player's turn
+  end
+
+  it 'highlight the piece that just moved' do
+    skip('todo')
   end
 
   # Piece card

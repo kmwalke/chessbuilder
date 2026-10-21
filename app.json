@@ -11,6 +11,9 @@
   },
   "addons": [
     "papertrail",
-    "heroku-redis"
+    "heroku-redis",
+    {
+      "plan": "heroku-postgresql"
+    }
   ]
 }

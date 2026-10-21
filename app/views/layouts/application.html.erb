@@ -12,7 +12,7 @@
   <%= yield :head %>
 
   <%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
-  <%#= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
+  <%= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
 
   <link rel="icon" href="/icon.png" type="image/png">
   <link rel="icon" href="/icon.svg" type="image/svg+xml">
@@ -32,7 +32,7 @@
     <nav class="sidebar-menu">
       <div class="info">
         <h4 class="title">Game Menu</h4>
-        <span class="version">Version 0.3</span><span>build_<%= ENV['HEROKU_RELEASE_VERSION'] %></span>
+        <span class="version">Version Alpha build_<%= ENV['HEROKU_RELEASE_VERSION'] %></span>
       </div>
       <ul class="links">
         <% if current_user %>
@@ -40,6 +40,17 @@
           <li><%= link_to 'Games', games_path %></li>
           <li><%= link_to 'Piece Cards', piece_cards_path %></li>
           <li><%= link_to 'Users', users_path %></li>
+          <li><%= link_to 'Roadmap', roadmap_path %></li>
+          <li>
+            <a
+              data-controller="push-subscription"
+              data-action="click->push-subscription#subscribe"
+              data-push-subscription-id-param="<%= current_user.id %>"
+            >Enable Notifications</a>
+            <script>
+                window.vapidPublicKey = new Uint8Array(<%= Base64.urlsafe_decode64(ENV['WEBPUSH_PUBLIC_KEY']).bytes %>)
+            </script>
+          </li>
           <li><%= link_to 'Log Out', logout_path %></li>
         <% else %>
           <li><%= link_to 'Sign Up', new_user_path %></li>
