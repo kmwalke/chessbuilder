@@ -48,9 +48,6 @@ class UsersController < ApplicationController
   end
 
   def web_push_subscription
-    puts params
-    puts params[:keys]
-    puts params[:keys][:p256dh]
     WebPushSubscription.create(
       user: @user,
       endpoint: params[:endpoint],

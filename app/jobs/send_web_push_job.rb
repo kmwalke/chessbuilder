@@ -11,9 +11,9 @@ class SendWebPushJob < ApplicationJob
         p256dh: sub.p256dh_key,
         auth: sub.auth_key,
         vapid: {
-          subject: "mailto:admin@example.com",
-          public_key: ENV["WEBPUSH_PUBLIC_KEY"],
-          private_key: ENV["WEBPUSH_PRIVATE_KEY"]
+          subject: 'mailto:admin@example.com',
+          public_key: ENV.fetch('WEBPUSH_PUBLIC_KEY', nil),
+          private_key: ENV.fetch('WEBPUSH_PRIVATE_KEY', nil)
         }
       )
     rescue WebPush::ExpiredSubscription, WebPush::InvalidSubscription
