@@ -5,6 +5,7 @@ RSpec.feature 'Project' do
     pending 'version_0.1 push notifications'
     pending 'version_0.1 moves log'
     pending 'version_0.1 replays'
+    pending 'version_0.1 detect check'
     pending 'version_0.2 craft pieces'
     pending 'version_0.2 manual matchmaking by showing players level'
     pending 'version_0.2 normal chess mode'
