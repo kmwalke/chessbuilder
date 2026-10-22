@@ -18,23 +18,10 @@ class GamesController < ApplicationController
   # TODO: refactor for readability/performance
   def move
     game_action(redirect: true, path: game_path(@game)) do
-      piece = @game.pieces.find_by(position: move_params[:from])
-      capture(@game.pieces.find_by(position: move_params[:to]))
-      piece.update(position: move_params[:to], has_moved?: true)
-      Move.create(game: @game, user: @game.current_player, a1_notation: move_params[:from] + move_params[:to])
+      move_piece(move_params[:from], move_params[:to])
       @game.take_turn unless @game.winner
       SendWebPushJob.perform_later(@game.current_player, "Your turn in #{@game.name}")
     end
-  end
-
-  def capture(piece)
-    return unless piece
-
-    if piece.name == PieceCard::PAWN
-      @game.current_player.update(upgrade_points: @game.current_player.upgrade_points + 1)
-    end
-    @game.update(winner: @game.current_player) if piece.name == PieceCard::KING
-    piece.destroy
   end
 
   def show; end
@@ -81,6 +68,23 @@ class GamesController < ApplicationController
   end
 
   private
+
+  def move_piece(from, to)
+    piece = @game.pieces.find_by(position: from)
+    capture(@game.pieces.find_by(position: to))
+    piece.update(position: to, has_moved?: true)
+    Move.create(game: @game, user: @game.current_player, a1_notation: from + to)
+  end
+
+  def capture(piece)
+    return unless piece
+
+    if piece.name == PieceCard::PAWN
+      @game.current_player.update(upgrade_points: @game.current_player.upgrade_points + 1)
+    end
+    @game.update(winner: @game.current_player) if piece.name == PieceCard::KING
+    piece.destroy
+  end
 
   # Use callbacks to share common setup or constraints between actions.
   def set_game
