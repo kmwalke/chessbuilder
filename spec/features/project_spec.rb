@@ -5,8 +5,6 @@ RSpec.feature 'Project' do
   describe 'bugs' do
     pending 'version_0.1 moves log'
     # display at the bottom of screen.
-    # could be used for "replays"
-    pending 'version_0.1 replays'
     pending 'version_0.1 detect check'
     pending 'version_0.2 craft pieces'
     pending 'version_0.2 manual matchmaking by showing players level'
@@ -15,6 +13,7 @@ RSpec.feature 'Project' do
     pending 'version_0.4 Equipment'
     pending 'version_0.5 Power Cards'
     pending 'version_0.6 Seasons'
+    pending 'version_0.x replays'
     pending 'version_0.x Art Improvements'
     pending 'version_0.x Themed Chess Sets'
     pending 'version_0.x auto matchmaking'
