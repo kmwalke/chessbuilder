@@ -1,0 +1,11 @@
+<div class="game-wrapper">
+  <h3>Moves</h3>
+  <ol reversed>
+    <% @game.move_logs.order(created_at: :desc).each do |move| %>
+    <li>
+      <%= move.user.name %>:
+      <%= move.a1_notation %>
+    </li>
+    <% end %>
+  </ol>
+</div>
