@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :move do
+  factory :move_log do
     game
   end
 end

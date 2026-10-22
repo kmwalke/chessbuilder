@@ -51,11 +51,11 @@ RSpec.feature 'Gameplay' do
 
     describe 'logs the move' do
       it 'notation' do
-        expect(game.reload.moves.last.a1_notation).to eq('d2d3')
+        expect(game.reload.move_logs.last.a1_notation).to eq('d2d3')
       end
 
       it 'user' do
-        expect(game.reload.moves.last.user).to eq(current_player)
+        expect(game.reload.move_logs.last.user).to eq(current_player)
       end
     end
   end

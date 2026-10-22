@@ -38,14 +38,14 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_22_012852) do
     t.integer "winner_id"
   end
 
-  create_table "moves", force: :cascade do |t|
+  create_table "move_logs", force: :cascade do |t|
     t.bigint "game_id", null: false
     t.bigint "user_id", null: false
     t.string "a1_notation", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["game_id"], name: "index_moves_on_game_id"
-    t.index ["user_id"], name: "index_moves_on_user_id"
+    t.index ["game_id"], name: "index_move_logs_on_game_id"
+    t.index ["user_id"], name: "index_move_logs_on_user_id"
   end
 
   create_table "piece_cards", force: :cascade do |t|
@@ -92,7 +92,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_22_012852) do
   end
 
   add_foreign_key "decks", "users"
-  add_foreign_key "moves", "games"
-  add_foreign_key "moves", "users"
+  add_foreign_key "move_logs", "games"
+  add_foreign_key "move_logs", "users"
   add_foreign_key "web_push_subscriptions", "users"
 end

@@ -73,7 +73,7 @@ class GamesController < ApplicationController
     piece = @game.pieces.find_by(position: from)
     capture(@game.pieces.find_by(position: to))
     piece.update(position: to, has_moved?: true)
-    Move.create(game: @game, user: @game.current_player, a1_notation: from + to)
+    MoveLog.create(game: @game, user: @game.current_player, a1_notation: from + to)
   end
 
   def capture(piece)
