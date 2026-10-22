@@ -53,6 +53,10 @@ html {
     list-style-type: disc;
     list-style-position: inside;
   }
+
+  ol {
+    list-style-position: inside;
+  }
 }
 
 div.notice {

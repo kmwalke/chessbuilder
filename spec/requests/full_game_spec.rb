@@ -34,4 +34,8 @@ RSpec.describe 'Full Game' do
       expect(piece.rank).to eq(2)
     end
   end
+
+  it 'logs the moves' do
+    expect(game.move_logs.count).to eq(29)
+  end
 end
