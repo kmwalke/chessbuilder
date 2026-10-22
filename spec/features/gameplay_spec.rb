@@ -57,6 +57,10 @@ RSpec.feature 'Gameplay' do
       it 'user' do
         expect(game.reload.move_logs.last.user).to eq(current_player)
       end
+
+      it 'and shows it' do
+        expect(page).to have_text("#{current_player.name}: d2d3")
+      end
     end
   end
 
