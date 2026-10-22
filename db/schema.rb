@@ -40,11 +40,12 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_22_012852) do
 
   create_table "moves", force: :cascade do |t|
     t.bigint "game_id", null: false
-    t.integer "order", null: false
+    t.bigint "user_id", null: false
     t.string "a1_notation", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["game_id"], name: "index_moves_on_game_id"
+    t.index ["user_id"], name: "index_moves_on_user_id"
   end
 
   create_table "piece_cards", force: :cascade do |t|
@@ -92,5 +93,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_22_012852) do
 
   add_foreign_key "decks", "users"
   add_foreign_key "moves", "games"
+  add_foreign_key "moves", "users"
   add_foreign_key "web_push_subscriptions", "users"
 end

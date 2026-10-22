@@ -48,6 +48,16 @@ RSpec.feature 'Gameplay' do
     it 'switches turns to the guest' do
       expect(game.reload.current_player).to eq(game.guest)
     end
+
+    describe 'logs the move' do
+      it 'notation' do
+        expect(game.reload.moves.last.a1_notation).to eq('d2d3')
+      end
+
+      it 'user' do
+        expect(game.reload.moves.last.user).to eq(current_player)
+      end
+    end
   end
 
   describe 'moves a piece far' do

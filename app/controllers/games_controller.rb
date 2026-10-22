@@ -21,6 +21,7 @@ class GamesController < ApplicationController
       piece = @game.pieces.find_by(position: move_params[:from])
       capture(@game.pieces.find_by(position: move_params[:to]))
       piece.update(position: move_params[:to], has_moved?: true)
+      Move.create(game: @game, user: @game.current_player, a1_notation: move_params[:from] + move_params[:to])
       @game.take_turn unless @game.winner
       SendWebPushJob.perform_later(@game.current_player, "Your turn in #{@game.name}")
     end

@@ -8,6 +8,7 @@ class Game < ApplicationRecord
   belongs_to :winner, class_name: 'User', optional: true
 
   has_many :pieces, dependent: :destroy
+  has_many :moves, dependent: :destroy
 
   after_create :setup_board
 
