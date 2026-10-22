@@ -23,7 +23,7 @@ self.addEventListener("notificationclick", function(event) {
       }
 
       if (clients.openWindow) {
-        return clients.openWindow(event.notification.data.path) && window.location.reload
+        return clients.openWindow(event.notification.data.path) && window.location.reload()
       }
     })
   )
