@@ -3,8 +3,6 @@ require 'rails_helper'
 # This isn't meant to have real specs.  Just high level descriptions of upcoming work
 RSpec.feature 'Project' do
   describe 'bugs' do
-    pending 'version_0.1 moves log'
-    # display at the bottom of screen.
     pending 'version_0.1 detect check'
     pending 'version_0.2 craft pieces'
     pending 'version_0.2 manual matchmaking by showing players level'
