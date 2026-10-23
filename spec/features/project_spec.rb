@@ -7,6 +7,7 @@ RSpec.feature 'Project' do
     pending 'version_0.2 craft pieces'
     pending 'version_0.2 manual matchmaking by showing players level'
     pending 'version_0.2 normal chess mode'
+    pending 'version_0.2 detect checkmate in normal mode'
     pending 'version_0.3 Earn Promotions'
     pending 'version_0.4 Equipment'
     pending 'version_0.5 Power Cards'

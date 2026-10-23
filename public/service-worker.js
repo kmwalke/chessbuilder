@@ -18,12 +18,12 @@ self.addEventListener("notificationclick", function(event) {
         let clientPath = (new URL(client.url)).pathname
 
         if (clientPath == event.notification.data.path && "focus" in client) {
-          return client.focus()
+          return client.focus() && window.location.reload()
         }
       }
 
       if (clients.openWindow) {
-        return clients.openWindow(event.notification.data.path)
+        return clients.openWindow(event.notification.data.path) && window.location.reload()
       }
     })
   )

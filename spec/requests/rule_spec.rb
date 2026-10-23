@@ -11,11 +11,9 @@ RSpec.describe 'Rules' do
   end
 
   describe 'generic chess rules' do
-    # TODO: En passante, dear god
-    # TODO: Castling???  Dual piece movement!!! :barf
-    # TODO: Check for other chess rules
-    # TODO: Break up in sections for each piece?
-    # TODO: Get original pieces up and running fully before making new pieces
+    pending 'En Passante'
+    pending 'Castling'
+    pending 'Check for other odd chess rules'
 
     describe 'no cheating with request spoofing' do
       it 'no illegal moves' do
