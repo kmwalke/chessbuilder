@@ -31,10 +31,9 @@
                             <% move_position = algebraic_notation(x_move, y_move) %>
                             <td title="<%= move_position %>" id="<%= move_position %>_move_to">
                               <% if game.valid_moves(piece).include?(move_position) %>
-<!--                                TODO: This construction should be in the controller/model.  Already built-->
-<!--                                View should be accessing stored data, not building it-->
-<!--                                That way, things like checking for check can be done at controller level-->
-<!--                                #Check for check here-->
+<!--                                TODO: Gawd, I hate this.  Shouldn't be updating data in the view -->
+<!--                                But how to avoid looping spaces again somewhere in the same request? -->
+                                <% @game.update(check: true) if  %>
                                 <%= form.radio_button nil, move_position, id: "#{position}#{move_position}_move_select", name: 'move[to]' %>
                                 <%= form.label "#{position}#{move_position}_move_select", piece.symbol, class: 'move_to' %>
                               <% else %>

@@ -38,6 +38,7 @@ class Game < ApplicationRecord
   # TODO: CPU Intensive.  Each viewer puts CPU strain on server.
   #       Add DB/RAM caching of valid_moves if this becomes a problem, so this is calculate once and fetch answer
   #       @valid_moves[piece] = [list of moves]
+  #       rendering the board in _game.html.erb runs this
   def valid_moves(piece)
     moves = []
     rules = piece.move_vectors.union(piece.attack_vectors)
@@ -52,6 +53,10 @@ class Game < ApplicationRecord
     raise ErrorMessages::GAME[:game_over] if winner
 
     update(current_player_id: non_current_player_id)
+  end
+
+  def non_current_player
+    [guest, host].detect {|i| i.id == non_current_player_id}
   end
 
   private
