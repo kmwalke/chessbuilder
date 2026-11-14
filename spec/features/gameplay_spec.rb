@@ -148,7 +148,7 @@ RSpec.feature 'Gameplay' do
       end
 
       it 'doesnt show game in check' do
-        expect(page).not_to have_text('Check')
+        expect(page).to have_no_text('Check')
       end
     end
   end

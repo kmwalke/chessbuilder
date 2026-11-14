@@ -75,9 +75,7 @@ class GamesController < ApplicationController
     piece = @game.pieces.find_by(position: from)
     capture(@game.pieces.find_by(position: to))
     piece.update(position: to, has_moved?: true)
-    if @game.valid_moves(piece).include?(other_king.position)
-      @game.update(check: true)
-    end
+    @game.update(check: true) if @game.valid_moves(piece).include?(other_king.position)
     MoveLog.create(game: @game, user: @game.current_player, a1_notation: "#{from}#{to}")
   end
 
@@ -93,7 +91,7 @@ class GamesController < ApplicationController
 
   def other_king
     @game.pieces.detect do |p|
-      (p.name == PieceCard::KING || p.name == PieceCard::EMPEROR) && p.player != @game.current_player_title
+      [PieceCard::KING, PieceCard::EMPEROR].include?(p.name) && p.player != @game.current_player_title
     end
   end
 
