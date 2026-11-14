@@ -38,6 +38,32 @@ RSpec.describe 'Rules' do
       expect(game.pieces.find_by(position: 'a3').has_moved?).to be(true)
     end
 
+    describe 'check' do
+      before do
+        move_piece_request(game, 'e2e3')
+        move_piece_request(game, 'd7d6')
+        move_piece_request(game, 'f1b5')
+      end
+
+      it 'marks game as in check' do
+        expect(game.reload.check).to be true
+      end
+
+      it 'forces guest to move out of check' do
+        skip('not implemented')
+      end
+
+      describe 'moves out of check' do
+        before do
+          move_piece_request(game, 'c8d7')
+        end
+
+        it 'is no longer in check' do
+          expect(game.reload.check).to be false
+        end
+      end
+    end
+
     describe 'pawns' do
       it 'moves 2 spaces at beginning' do
         expect(game.valid_moves(game.pieces.find_by(position: 'd2'))).to eq(%w[d3 d4])

@@ -125,31 +125,8 @@ RSpec.feature 'Gameplay' do
       click_button 'Move piece'
     end
 
-    it 'marks game as in check' do
-      expect(game.reload.check).to be true
-    end
-
     it 'shows the game as in check' do
       expect(page).to have_text('Check')
-    end
-
-    it 'forces guest to move out of check' do
-      skip('not implemented')
-    end
-
-    describe 'moves out of check' do
-      before do
-        move_piece_request(game, 'c8d7')
-        visit game_path(game)
-      end
-
-      it 'removes checkmark' do
-        expect(game.reload.check).to be false
-      end
-
-      it 'doesnt show game in check' do
-        expect(page).to have_no_text('Check')
-      end
     end
   end
 
