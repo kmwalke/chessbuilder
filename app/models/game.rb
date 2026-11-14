@@ -59,6 +59,12 @@ class Game < ApplicationRecord
     [guest, host].detect {|i| i.id == non_current_player_id}
   end
 
+  def current_player_title
+    return 'Host' if current_player == host
+
+    'Guest'
+  end
+
   private
 
   def non_current_player_id

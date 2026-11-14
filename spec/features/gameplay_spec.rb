@@ -112,6 +112,36 @@ RSpec.feature 'Gameplay' do
     end
   end
 
+  describe 'check' do
+    let(:guest_king) { game.pieces.find_by(position: 'e8') }
+
+    before do
+      game.pieces.find_by(position: 'e2').update(position: 'e3')
+      game.pieces.find_by(position: 'd7').update(position: 'd6')
+      visit game_path(game)
+
+      page.find_by_id('f1_piece_select').click
+      page.find_by_id('f1b5_move_select').click
+      click_button 'Move piece'
+    end
+
+    it 'marks game as in check' do
+      expect(game.reload.check).to be true
+    end
+
+    it 'shows the game as in check' do
+      expect(page).to have_text('Check')
+    end
+
+    it 'forces guest to move out of check' do
+      skip('not implemented')
+    end
+  end
+
+  describe 'checkmate' do
+    skip('not implemented')
+  end
+
   describe 'finished game' do
     before do
       game.update(winner: current_player, current_player:)
