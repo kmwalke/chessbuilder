@@ -21,11 +21,18 @@ RSpec.feature 'Project' do
     pending 'version_0.x auto matchmaking'
   end
 
-  describe 'bugs' do
-    it 'BUG: sometimes logs users out' do
+  describe 'BUG:' do
+    it 'sometimes logs users out' do
       skip('find how to reproduce')
       # is it a timeout thing?
       # Is it only a development thing?
+    end
+
+    it 'Errant Knight' do
+      skip('bug')
+      # Submitted a move without a destination, intended to be f1e3. Opening move
+      # got expected error
+      # clicked destination , submit.  Knight dissapears, now the other player's turn
     end
   end
 
@@ -78,13 +85,6 @@ RSpec.feature 'Project' do
     # https://en.wikipedia.org/wiki/Chess_symbols_in_Unicode
     # https://en.wikipedia.org/wiki/Algebraic_notation_(chess)
     # https://www.reddit.com/r/chess/comments/he6tmj/here_are_30_alternative_chess_pieces_as/
-  end
-
-  it 'BUG: Errant Knight' do
-    skip('bug')
-    # Submitted a move without a destination, intended to be f1e3. Opening move
-    # got expected error
-    # clicked destination , submit.  Knight dissapears, now the other player's turn
   end
 
   it 'highlight the piece that just moved' do
