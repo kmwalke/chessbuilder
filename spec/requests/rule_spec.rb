@@ -18,22 +18,22 @@ RSpec.describe 'Rules' do
     describe 'no cheating with request spoofing' do
       it 'no illegal moves' do
         skip('not implemented')
-        move_piece(game, 'd2e6')
+        move_piece_request(game, 'd2e6')
 
         expect(game.pieces.find_by(position: 'd2')).to be_a(Piece)
       end
 
       it 'no double moves' do
         skip('not implemented')
-        move_piece(game, 'd2d4')
-        move_piece(game, 'a2a3')
+        move_piece_request(game, 'd2d4')
+        move_piece_request(game, 'a2a3')
 
         expect(game.pieces.find_by(position: 'a2')).to be_a(Piece)
       end
     end
 
     it 'updates has_moved?' do
-      move_piece(game, 'a2a3')
+      move_piece_request(game, 'a2a3')
 
       expect(game.pieces.find_by(position: 'a3').has_moved?).to be(true)
     end
@@ -44,20 +44,20 @@ RSpec.describe 'Rules' do
       end
 
       it 'moves 1 space after first movement' do
-        move_piece(game, 'd2d4')
-        move_piece(game, 'a7a6')
+        move_piece_request(game, 'd2d4')
+        move_piece_request(game, 'a7a6')
         expect(game.valid_moves(game.pieces.find_by(position: 'd4'))).to eq(%w[d5])
       end
 
       it 'attack diagonally' do
-        move_piece(game, 'd2d4')
-        move_piece(game, 'e7e5')
+        move_piece_request(game, 'd2d4')
+        move_piece_request(game, 'e7e5')
         expect(game.valid_moves(game.pieces.find_by(position: 'd4'))).to eq(%w[d5 e5])
       end
 
       it 'can\'t attack straight ahead' do
-        move_piece(game, 'd2d4')
-        move_piece(game, 'd7d5')
+        move_piece_request(game, 'd2d4')
+        move_piece_request(game, 'd7d5')
         expect(game.valid_moves(game.pieces.find_by(position: 'd4'))).to eq(%w[])
       end
     end
