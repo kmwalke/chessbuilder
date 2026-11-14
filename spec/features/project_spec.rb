@@ -2,8 +2,11 @@ require 'rails_helper'
 
 # This isn't meant to have real specs.  Just high level descriptions of upcoming work
 RSpec.feature 'Project' do
-  describe 'bugs' do
-    pending 'version_0.1 detect check'
+  describe 'roadmap' do
+    pending 'version_0.1 En Passante, Castling, etc..'
+    pending 'version_0.1 basic chess app QOL pass'
+    pending 'version_0.1 Basic chess app design pass'
+    pending 'version_0.1 Complete basic chess app'
     pending 'version_0.2 craft pieces'
     pending 'version_0.2 manual matchmaking by showing players level'
     pending 'version_0.2 normal chess mode'
@@ -16,10 +19,13 @@ RSpec.feature 'Project' do
     pending 'version_0.x Art Improvements'
     pending 'version_0.x Themed Chess Sets'
     pending 'version_0.x auto matchmaking'
+  end
 
+  describe 'bugs' do
     it 'BUG: sometimes logs users out' do
       skip('find how to reproduce')
       # is it a timeout thing?
+      # Is it only a development thing?
     end
   end
 
