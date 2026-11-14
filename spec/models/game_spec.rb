@@ -36,6 +36,21 @@ RSpec.describe Game do
     end
   end
 
+  it 'non_current_player' do
+    expect(game.non_current_player).not_to eq(game.current_player)
+  end
+
+  describe 'current_player_title' do
+    it 'names the host' do
+      expect(game.current_player_title).to eq(Game::HOST)
+    end
+
+    it 'names the guest' do
+      game.take_turn
+      expect(game.current_player_title).to eq(Game::GUEST)
+    end
+  end
+
   describe 'name_and_status' do
     it 'unfinished game' do
       expect(game.name_and_status(game.host)).to eq(game.name)

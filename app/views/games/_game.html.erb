@@ -1,4 +1,7 @@
 <div class="game-wrapper">
+  <% if game.check %>
+    <h3 class="check">Check!</h3>
+  <% end %>
   <h3 class="turn">
     <% if game.winner %>
       <%= game.winner.name %> won!

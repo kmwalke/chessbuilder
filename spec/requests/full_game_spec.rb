@@ -19,7 +19,7 @@ RSpec.describe 'Full Game' do
     display(game) if VERBOSE
     MOVES.each do |move|
       game.reload
-      move_piece(game, move)
+      move_piece_request(game, move)
       display(game) if VERBOSE
     end
   end

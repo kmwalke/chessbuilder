@@ -16,8 +16,10 @@ class GamesController < ApplicationController
   # TODO: validate moves.  Raise error if :to is not a valid move.  prevent cheating from request spoofing
   # TODO: validate which turn it is.  can't go twice
   # TODO: refactor for readability/performance
+  #    @game.update is called multiple times.  Should only make 1 db call at the end
   def move
     game_action(redirect: true, path: game_path(@game)) do
+      @game.update(check: false) if @game.check
       move_piece(move_params[:from], move_params[:to])
       @game.take_turn unless @game.winner
       SendWebPushJob.perform_later(@game.current_player, "Your turn in #{@game.name}")
@@ -73,7 +75,8 @@ class GamesController < ApplicationController
     piece = @game.pieces.find_by(position: from)
     capture(@game.pieces.find_by(position: to))
     piece.update(position: to, has_moved?: true)
-    MoveLog.create(game: @game, user: @game.current_player, a1_notation: from + to)
+    @game.update(check: true) if @game.valid_moves(piece).include?(other_king.position)
+    MoveLog.create(game: @game, user: @game.current_player, a1_notation: "#{from}#{to}")
   end
 
   def capture(piece)
@@ -84,6 +87,12 @@ class GamesController < ApplicationController
     end
     @game.update(winner: @game.current_player) if piece.name == PieceCard::KING
     piece.destroy
+  end
+
+  def other_king
+    @game.pieces.detect do |p|
+      [PieceCard::KING, PieceCard::EMPEROR].include?(p.name) && p.player != @game.current_player_title
+    end
   end
 
   # Use callbacks to share common setup or constraints between actions.
