@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_10_22_012852) do
+ActiveRecord::Schema[8.1].define(version: 2026_10_23_182350) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -36,6 +36,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_22_012852) do
     t.integer "host_id", null: false
     t.datetime "updated_at", null: false
     t.integer "winner_id"
+    t.boolean "check", default: false, null: false
   end
 
   create_table "move_logs", force: :cascade do |t|

@@ -3,7 +3,7 @@ include ApplicationHelper
 LOG     = ActiveSupport::Logger.new($stdout)
 VERBOSE = false
 
-def move_piece(game, move)
+def move_piece_request(game, move)
   LOG.debug move if VERBOSE
   from_position = move[0..1]
   to_position   = move[(move.length - 2)..]
