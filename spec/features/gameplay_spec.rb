@@ -136,6 +136,21 @@ RSpec.feature 'Gameplay' do
     it 'forces guest to move out of check' do
       skip('not implemented')
     end
+
+    describe 'moves out of check' do
+      before do
+        move_piece_request(game, 'c8d7')
+        visit game_path(game)
+      end
+
+      it 'removes checkmark' do
+        expect(game.reload.check).to be false
+      end
+
+      it 'doesnt show game in check' do
+        expect(page).not_to have_text('Check')
+      end
+    end
   end
 
   describe 'checkmate' do

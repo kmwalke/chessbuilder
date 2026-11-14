@@ -16,8 +16,10 @@ class GamesController < ApplicationController
   # TODO: validate moves.  Raise error if :to is not a valid move.  prevent cheating from request spoofing
   # TODO: validate which turn it is.  can't go twice
   # TODO: refactor for readability/performance
+  #    @game.update is called multiple times.  Should only make 1 db call at the end
   def move
     game_action(redirect: true, path: game_path(@game)) do
+      @game.update(check: false) if @game.check
       move_piece(move_params[:from], move_params[:to])
       @game.take_turn unless @game.winner
       SendWebPushJob.perform_later(@game.current_player, "Your turn in #{@game.name}")
