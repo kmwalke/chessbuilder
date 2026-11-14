@@ -34,10 +34,6 @@
                             <% move_position = algebraic_notation(x_move, y_move) %>
                             <td title="<%= move_position %>" id="<%= move_position %>_move_to">
                               <% if game.valid_moves(piece).include?(move_position) %>
-<!--                                TODO: Gawd, I hate this.  Shouldn't be updating data in the view -->
-<!--                                But how to avoid looping spaces again somewhere in the same request? -->
-<!--                                put it in the move method of the controller-->
-                                <%# @game.update(check: true) if move_position == `other player's king`.position %>
                                 <%= form.radio_button nil, move_position, id: "#{position}#{move_position}_move_select", name: 'move[to]' %>
                                 <%= form.label "#{position}#{move_position}_move_select", piece.symbol, class: 'move_to' %>
                               <% else %>
