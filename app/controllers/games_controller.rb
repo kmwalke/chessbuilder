@@ -13,8 +13,6 @@ class GamesController < ApplicationController
     end
   end
 
-  # TODO: validate moves.  Raise error if :to is not a valid move.  prevent cheating from request spoofing
-  # TODO: validate which turn it is.  can't go twice
   # TODO: refactor for readability/performance
   #    @game.update is called multiple times.  Should only make 1 db call at the end
   def move
