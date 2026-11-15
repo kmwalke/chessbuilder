@@ -17,14 +17,12 @@ RSpec.describe 'Rules' do
 
     describe 'no cheating with request spoofing' do
       it 'no illegal moves' do
-        skip('not implemented')
         move_piece_request(game, 'd2e6')
 
         expect(game.pieces.find_by(position: 'd2')).to be_a(Piece)
       end
 
       it 'no double moves' do
-        skip('not implemented')
         move_piece_request(game, 'd2d4')
         move_piece_request(game, 'a2a3')
 
