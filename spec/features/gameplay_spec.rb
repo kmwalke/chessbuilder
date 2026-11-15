@@ -13,10 +13,6 @@ RSpec.feature 'Gameplay' do
       piece = game.pieces.guest.first
       expect { page.find_by_id("#{piece.position}_piece_select") }.to raise_error(Capybara::ElementNotFound)
     end
-
-    pending 'doesn\'t go twice'
-
-    pending 'doesn\'t make an illegal move'
   end
 
   describe 'bad input' do
