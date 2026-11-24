@@ -71,7 +71,7 @@ class GamesController < ApplicationController
 
   def move_piece(from, to)
     piece = @game.pieces.find_by(position: from)
-    raise ErrorMessages::CHEATING[:illegal_move] if illegal_move(piece)
+    raise ErrorMessages::CHEATING[:illegal_move] if illegal_move?(piece)
 
     capture(@game.pieces.find_by(position: to))
     piece.update(position: to, has_moved?: true)
@@ -79,15 +79,15 @@ class GamesController < ApplicationController
     MoveLog.create(game: @game, user: @game.current_player, a1_notation: "#{from}#{to}")
   end
 
-  def illegal_move(piece)
-    not_your_turn(piece) || invalid_move(piece)
+  def illegal_move?(piece)
+    not_your_turn?(piece) || invalid_move?(piece)
   end
 
-  def not_your_turn(piece)
+  def not_your_turn?(piece)
     piece.player != @game.current_player_title
   end
 
-  def invalid_move(piece)
+  def invalid_move?(piece)
     @game.valid_moves(piece).exclude?(move_params[:to])
   end
 
