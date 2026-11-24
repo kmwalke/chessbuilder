@@ -13,8 +13,6 @@ class GamesController < ApplicationController
     end
   end
 
-  # TODO: validate moves.  Raise error if :to is not a valid move.  prevent cheating from request spoofing
-  # TODO: validate which turn it is.  can't go twice
   # TODO: refactor for readability/performance
   #    @game.update is called multiple times.  Should only make 1 db call at the end
   def move
@@ -73,10 +71,24 @@ class GamesController < ApplicationController
 
   def move_piece(from, to)
     piece = @game.pieces.find_by(position: from)
+    raise ErrorMessages::CHEATING[:illegal_move] if illegal_move?(piece)
+
     capture(@game.pieces.find_by(position: to))
     piece.update(position: to, has_moved?: true)
     @game.update(check: true) if @game.valid_moves(piece).include?(other_king.position)
     MoveLog.create(game: @game, user: @game.current_player, a1_notation: "#{from}#{to}")
+  end
+
+  def illegal_move?(piece)
+    not_your_turn?(piece) || invalid_move?(piece)
+  end
+
+  def not_your_turn?(piece)
+    piece.player != @game.current_player_title
+  end
+
+  def invalid_move?(piece)
+    @game.valid_moves(piece).exclude?(move_params[:to])
   end
 
   def capture(piece)

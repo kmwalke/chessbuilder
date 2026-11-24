@@ -4,7 +4,7 @@ class ErrorMessages
     select_move: 'You must select a move for your piece'
   }.freeze
   CHEATING  = {
-    request_spoofing: 'Nice try. You have skills.  Email kentslaymaker@gmail.com to contribute.'
+    illegal_move: 'Nice try. You have skills.  Email kentslaymaker@gmail.com to contribute.'
   }.freeze
   GAME      = {
     game_over: 'The game is over.'
